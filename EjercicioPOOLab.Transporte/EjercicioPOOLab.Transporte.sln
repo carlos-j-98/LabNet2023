@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EjercicioPOOLab.Transporte", "EjercicioPOOLab.Transporte\EjercicioPOOLab.Transporte.csproj", "{B4E2BBAA-29EF-42E6-AA92-640A8B369840}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4E2BBAA-29EF-42E6-AA92-640A8B369840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E2BBAA-29EF-42E6-AA92-640A8B369840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E2BBAA-29EF-42E6-AA92-640A8B369840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E2BBAA-29EF-42E6-AA92-640A8B369840}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48E3D510-0E37-4920-B361-B3DFA96EFD17}
+	EndGlobalSection
+EndGlobal
