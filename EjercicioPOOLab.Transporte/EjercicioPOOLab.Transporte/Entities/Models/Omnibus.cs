@@ -1,6 +1,6 @@
-﻿using EjercicioPOOLab.Transporte.Data.Abstract;
+﻿using EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract;
 
-namespace EjercicioPOOLab.Transporte.Data.Model
+namespace EjercicioPOOLab.Transporte.Entities.Models
 {
     public class Omnibus : TransportePublico
     {

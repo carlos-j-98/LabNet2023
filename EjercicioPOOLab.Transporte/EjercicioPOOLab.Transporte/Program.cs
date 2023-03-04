@@ -1,4 +1,4 @@
-﻿using EjercicioPOOLab.Transporte.Application;
+﻿using EjercicioPOOLab.Transporte.UI;
 
 namespace EjercicioPOOLab.Transporte
 {
@@ -6,7 +6,7 @@ namespace EjercicioPOOLab.Transporte
     {
         static void Main(string[] args)
         {
-            Menu MenuP = new Menu();
+            MenuPrincipal MenuP = new MenuPrincipal();
             MenuP.Run();
         }
     }

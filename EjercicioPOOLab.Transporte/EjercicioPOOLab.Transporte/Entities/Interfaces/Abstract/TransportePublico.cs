@@ -1,4 +1,4 @@
-﻿namespace EjercicioPOOLab.Transporte.Data.Abstract
+﻿namespace EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract
 {
     public abstract class TransportePublico
     {
