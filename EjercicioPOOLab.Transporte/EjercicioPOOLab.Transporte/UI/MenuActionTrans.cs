@@ -17,7 +17,7 @@ namespace EjercicioPOOLab.Transporte.UI
             WriteTitleStopTrans();
             if (!TransportePublicoValidator.ListHasTrans(transList))
             {
-                menuPrincipal.ListNotHasTrans();
+                menuPrincipal.WriteListNotHasTrans();
             }
             else
             {
@@ -29,7 +29,7 @@ namespace EjercicioPOOLab.Transporte.UI
             WriteTitleGoTrans();
             if (!TransportePublicoValidator.ListHasTrans(transList))
             {
-                menuPrincipal.ListNotHasTrans();
+                menuPrincipal.WriteListNotHasTrans();
             }
             else
             {

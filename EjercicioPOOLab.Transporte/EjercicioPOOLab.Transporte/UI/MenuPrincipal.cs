@@ -42,7 +42,7 @@ namespace EjercicioPOOLab.Transporte.UI
                             Environment.Exit(0);
                             break;
                         default:
-                            IncorrectOption();
+                            WriteIncorrectOption();
                             break;
                     }
                 }
@@ -51,7 +51,7 @@ namespace EjercicioPOOLab.Transporte.UI
                     WriteInvalidFormat();
                     continue;
                 }
-                BackToMenu();
+                WriteBackToMenu();
             }
         }
         public void WriteInit()
@@ -63,12 +63,12 @@ namespace EjercicioPOOLab.Transporte.UI
             Console.WriteLine("2- Detener transportes");
             Console.WriteLine("3- Salir");
         }
-        public void BackToMenu()
+        public void WriteBackToMenu()
         {
             Console.WriteLine("\n Presione cualquier boton para volver al menu principal \n");
             Console.ReadKey();
         }
-        public void ListNotHasTrans()
+        public void WriteListNotHasTrans()
         {
             Console.Clear();
             Console.WriteLine("\n La lista no contiene transportes publicos. Redireccionando al menu de carga \n");
@@ -82,7 +82,7 @@ namespace EjercicioPOOLab.Transporte.UI
             Console.WriteLine("\n Volviendo al menu anterior");
             Thread.Sleep(2000);
         }
-        public void IncorrectOption()
+        public void WriteIncorrectOption()
         {
             Console.Clear();
             Console.WriteLine("Opcion incorrecta - Devolviendo al menu principal");
