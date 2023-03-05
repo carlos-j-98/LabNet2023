@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Logic\GenericLogic.cs" />
+    <Compile Include="Application\Logic\OmnibusLogic.cs" />
+    <Compile Include="Application\Logic\TaxiLogic.cs" />
     <Compile Include="Application\Validators\TransportePublicoValidator.cs" />
     <Compile Include="Entities\Interfaces\Abstract\TransportePublico.cs" />
     <Compile Include="Entities\Models\Omnibus.cs" />

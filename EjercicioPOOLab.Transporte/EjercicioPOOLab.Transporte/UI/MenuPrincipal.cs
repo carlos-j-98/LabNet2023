@@ -19,13 +19,8 @@ namespace EjercicioPOOLab.Transporte.UI
         {
             menuActionTrans = new MenuActionTrans();
             menuLoadTrans = new MenuLoadTrans();
-            menuLoadTrans.AddTrans(transList);
             while (true)
             {
-                if (!TransportePublicoValidator.ListHasTrans(transList))
-                {
-                    menuLoadTrans.AddTrans(transList);
-                }
                 WriteInit();
                 try
                 {
@@ -33,12 +28,15 @@ namespace EjercicioPOOLab.Transporte.UI
                     switch (select)
                     {
                         case 1:
-                            menuActionTrans.GoTrans(transList);
+                            menuActionTrans.WriteGoTrans(transList);
                             break;
                         case 2:
-                            menuActionTrans.StopTrans(transList);
+                            menuActionTrans.WriteStopTrans(transList);
                             break;
                         case 3:
+                            transList = menuLoadTrans.RunMenuLoadTrans();
+                            break;
+                        case 4:
                             Environment.Exit(0);
                             break;
                         default:
@@ -46,7 +44,7 @@ namespace EjercicioPOOLab.Transporte.UI
                             break;
                     }
                 }
-                catch (FormatException)
+                catch(FormatException)
                 {
                     WriteInvalidFormat();
                     continue;
@@ -59,33 +57,34 @@ namespace EjercicioPOOLab.Transporte.UI
             Console.Clear();
             Console.Title = "Menu Principal";
             Console.WriteLine("¿Que desea hacer? \n");
-            Console.WriteLine("1- Avanzar transportes");
-            Console.WriteLine("2- Detener transportes");
-            Console.WriteLine("3- Salir");
+            Console.WriteLine("1- Avanzar transportes \n");
+            Console.WriteLine("2- Detener transportes \n");
+            Console.WriteLine("3- Agregar Taxis y Omnibus \n");
+            Console.WriteLine("4- Salir \n");
         }
         public void WriteBackToMenu()
         {
-            Console.WriteLine("\n Presione cualquier boton para volver al menu principal \n");
+            Console.WriteLine("");
+            Console.WriteLine("Presione cualquier boton para regresar al menu principal \n");
             Console.ReadKey();
         }
         public void WriteListNotHasTrans()
         {
             Console.Clear();
-            Console.WriteLine("\n La lista no contiene transportes publicos. Redireccionando al menu de carga \n");
-            Thread.Sleep(3000);
-            menuLoadTrans.AddTrans(transList);
+            Console.WriteLine("");
+            Console.WriteLine("La lista no contiene transportes publicos. Puede ingresarlos en el menu principal \n");
         }
-        public void WriteInvalidFormat()
+        public static void WriteInvalidFormat()
         {
             Console.Clear();
-            Console.WriteLine("\n Hubo un error, no se deben ingresar letras o simbolos, solo numeros.");
-            Console.WriteLine("\n Volviendo al menu anterior");
+            Console.WriteLine("Hubo un error, no se deben ingresar letras o simbolos, solo numeros. \n");
+            Console.WriteLine("Volviendo al menu anterior \n");
             Thread.Sleep(2000);
         }
         public void WriteIncorrectOption()
         {
             Console.Clear();
-            Console.WriteLine("Opcion incorrecta - Devolviendo al menu principal");
+            Console.WriteLine("Opcion incorrecta - Devolviendo al menu principal. \n");
             Thread.Sleep(3000);
         }
     }
