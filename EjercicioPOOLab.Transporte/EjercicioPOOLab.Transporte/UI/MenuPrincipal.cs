@@ -1,5 +1,4 @@
-﻿using EjercicioPOOLab.Transporte.Application.Validators;
-using EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract;
+﻿using EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -44,7 +43,7 @@ namespace EjercicioPOOLab.Transporte.UI
                             break;
                     }
                 }
-                catch(FormatException)
+                catch (FormatException)
                 {
                     WriteInvalidFormat();
                     continue;

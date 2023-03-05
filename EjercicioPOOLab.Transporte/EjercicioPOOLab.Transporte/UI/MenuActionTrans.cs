@@ -42,7 +42,7 @@ namespace EjercicioPOOLab.Transporte.UI
         }
         public void WriteStopTrans(List<TransportePublico> transList)
         {
-            if (TransportePublicoValidator.ListHasTrans(transList)) 
+            if (TransportePublicoValidator.ListHasTrans(transList))
             {
                 WriteTitleStopTrans();
                 foreach (var item in transList)
@@ -50,7 +50,7 @@ namespace EjercicioPOOLab.Transporte.UI
                     Console.WriteLine(GenericLogic.StopTrans(item));
                 }
             }
-            else 
+            else
             {
                 menuPrincipal.WriteListNotHasTrans();
             }

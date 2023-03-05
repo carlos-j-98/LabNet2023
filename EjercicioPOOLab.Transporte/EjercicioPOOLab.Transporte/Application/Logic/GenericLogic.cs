@@ -1,11 +1,6 @@
-﻿using EjercicioPOOLab.Transporte.Application.Validators;
-using EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract;
-using System;
+﻿using EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EjercicioPOOLab.Transporte.Application.Logic
 {

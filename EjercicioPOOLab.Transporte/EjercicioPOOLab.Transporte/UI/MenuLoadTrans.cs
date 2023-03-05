@@ -1,7 +1,6 @@
 ﻿using EjercicioPOOLab.Transporte.Application.Logic;
 using EjercicioPOOLab.Transporte.Application.Validators;
 using EjercicioPOOLab.Transporte.Entities.Interfaces.Abstract;
-using EjercicioPOOLab.Transporte.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,15 +21,15 @@ namespace EjercicioPOOLab.Transporte.UI
             minPlace = int.Parse(ConfigurationManager.AppSettings["minCountPassanger"]);
             transList = new List<TransportePublico>();
         }
-        public List<TransportePublico> RunMenuLoadTrans() 
+        public List<TransportePublico> RunMenuLoadTrans()
         {
-            if (TransportePublicoValidator.ListHasTrans(transList)) 
+            if (TransportePublicoValidator.ListHasTrans(transList))
             {
                 WriteConfirmNewLoad();
                 try
                 {
                     int select = int.Parse(Console.ReadLine());
-                    if(select == 1) 
+                    if (select == 1)
                     {
                         transList.Clear();
                         WriteAddTrans();
@@ -45,7 +44,7 @@ namespace EjercicioPOOLab.Transporte.UI
                     return transList;
                 }
             }
-            else 
+            else
             {
                 WriteAddTrans();
                 return transList;
@@ -53,9 +52,9 @@ namespace EjercicioPOOLab.Transporte.UI
         }
         public void WriteAddTrans()
         {
-            while (transList.Count < int.Parse(ConfigurationManager.AppSettings["maxTransList"])) 
+            while (transList.Count < int.Parse(ConfigurationManager.AppSettings["maxTransList"]))
             {
-                GenericLogic.Settings(GenericLogic.TipeTransport(transList.Count),"tipeTransLoad");
+                GenericLogic.Settings(GenericLogic.TipeTransport(transList.Count), "tipeTransLoad");
                 maxPlace = GenericLogic.SetMaxPlace(ConfigurationManager.AppSettings["tipeTransLoad"]);
                 Console.Clear();
                 Console.Title = "Agregar transportes";
@@ -94,7 +93,7 @@ namespace EjercicioPOOLab.Transporte.UI
             Console.WriteLine("Debe respetar la cantidad maxima y minima de pasajeros permitida, porfavor intente nuevamente. \n");
             Thread.Sleep(3000);
         }
-        public void WriteConfirmNewLoad() 
+        public void WriteConfirmNewLoad()
         {
             Console.Clear();
             Console.Title = "Nueva carga de transportes";
@@ -104,7 +103,7 @@ namespace EjercicioPOOLab.Transporte.UI
             Console.WriteLine("1- Continuar \n");
             Console.WriteLine("2- Conservar \n");
         }
-        public void WriteSave() 
+        public void WriteSave()
         {
             Console.Clear();
             Console.WriteLine("Volviendo al menu principal");
