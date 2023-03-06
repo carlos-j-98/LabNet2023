@@ -55,18 +55,19 @@ namespace EjercicioPOOLab.Transporte.UI
             while (transList.Count < int.Parse(ConfigurationManager.AppSettings["maxTransList"]))
             {
                 GenericLogic.Settings(GenericLogic.TipeTransport(transList.Count), "tipeTransLoad");
-                maxPlace = GenericLogic.SetMaxPlace(ConfigurationManager.AppSettings["tipeTransLoad"]);
+                string tipeTransLoad = ConfigurationManager.AppSettings["tipeTransLoad"];
+                maxPlace = GenericLogic.SetMaxPlace(tipeTransLoad);
                 Console.Clear();
                 Console.Title = "Agregar transportes";
                 Console.WriteLine(" Bienvenido al menu para agregar transportes \n");
-                Console.WriteLine(" Debera ingresar pasajeros para {1} faltantes {0}. \n", GenericLogic.MissingNumTrans(ConfigurationManager.AppSettings["tipeTransLoad"], transList), ConfigurationManager.AppSettings["tipeTransLoad"]);
-                Console.WriteLine(" La plaza maxima de {0} son {1} pasajeros con un minimo de {2} pasajeros \n", ConfigurationManager.AppSettings["tipeTransLoad"], maxPlace, minPlace);
+                Console.WriteLine(" Debera ingresar pasajeros para {1} faltantes {0}. \n", GenericLogic.MissingNumTrans(tipeTransLoad, transList), tipeTransLoad);
+                Console.WriteLine(" La plaza maxima de {0} son {1} pasajeros con un minimo de {2} pasajeros \n", tipeTransLoad, maxPlace, minPlace);
                 Console.WriteLine(" Ingrese la cantidad de pasajeros: \n");
                 Console.WriteLine("");
                 try
                 {
                     int numPassanger = int.Parse(Console.ReadLine());
-                    if (!TransportePublicoValidator.CanAddTrans(numPassanger, ConfigurationManager.AppSettings["tipeTransLoad"]))
+                    if (!TransportePublicoValidator.CanAddTrans(numPassanger, tipeTransLoad))
                     {
                         WriteIncorrectNumPassanger();
                         continue;
@@ -106,8 +107,8 @@ namespace EjercicioPOOLab.Transporte.UI
         public void WriteSave()
         {
             Console.Clear();
-            Console.WriteLine("Volviendo al menu principal");
-            Thread.Sleep(3000);
+            Console.WriteLine("");
+            Console.WriteLine("Lista guardada \n");
         }
     }
 }

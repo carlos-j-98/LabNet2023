@@ -10,13 +10,13 @@ namespace EjercicioPOOLab.Transporte.Application.Logic
         {
             if (tipeTransport == ConfigurationManager.AppSettings["omnibus"])
             {
-                return 5 - transList.Count;
+                return int.Parse(ConfigurationManager.AppSettings["maxCantTipeTrans"]) - transList.Count;
             }
-            return 10 - transList.Count;
+            return int.Parse(ConfigurationManager.AppSettings["maxTransList"]) - transList.Count;
         }
         public static string TipeTransport(int cantTrans)
         {
-            if (cantTrans >= 5)
+            if (cantTrans >= int.Parse(ConfigurationManager.AppSettings["maxCantTipeTrans"]))
             {
                 return ConfigurationManager.AppSettings["taxi"];
             }
