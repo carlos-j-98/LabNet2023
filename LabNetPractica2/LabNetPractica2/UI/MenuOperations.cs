@@ -6,7 +6,7 @@ namespace LabNetPractica2.UI
 {
     public class MenuOperations
     {
-        public MenuOperations()
+        MenuOperations()
         {
 
         }
@@ -37,9 +37,9 @@ namespace LabNetPractica2.UI
                 ex = new DivideByZeroException();
                 Console.WriteLine(ex.Message);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
-                ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
+                FormatException ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
                 MenuPrincipal.WriteExceptionInfo(ex);
             }
         }
@@ -57,7 +57,7 @@ namespace LabNetPractica2.UI
                 double denominator = double.Parse(Console.ReadLine());
                 Console.WriteLine("");
                 double result = numerator.Divide(denominator);
-                if (result == double.PositiveInfinity)
+                if (result == double.PositiveInfinity || double.IsNaN(result))
                 {
                     throw new DivideByZeroException();
                 }
@@ -70,9 +70,9 @@ namespace LabNetPractica2.UI
                 ex = new DivideByZeroException();
                 Console.WriteLine(ex.Message);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
-                ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
+                FormatException ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
                 MenuPrincipal.WriteExceptionInfo(ex);
             }
         }

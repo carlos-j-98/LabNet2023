@@ -47,7 +47,8 @@ namespace LabNetPractica2.UI
                 }
                 catch (Exception)
                 {
-                    new Exception("Ocurrio un error no controlado - regresando al menu principal \n");
+                    Exception ex = new Exception("Ocurrio un error no controlado - regresando al menu principal \n");
+                    WriteExceptionInfo(ex);
                 }
             }
         }

@@ -4,7 +4,7 @@
     {
         public static double Divide(this double numerator, double denominator)
         {
-            return (double)numerator / denominator;
+            return numerator / denominator;
         }
     }
 }

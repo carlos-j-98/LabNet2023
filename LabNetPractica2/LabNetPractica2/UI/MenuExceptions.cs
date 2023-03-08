@@ -6,7 +6,7 @@ namespace LabNetPractica2.UI
 {
     public class MenuExceptions
     {
-        public MenuExceptions()
+        MenuExceptions()
         {
 
         }

@@ -5,7 +5,7 @@ namespace LabNetPractica2.Application.Logic
 {
     public class Logic
     {
-        public Logic()
+        Logic()
         {
 
         }
