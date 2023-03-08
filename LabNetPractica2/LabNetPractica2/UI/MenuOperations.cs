@@ -33,7 +33,7 @@ namespace LabNetPractica2.UI
             catch (DivideByZeroException ex)
             {
                 Console.WriteLine("");
-                Console.WriteLine("La operacion no pudo realizarce \n");
+                Console.WriteLine("La operacion no pudo realizarse \n");
                 ex = new DivideByZeroException();
                 Console.WriteLine(ex.Message);
             }
