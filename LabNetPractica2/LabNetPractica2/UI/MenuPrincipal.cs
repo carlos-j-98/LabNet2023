@@ -58,7 +58,7 @@ namespace LabNetPractica2.UI
             Console.WriteLine("Bienvenido al - MENU DE OPERACIONES - \n");
             Console.WriteLine("Cada opcion es distinta, leer atentamente \n");
             Console.WriteLine("1- Ingresar un NUMERADOR para ser dividido por {0} \n", ConfigurationManager.AppSettings["numStatic"]);
-            Console.WriteLine("2- Ingresar un NUMERADOR y DENOMINADOR para dividirlos - Ojo si pones '0' \n");
+            Console.WriteLine("2- Ingresar un NUMERADOR y DENOMINADOR para dividirlos \n");
             Console.WriteLine("3- Menu para mostrar excepciones \n");
             Console.WriteLine("4- Salir \n");
         }
