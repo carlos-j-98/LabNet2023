@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8ADBF3B9-098F-475D-B98B-9B580F2ACB6D}</ProjectGuid>
+    <ProjectGuid>{3E182B93-0E9A-483D-AED5-3E5262171D65}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LabNetPractica2Tests</RootNamespace>
-    <AssemblyName>LabNetPractica2Tests</AssemblyName>
+    <RootNamespace>LabNetPractica2Tests1</RootNamespace>
+    <AssemblyName>LabNetPractica2Tests1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,17 +53,24 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Application\ExtensionMethods\DoubleExtensionTests.cs" />
+    <Compile Include="Application\ExtensionMethods\ExceptionExtensionTests.cs" />
+    <Compile Include="Application\ExtensionMethods\IntExtensionTests.cs" />
+    <Compile Include="Application\Logic\LogicTests.cs" />
+    <Compile Include="Application\Validators\IntValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LabNetPractica2\LabNetPractica2.csproj">
+      <Project>{ED2214C3-805B-4E3E-B807-217B85298EBC}</Project>
+      <Name>LabNetPractica2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

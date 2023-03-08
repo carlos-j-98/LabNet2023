@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabNetPractica2", "LabNetPractica2\LabNetPractica2.csproj", "{ED2214C3-805B-4E3E-B807-217B85298EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabNetPractica2Tests1", "LabNetPractica2Tests1\LabNetPractica2Tests1.csproj", "{3E182B93-0E9A-483D-AED5-3E5262171D65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabNetPractica2Tests", "LabNetPractica2Tests\LabNetPractica2Tests.csproj", "{3E182B93-0E9A-483D-AED5-3E5262171D65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

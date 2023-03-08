@@ -39,6 +39,12 @@ namespace LabNetPractica2.UI
                     }
                     WriteBackMenu();
                 }
+                catch (FormatException ex)
+                {
+                    ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
+                    MenuPrincipal.WriteExceptionInfo(ex);
+                    WriteBackMenu();
+                }
                 catch (Exception)
                 {
                     new Exception("Ocurrio un error no controlado - regresando al menu principal \n");
@@ -49,7 +55,7 @@ namespace LabNetPractica2.UI
         {
             Console.Title = "Menu principal";
             Console.Clear();
-            Console.WriteLine("Bienvenido a - MENU DIVISIONES - \n");
+            Console.WriteLine("Bienvenido al - MENU DE OPERACIONES - \n");
             Console.WriteLine("Cada opcion es distinta, leer atentamente \n");
             Console.WriteLine("1- Ingresar un NUMERADOR para ser dividido por {0} \n", ConfigurationManager.AppSettings["numStatic"]);
             Console.WriteLine("2- Ingresar un NUMERADOR y DENOMINADOR para dividirlos - Ojo si pones '0'\n");

@@ -20,6 +20,7 @@ namespace LabNetPractica2.UI
             Console.WriteLine("Ingresa un numero para que sea dividido por {0}\n", numStatic);
             try
             {
+                WriteAddNumber("Numerador");
                 double num = double.Parse(Console.ReadLine());
                 if (IntValidator.IsZero(numStatic))
                 {
@@ -38,7 +39,7 @@ namespace LabNetPractica2.UI
             }
             catch (FormatException ex)
             {
-                ex = new FormatException("Se deben ingresar numeros, no letras o simbolos \n");
+                ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
                 MenuPrincipal.WriteExceptionInfo(ex);
             }
         }
@@ -53,8 +54,8 @@ namespace LabNetPractica2.UI
                 WriteAddNumber("Numerador");
                 double numerator = double.Parse(Console.ReadLine());
                 WriteAddNumber("Denominador");
-                Console.WriteLine("");
                 double denominator = double.Parse(Console.ReadLine());
+                Console.WriteLine("");
                 double result = numerator.Divide(denominator);
                 if (result == double.PositiveInfinity)
                 {
@@ -71,7 +72,7 @@ namespace LabNetPractica2.UI
             }
             catch (FormatException ex)
             {
-                ex = new FormatException("Se deben ingresar numeros, no letras o simbolos \n");
+                ex = new FormatException(ConfigurationManager.AppSettings["invalidFormatText"]);
                 MenuPrincipal.WriteExceptionInfo(ex);
             }
         }
