@@ -6,5 +6,13 @@
         {
             return $"El resultado de la division es {result} \n";
         }
+        public static bool DoubleIsZero(this double value)
+        {
+            if (value == 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

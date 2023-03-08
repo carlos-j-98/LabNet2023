@@ -16,5 +16,17 @@ namespace LabNetPractica2.Application.ExtensionMethods.Tests
             //Assert
             Assert.AreEqual(expectedResult, result);
         }
+
+        [TestMethod()]
+        public void DoubleIsZeroTest()
+        {
+            //Arrange
+            double value = 0;
+            bool expectedResult = true;
+            //Act
+            bool result = value.DoubleIsZero();
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
     }
 }

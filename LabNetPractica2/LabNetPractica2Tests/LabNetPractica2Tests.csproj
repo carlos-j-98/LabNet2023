@@ -60,7 +60,6 @@
     <Compile Include="Application\ExtensionMethods\ExceptionExtensionTests.cs" />
     <Compile Include="Application\ExtensionMethods\IntExtensionTests.cs" />
     <Compile Include="Application\Logic\LogicTests.cs" />
-    <Compile Include="Application\Validators\IntValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

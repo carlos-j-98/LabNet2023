@@ -49,7 +49,6 @@
     <Compile Include="Application\ExtensionMethods\ExceptionExtension.cs" />
     <Compile Include="Application\ExtensionMethods\IntExtension.cs" />
     <Compile Include="Application\Logic\Logic.cs" />
-    <Compile Include="Application\Validators\IntValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\MenuExceptions.cs" />

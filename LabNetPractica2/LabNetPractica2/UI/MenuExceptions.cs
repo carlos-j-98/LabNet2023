@@ -14,8 +14,8 @@ namespace LabNetPractica2.UI
         {
             Console.Clear();
             Console.Title = "Menu disparar excepcion";
-            Console.WriteLine("Bienvenido al menu que muestra una excepcion\n");
-            Console.WriteLine("Seleccione que tipo de excepcion desea lanzar\n");
+            Console.WriteLine("Bienvenido al menu que muestra una excepcion \n");
+            Console.WriteLine("Seleccione que tipo de excepcion desea lanzar \n");
             Console.WriteLine("1- Excepcion 1 \n");
             Console.WriteLine("2- Excepcion custom \n");
             Console.WriteLine("3- Ninguna \n");

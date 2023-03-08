@@ -1,5 +1,4 @@
 ﻿using LabNetPractica2.Application.ExtensionMethods;
-using LabNetPractica2.Application.Validators;
 using System;
 using System.Configuration;
 
@@ -16,19 +15,20 @@ namespace LabNetPractica2.UI
             Console.Clear();
             double numStatic = double.Parse(ConfigurationManager.AppSettings["numStatic"]);
             Console.Title = $"Menu de dividir por {numStatic}";
-            Console.WriteLine("Bienvenido al menu para realizar divisiones por {0}\n", numStatic);
-            Console.WriteLine("Ingresa un numero para que sea dividido por {0}\n", numStatic);
+            Console.WriteLine("Bienvenido al menu para realizar divisiones por {0} \n", numStatic);
+            Console.WriteLine("Ingresa un numero para que sea dividido por {0} \n", numStatic);
             try
             {
                 WriteAddNumber("Numerador");
                 double num = double.Parse(Console.ReadLine());
-                if (IntValidator.IsZero(numStatic))
+                if (numStatic.DoubleIsZero())
                 {
                     throw new DivideByZeroException();
                 }
                 Console.WriteLine("");
                 double result = num.Divide(numStatic);
                 Console.WriteLine(result.WriteResult());
+                Console.WriteLine("La operacion de division fue exitosa \n");
             }
             catch (DivideByZeroException ex)
             {
