@@ -1,25 +1,18 @@
 ﻿using Practica4.EF.Data;
 using Practica4.EF.Entities.DTO;
-using Practica4.EF.Logic.QueriesLogic.GenericQuerieLogic;
+using Practica4.EF.Entities.EntitiesDatabase;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Practica4.EF.Logic.QueriesLogic
 {
-    public class CustomersLogic : GenericLogic
+    public class CustomersLogic : GenericLogic <Customers>
     {
-
-        public override List<GenericDTO> GetAll()
+        public override List<Customers> GetAll()
         {
-            using (var context = new NorthwindContext())
+            using (_northwindContext) 
             {
-                var generic = context.Customers
-                                .Select(_generic => new GenericDTO
-                                {
-                                    id = _generic.CustomerID.ToString(),
-                                    description = _generic.CompanyName
-                                }).ToList();
-                return generic;
+                return _northwindContext.Customers.ToList();
             }
         }
     }

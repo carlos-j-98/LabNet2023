@@ -1,6 +1,6 @@
 ﻿using Practica4.EF.Entities.DTO;
+using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.QueriesLogic;
-using Practica4.EF.Logic.QueriesLogic.GenericQuerieLogic;
 using System;
 using System.Collections.Generic;
 
@@ -8,37 +8,37 @@ namespace Practica4.EF.UI.Menu
 {
     public class MenuConsultas
     {
-        public MenuConsultas()
+        public MenuConsultas() 
         {
-
         }
-        public static void RunMenuConsultas()
+        public void RunMenuConsultas()
         {
             WriteMenuConsultas();
-            GenericLogic genericLogic;
             switch (MenuPrincipal.SelectOption())
             {
                 case 1:
-                    genericLogic = new CategoriesLogic();
+                    CategoriesLogic categoriesLogic = new CategoriesLogic();
+                    WriteInfoCategoriesList(categoriesLogic.GetAll());
                     break;
                 case 2:
-                    genericLogic = new CustomersLogic();
+                    CustomersLogic customersLogic = new CustomersLogic();
+                    WriteInfoCustomersList(customersLogic.GetAll());
                     break;
                 case 3:
-                    genericLogic = new ShippersLogic();
+                    ShippersLogic shippersLogic = new ShippersLogic();
+                    WriteInfoShippersList(shippersLogic.GetAll());
                     break;
                 case 4:
-                    genericLogic = new TerritoriesLogic();
+                    TerritoriesLogic territoriesLogic = new TerritoriesLogic();
+                    WriteInfoTerritoriesList(territoriesLogic.GetAll());
                     break;
                 case 5:
                     return;
                 default:
                     MenuPrincipal.WriteIncorrectOption();
                     RunMenuConsultas();
-                    genericLogic = new CategoriesLogic();
-                    break;
+                    return;
             }
-            WriteInfoList(genericLogic.GetAll());
         }
         public static void WriteMenuConsultas()
         {
@@ -52,20 +52,56 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine("4- Territories \n");
             Console.WriteLine("5- Volver al menu principal. \n");
         }
-        public static void WriteOptionsToBack()
-        {
-            Console.WriteLine("");
-
-        }
-        public static void WriteInfoList(List<GenericDTO> genericDTOs)
+        public static void WriteInfoCategoriesList(List<Categories> cat) 
         {
             Console.Clear();
-            Console.Title = "Mostrando datos";
-            foreach (var item in genericDTOs)
+            foreach (var categories in cat)
             {
                 Console.WriteLine("---------------------------- \n");
-                Console.WriteLine($"ID: {item.id} \n");
-                Console.WriteLine($"ID: {item.description} \n");
+                Console.WriteLine($"ID: {categories.CategoryID}");
+                Console.WriteLine($"Nombre categoria: {categories.CategoryName}");
+                Console.WriteLine($"Descripcion: {categories.Description}");
+            }
+        }
+        public static void WriteInfoCustomersList(List<Customers> cust) 
+        {
+            Console.Clear();
+            foreach (var customers in cust)
+            {
+                Console.WriteLine("---------------------------- \n");
+                Console.WriteLine($"ID: {customers.CustomerID}");
+                Console.WriteLine($"Nombre de empresa: {customers.CompanyName}");
+                Console.WriteLine($"Contacto: {customers.ContactName}");
+                Console.WriteLine($"Titulo de contacto: {customers.ContactTitle}");
+                Console.WriteLine($"Direccion: {customers.Address}");
+                Console.WriteLine($"Ciudad: {customers.City}");
+                Console.WriteLine($"Region: {customers.Region}");
+                Console.WriteLine($"Codigo postal: {customers.PostalCode}");
+                Console.WriteLine($"Telefono: {customers.Phone}");
+                Console.WriteLine($"Fax: {customers.Fax}");
+            }
+
+        }
+        public static void WriteInfoShippersList(List<Shippers> ship) 
+        {
+            Console.Clear();
+            foreach (var shippers in ship)
+            {
+                Console.WriteLine("---------------------------- \n");
+                Console.WriteLine($"ID: {shippers.ShipperID}");
+                Console.WriteLine($"Nombre de empresa: {shippers.CompanyName}");
+                Console.WriteLine($"Telefono: {shippers.Phone}");
+            }
+        }
+        public static void WriteInfoTerritoriesList(List<Territories> terri) 
+        {
+            Console.Clear();
+            foreach (var territories in terri)
+            {
+                Console.WriteLine("---------------------------- \n");
+                Console.WriteLine($"ID: {territories.TerritoryID}");
+                Console.WriteLine($"Descripcion: {territories.TerritoryDescription}");
+                Console.WriteLine($"ID de region: {territories.RegionID}");
             }
         }
     }

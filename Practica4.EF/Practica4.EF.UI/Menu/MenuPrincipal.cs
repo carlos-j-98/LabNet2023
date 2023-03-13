@@ -7,9 +7,12 @@ namespace Practica4.EF.UI.Menu
 {
     public class MenuPrincipal
     {
-        public MenuPrincipal()
+        private readonly MenuConsultas _menuConsultas;
+        private readonly MenuRepositorio _menuRepositorio;
+        public MenuPrincipal() 
         {
-
+            _menuConsultas = new MenuConsultas();
+            _menuRepositorio = new MenuRepositorio();
         }
         public void RunMenuPrincipal()
         {
@@ -21,10 +24,10 @@ namespace Practica4.EF.UI.Menu
                     switch (SelectOption())
                     {
                         case 1:
-                            MenuConsultas.RunMenuConsultas();
+                            _menuConsultas.RunMenuConsultas();
                             break;
                         case 2:
-                            MenuRepositorio.RunMenuRepositorio();
+                            _menuRepositorio.RunMenuRepositorio();
                             break;
                         case 3:
                             Environment.Exit(0);
@@ -45,7 +48,7 @@ namespace Practica4.EF.UI.Menu
                 {
                     ex = new InvalidOperationException();
                     WriteExceptionInfo(ex);
-                    Console.WriteLine(ex.StackTrace);
+                    WriteBackMenu();
                 }
                 catch (Exception ex)
                 {
