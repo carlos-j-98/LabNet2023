@@ -1,5 +1,4 @@
-﻿using Practica4.EF.Entities.DTO;
-using Practica4.EF.Entities.EntitiesDatabase;
+﻿using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.QueriesLogic;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ namespace Practica4.EF.UI.Menu
 {
     public class MenuConsultas
     {
-        public MenuConsultas() 
+        public MenuConsultas()
         {
         }
         public void RunMenuConsultas()
@@ -52,7 +51,7 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine("4- Territories \n");
             Console.WriteLine("5- Volver al menu principal. \n");
         }
-        public static void WriteInfoCategoriesList(List<Categories> cat) 
+        public static void WriteInfoCategoriesList(List<Categories> cat)
         {
             Console.Clear();
             foreach (var categories in cat)
@@ -63,7 +62,7 @@ namespace Practica4.EF.UI.Menu
                 Console.WriteLine($"Descripcion: {categories.Description}");
             }
         }
-        public static void WriteInfoCustomersList(List<Customers> cust) 
+        public static void WriteInfoCustomersList(List<Customers> cust)
         {
             Console.Clear();
             foreach (var customers in cust)
@@ -82,7 +81,7 @@ namespace Practica4.EF.UI.Menu
             }
 
         }
-        public static void WriteInfoShippersList(List<Shippers> ship) 
+        public static void WriteInfoShippersList(List<Shippers> ship)
         {
             Console.Clear();
             foreach (var shippers in ship)
@@ -93,7 +92,7 @@ namespace Practica4.EF.UI.Menu
                 Console.WriteLine($"Telefono: {shippers.Phone}");
             }
         }
-        public static void WriteInfoTerritoriesList(List<Territories> terri) 
+        public static void WriteInfoTerritoriesList(List<Territories> terri)
         {
             Console.Clear();
             foreach (var territories in terri)

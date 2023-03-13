@@ -1,18 +1,16 @@
-﻿using Practica4.EF.Entities.DTO;
-using Practica4.EF.Entities.EntitiesDatabase;
+﻿using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.QueriesLogic;
 using Practica4.EF.Logic.Repository;
 using Practica4.EF.Logic.Validators;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Practica4.EF.UI.Menu
 {
     public class MenuRepositorio
     {
         private readonly ShippersValidator _shippersValidator;
-        public MenuRepositorio() 
+        public MenuRepositorio()
         {
             _shippersValidator = new ShippersValidator();
         }
@@ -47,7 +45,7 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine("3- Borrar un -Shippers- de la DB \n");
             Console.WriteLine("4- Volver al menu principal \n");
         }
-        public void WriteAddShippers() 
+        public void WriteAddShippers()
         {
             Console.Clear();
             Console.Title = "Menu de agregar a DB";
@@ -57,6 +55,7 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine("");
             Console.WriteLine("Ingresa un numero de telefono para la compania \n");
             string number = WriteInsert("Numero");
+            Console.WriteLine("");
             Console.WriteLine("La -Shipper- fue creada con el ID: {0} \n", AddShippers(name, number));
         }
         public int AddShippers(string name, string number)
@@ -78,14 +77,15 @@ namespace Practica4.EF.UI.Menu
             ShippersLogic shippersLogic = new ShippersLogic();
             List<Shippers> saveList = shippersLogic.GetAll();
             MenuConsultas.WriteInfoShippersList(saveList);
+            Console.WriteLine("");
             Console.WriteLine("Ingrese el ID de la -Shipper- que quiera modificar sus datos \n");
             int select = MenuPrincipal.SelectOption();
             Shippers ship = _shippersValidator.ShipperExist(saveList, select);
-            if (ship != null) 
+            if (ship != null)
             {
                 WriteChangeValues(ship);
             }
-            else 
+            else
             {
                 Console.WriteLine("No se encontro ningun shipper con el ID: {0} \n", select);
             }
@@ -100,6 +100,7 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine("");
             string number = WriteInsert("Telefono");
             UpdateShipper(name, number, shipp);
+            Console.WriteLine("");
             Console.WriteLine("Cambios realizados con exito \n");
         }
         public static void WriteInfoShipperUnit(Shippers shippers)
@@ -110,14 +111,14 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine($"Telefono: {shippers.Phone}");
             Console.WriteLine("---------------------------- \n");
         }
-        public void UpdateShipper(string name, string number, Shippers ship) 
+        public void UpdateShipper(string name, string number, Shippers ship)
         {
             ship.CompanyName = name;
             ship.Phone = number;
             Repository<Shippers> repository = new Repository<Shippers>();
             repository.Update(ship);
         }
-        public void WriteDelete() 
+        public void WriteDelete()
         {
             Console.Clear();
             Console.Title = "Menu de borrado ";
@@ -125,6 +126,7 @@ namespace Practica4.EF.UI.Menu
             ShippersLogic shippersLogic = new ShippersLogic();
             List<Shippers> saveList = shippersLogic.GetAll();
             MenuConsultas.WriteInfoShippersList(saveList);
+            Console.WriteLine("");
             Console.WriteLine("Ingrese el ID del elemento que desea borrar \n");
             int select = MenuPrincipal.SelectOption();
             Shippers ship = _shippersValidator.ShipperExist(saveList, select);
@@ -137,7 +139,7 @@ namespace Practica4.EF.UI.Menu
                 Console.WriteLine("No se encontro ningun shipper con el ID: {0} \n", select);
             }
         }
-        public void WriteConfirmDelete(Shippers ship) 
+        public void WriteConfirmDelete(Shippers ship)
         {
             Console.Clear();
             Console.Title = "Confirmar borrado";
@@ -146,16 +148,17 @@ namespace Practica4.EF.UI.Menu
             Console.WriteLine("¿Confimar borrado? \n");
             Console.WriteLine("1- Si \n");
             Console.WriteLine("2- No \n");
-            if (MenuPrincipal.SelectOption() == 1) 
+            if (MenuPrincipal.SelectOption() == 1)
             {
                 Repository<Shippers> repository = new Repository<Shippers>();
                 repository.Delete(ship.ShipperID);
+                Console.WriteLine("");
                 Console.WriteLine("Borrado realizado con exito \n");
             }
         }
-        public static string WriteInsert(string tipe) 
+        public static string WriteInsert(string tipe)
         {
-            Console.Write("{0}:",tipe);
+            Console.Write("{0}:", tipe);
             string value = Console.ReadLine();
             return value;
         }

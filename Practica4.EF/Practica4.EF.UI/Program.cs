@@ -2,7 +2,7 @@
 
 namespace Practica4.EF.UI
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {

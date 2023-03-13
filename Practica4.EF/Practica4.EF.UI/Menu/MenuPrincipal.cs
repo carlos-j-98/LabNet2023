@@ -9,7 +9,7 @@ namespace Practica4.EF.UI.Menu
     {
         private readonly MenuConsultas _menuConsultas;
         private readonly MenuRepositorio _menuRepositorio;
-        public MenuPrincipal() 
+        public MenuPrincipal()
         {
             _menuConsultas = new MenuConsultas();
             _menuRepositorio = new MenuRepositorio();
@@ -44,7 +44,7 @@ namespace Practica4.EF.UI.Menu
                     WriteExceptionInfo(ex);
                     WriteBackMenu();
                 }
-                catch (InvalidOperationException ex) 
+                catch (InvalidOperationException ex)
                 {
                     ex = new InvalidOperationException();
                     WriteExceptionInfo(ex);
