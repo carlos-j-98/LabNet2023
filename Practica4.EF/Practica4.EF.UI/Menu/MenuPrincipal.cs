@@ -1,4 +1,4 @@
-﻿using Practica4.EF.Logic.ExtensionMethods;
+﻿using Practica4.EF.Service.ExtensionMethods;
 using System;
 using System.Configuration;
 using System.Threading;

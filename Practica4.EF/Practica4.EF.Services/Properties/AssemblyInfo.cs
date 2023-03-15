@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("Practica4.EF.Logic")]
+[assembly: AssemblyTitle("Practica4.EF.Services")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Practica4.EF.Logic")]
+[assembly: AssemblyProduct("Practica4.EF.Services")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-[assembly: Guid("80a8f0d4-e61a-4fb4-985c-f186e729d64a")]
+[assembly: Guid("82b6a7c1-8a60-4091-834d-a8b7ba9b4a48")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //

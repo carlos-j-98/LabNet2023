@@ -66,9 +66,9 @@
       <Project>{05da40d5-7eff-4641-88d1-c7bad2cec4cc}</Project>
       <Name>Practica4.EF.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Practica4.EF.Logic\Practica4.EF.Logic.csproj">
-      <Project>{80a8f0d4-e61a-4fb4-985c-f186e729d64a}</Project>
-      <Name>Practica4.EF.Logic</Name>
+    <ProjectReference Include="..\Practica4.EF.Services\Practica4.EF.Services.csproj">
+      <Project>{82B6A7C1-8A60-4091-834D-A8B7BA9B4A48}</Project>
+      <Name>Practica4.EF.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

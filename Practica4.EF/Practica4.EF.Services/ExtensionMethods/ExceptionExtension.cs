@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Practica4.EF.Logic.ExtensionMethods
+namespace Practica4.EF.Service.ExtensionMethods
 {
     public static class ExceptionExtension
     {
