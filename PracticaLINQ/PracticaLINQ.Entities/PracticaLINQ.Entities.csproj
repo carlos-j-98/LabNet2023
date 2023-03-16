@@ -59,6 +59,8 @@
     <Compile Include="DbEntities\Shippers.cs" />
     <Compile Include="DbEntities\Suppliers.cs" />
     <Compile Include="DbEntities\Territories.cs" />
+    <Compile Include="DTO\CustomersOrdersDTO.cs" />
+    <Compile Include="DTO\CustomersUpperLowerDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

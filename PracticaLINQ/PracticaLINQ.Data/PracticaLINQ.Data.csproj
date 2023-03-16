@@ -50,18 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NorthwindContext.cs" />
+    <Compile Include="Context\NorthwindContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\CustomerQueries.cs" />
+    <Compile Include="Queries\ProductQueries.cs" />
+    <Compile Include="Queries\QueriesInterfaces\ICustomerQueries.cs" />
+    <Compile Include="Queries\QueriesInterfaces\IProductQueries.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Queries\" />
-    <Folder Include="Repositorys\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PracticaLINQ.Entities\PracticaLINQ.Entities.csproj">
       <Project>{834cb6e6-da95-4416-84a3-2edd4f977517}</Project>

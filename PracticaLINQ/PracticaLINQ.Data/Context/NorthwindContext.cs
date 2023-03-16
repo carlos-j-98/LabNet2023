@@ -1,7 +1,7 @@
 using PracticaLINQ.Entities.DbEntities;
 using System.Data.Entity;
 
-namespace PracticaLINQ.Data
+namespace PracticaLINQ.Data.Context
 {
     public partial class NorthwindContext : DbContext
     {
