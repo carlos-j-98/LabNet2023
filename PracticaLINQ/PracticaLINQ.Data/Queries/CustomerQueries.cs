@@ -5,8 +5,6 @@ using PracticaLINQ.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracticaLINQ.Data.Queries
 {
@@ -15,10 +13,37 @@ namespace PracticaLINQ.Data.Queries
         private readonly NorthwindContext _northwindContext;
         public CustomerQueries()
         {
-            _northwindContext = new NorthwindContext();            
+            _northwindContext = new NorthwindContext();
         }
 
-        public List<CustomersOrdersDTO> GetCustomersOrdersWA()
+        public List<CustCantOrderDTO> GetCustCantOrder()
+        {
+            var custOrder = (from o in _northwindContext.Orders
+                             join c in _northwindContext.Customers on o.CustomerID equals c.CustomerID
+                             group o by c.ContactName into g
+                             select new
+                             {
+                                 custNames = g.Key,
+                                 lOrders = g.Select(p => p.OrderID).ToList()
+                             }).ToList();
+            var result = custOrder.ToList().Select(x => new CustCantOrderDTO
+            {
+                custName = x.custNames,
+                asociedOrders = string.Join(",", x.lOrders),
+                cantOrders = x.lOrders.Count
+            }).ToList();
+            return result;
+        }
+
+        public List<Customers> GetCustomerCantByRegion(string custRegion, int cant)
+        {
+            var customers = (from c in _northwindContext.Customers
+                             where c.Region == custRegion
+                             select c).Take(cant).ToList();
+            return customers;
+        }
+
+        public List<CustomersOrdersDTO> GetCustomersOrders(string custRegion, DateTime date)
         {
             var custOrders = from c in _northwindContext.Customers
                              join o in _northwindContext.Orders on c.CustomerID equals o.CustomerID
@@ -27,14 +52,23 @@ namespace PracticaLINQ.Data.Queries
                              {
                                  region = c.Region,
                                  orderDate = o.RequiredDate,
-                                 contactName = c.ContactName
+                                 customerName = c.ContactName,
+                                 shippDate = o.ShippedDate,
+                                 requiredDate = o.RequiredDate,
+                                 freight = o.Freight,
+                                 address = c.Address,
+                                 city = c.City,
+                                 postalCode = c.PostalCode,
+                                 country = c.Country,
+                                 phone = c.Phone,
+                                 orderID = o.OrderID
                              };
             return custOrders.ToList();
         }
 
-        public List<Customers> GetCustomersRegionWA()
+        public List<Customers> GetCustomersRegion(string custRegion)
         {
-            return _northwindContext.Customers.Where(x => x.Region == "WA").ToList();
+            return _northwindContext.Customers.Where(x => x.Region == custRegion).ToList();
         }
 
         public List<CustomersUpperLowerDTO> GetCustomersUpperLowers()
@@ -42,9 +76,8 @@ namespace PracticaLINQ.Data.Queries
             var customersName = from c in _northwindContext.Customers
                                 select new CustomersUpperLowerDTO
                                 {
-                                    idCustomer = c.CustomerID,
-                                    lowerName = c.ContactName,
-                                    upperName = c.ContactName
+                                    lowerName = c.ContactName.ToLower(),
+                                    upperName = c.ContactName.ToUpper()
                                 };
             return customersName.ToList();
         }

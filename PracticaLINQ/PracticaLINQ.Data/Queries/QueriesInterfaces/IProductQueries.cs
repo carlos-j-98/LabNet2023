@@ -1,9 +1,6 @@
 ﻿using PracticaLINQ.Entities.DbEntities;
-using System;
+using PracticaLINQ.Entities.DTO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracticaLINQ.Data.Queries.QueriesInterfaces
 {
@@ -11,6 +8,10 @@ namespace PracticaLINQ.Data.Queries.QueriesInterfaces
     {
         List<Products> GetProductsNoStock();
         List<Products> GetProductsStockAndThree();
-        Products GetProductsFirstOrNullByID();
+        Products GetProductsFirstOrNullByID(int productID);
+        List<Products> GetProductsOrderByName(bool isAcending);
+        List<Products> GetProductsOrderByUnitsInStock(bool isAcending);
+        List<ProductCategoriesDTO> GetProductCategoriesGroupBy();
+        Products GetProduct();
     }
 }

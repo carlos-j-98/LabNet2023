@@ -48,11 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\ExceptionExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\CustomerService.cs" />
+    <Compile Include="Service\ProductService.cs" />
+    <Compile Include="Service\ServicesInterfaces\ICustomerService.cs" />
+    <Compile Include="Service\ServicesInterfaces\IProductService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PracticaLINQ.Data\PracticaLINQ.Data.csproj">
+      <Project>{D7746408-0AE7-442F-9DDE-C178F8685D7E}</Project>
+      <Name>PracticaLINQ.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PracticaLINQ.Entities\PracticaLINQ.Entities.csproj">
+      <Project>{834cb6e6-da95-4416-84a3-2edd4f977517}</Project>
+      <Name>PracticaLINQ.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,12 +51,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu\CustomersPresentation.cs" />
+    <Compile Include="Menu\MenuPrincipal.cs" />
+    <Compile Include="Menu\ProductPresentation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PracticaLINQ.Entities\PracticaLINQ.Entities.csproj">
+      <Project>{834CB6E6-DA95-4416-84A3-2EDD4F977517}</Project>
+      <Name>PracticaLINQ.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PracticaLINQ.Services\PracticaLINQ.Services.csproj">
+      <Project>{88827f43-a24d-4b3b-899b-22849b253334}</Project>
+      <Name>PracticaLINQ.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

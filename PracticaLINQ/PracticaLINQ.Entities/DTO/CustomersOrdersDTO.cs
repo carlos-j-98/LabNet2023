@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracticaLINQ.Entities.DTO
 {
     public class CustomersOrdersDTO
     {
-        public string contactName { get; set; }
+        public string customerName { get; set; }
+        public int orderID { get; set; }
         public string region { get; set; }
         public DateTime? orderDate { get; set; }
+        public DateTime? shippDate { get; set; }
+        public DateTime? requiredDate { get; set; }
+        public decimal? freight { get; set; }
+        public string address { get; set; }
+        public string city { get; set; }
+        public string postalCode { get; set; }
+        public string country { get; set; }
+        public string phone { get; set; }
+
     }
 }

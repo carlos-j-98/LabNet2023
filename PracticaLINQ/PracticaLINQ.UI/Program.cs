@@ -1,9 +1,13 @@
-﻿namespace PracticaLINQ.UI
+﻿using PracticaLINQ.UI.Menu;
+
+namespace PracticaLINQ.UI
 {
-    internal class Program
+    static class Program
     {
         static void Main(string[] args)
         {
+            MenuPrincipal principal = new MenuPrincipal();
+            principal.RunMenuPrincipal();
         }
     }
 }
