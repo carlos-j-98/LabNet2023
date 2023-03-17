@@ -27,14 +27,14 @@ namespace PracticaLINQ.UI.Menu
                 Console.WriteLine("Se esta mostrando el primer customer que hay en la DB \n");
                 Console.WriteLine($"Nombre de contacto: {save.ContactName} \n");
                 Console.WriteLine($"Nombre de compania: {save.CompanyName} \n");
-                Console.WriteLine($"Titulo de contacto: {save.ContactTitle} \n");
-                Console.WriteLine($"Direccion: {save.Address} \n");
-                Console.WriteLine($"Ciudad: {save.City} \n");
-                Console.WriteLine($"Region: {save.Region} \n");
-                Console.WriteLine($"Codigo postal: {save.PostalCode} \n");
-                Console.WriteLine($"Country: {save.Country} \n");
-                Console.WriteLine($"Telefono: {save.Phone} \n");
-                Console.WriteLine($"Fax: {save.Fax} \n");
+                Console.WriteLine($"Titulo de contacto: {save.ContactTitle ?? "Desconocido"} \n");
+                Console.WriteLine($"Direccion: {save.Address ?? "Desconocido"} \n");
+                Console.WriteLine($"Ciudad: {save.City ?? "Desconocido"} \n");
+                Console.WriteLine($"Region: {save.Region ?? "Desconocido"} \n");
+                Console.WriteLine($"Codigo postal: {save.PostalCode ?? "Desconocido"} \n");
+                Console.WriteLine($"Country: {save.Country ?? "Desconocido"} \n");
+                Console.WriteLine($"Telefono: {save.Phone ?? "Desconocido"} \n");
+                Console.WriteLine($"Fax: {save.Fax ?? "Desconocido"} \n");
             }
         }
         public void WriteListCustomers(string select)
@@ -64,16 +64,16 @@ namespace PracticaLINQ.UI.Menu
                 {
                     Console.WriteLine("");
                     Console.WriteLine("--------------------------------- \n");
-                    Console.WriteLine($"Nombre de contacto: {save.ContactName}");
+                    Console.WriteLine($"Nombre de contacto: {save.ContactName ?? "Desconocido"}");
                     Console.WriteLine($"Nombre de compania: {save.CompanyName}");
-                    Console.WriteLine($"Titulo de contacto: {save.ContactTitle}");
-                    Console.WriteLine($"Direccion: {save.Address}");
-                    Console.WriteLine($"Ciudad: {save.City}");
-                    Console.WriteLine($"Region: {save.Region}");
-                    Console.WriteLine($"Codigo postal: {save.PostalCode}");
-                    Console.WriteLine($"Country: {save.Country}");
-                    Console.WriteLine($"Telefono: {save.Phone}");
-                    Console.WriteLine($"Fax: {save.Fax}");
+                    Console.WriteLine($"Titulo de contacto: {save.ContactTitle ?? "Desconocido"}");
+                    Console.WriteLine($"Direccion: {save.Address ?? "Desconocido"}");
+                    Console.WriteLine($"Ciudad: {save.City ?? "Desconocido"}");
+                    Console.WriteLine($"Region: {save.Region ?? "Desconocido"}");
+                    Console.WriteLine($"Codigo postal: {save.PostalCode ?? "Desconocido"}");
+                    Console.WriteLine($"Country: {save.Country ?? "Desconocido"}");
+                    Console.WriteLine($"Telefono: {save.Phone ?? "Desconocido"}");
+                    Console.WriteLine($"Fax: {save.Fax ?? "Desconocido"}");
                 }
             }
         }
@@ -89,8 +89,8 @@ namespace PracticaLINQ.UI.Menu
                 {
                     Console.WriteLine("");
                     Console.WriteLine("--------------------------------- \n");
-                    Console.WriteLine($"Nombre en minuscula: {save.lowerName}");
-                    Console.WriteLine($"Nombre en mayuscula: {save.upperName}");
+                    Console.WriteLine($"Nombre en minuscula: {save.lowerName ?? "Desconocido"}");
+                    Console.WriteLine($"Nombre en mayuscula: {save.upperName ?? "Desconocido"}");
                 }
             }
         }
@@ -111,13 +111,13 @@ namespace PracticaLINQ.UI.Menu
                 {
                     Console.WriteLine("");
                     Console.WriteLine("--------------------------------- \n");
-                    Console.WriteLine($"Orden numero: {save.orderID}");
-                    Console.WriteLine($"Nombre de contacto: {save.customerName}");
-                    Console.WriteLine($"Region: {save.region}");
-                    Console.WriteLine($"Direccion: {save.address},{save.city},{save.country}");
-                    Console.WriteLine($"Codigo postal: {save.postalCode}");
-                    Console.WriteLine($"Telefono: {save.phone}");
-                    Console.WriteLine($"Fecha de orden: {save.orderDate}");
+                    Console.WriteLine($"Orden numero: {save.orderID.ToString() ?? "Desconocido"}");
+                    Console.WriteLine($"Nombre de contacto: {save.customerName ?? "Desconocido"}");
+                    Console.WriteLine($"Region: {save.region ?? "Desconocido"}");
+                    Console.WriteLine($"Direccion: {save.address + "," +save.city + "," +save.country ?? "Desconocido"}");
+                    Console.WriteLine($"Codigo postal: {save.postalCode ?? "Desconocido"}");
+                    Console.WriteLine($"Telefono: {save.phone ?? "Desconocido"}");
+                    Console.WriteLine($"Fecha de orden: {save.orderDate.ToString() ?? "Desconocido"}");
                 }
             }
         }
@@ -133,9 +133,9 @@ namespace PracticaLINQ.UI.Menu
                 {
                     Console.WriteLine("");
                     Console.WriteLine("--------------------------------- \n");
-                    Console.WriteLine($"Nombre del customer: {item.custName}\n");
-                    Console.WriteLine($"Lista de orders del customer: {item.asociedOrders} \n");
-                    Console.WriteLine($"Cantidad de ordenes: {item.cantOrders} \n");
+                    Console.WriteLine($"Nombre del customer: {item.custName ?? "Desconocido"}\n");
+                    Console.WriteLine($"Lista de orders del customer: {item.asociedOrders ?? "Desconocido"} \n");
+                    Console.WriteLine($"Cantidad de ordenes: {item.cantOrders.ToString() ?? "Desconocido"} \n");
                 }
             }
         }

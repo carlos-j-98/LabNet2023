@@ -48,8 +48,9 @@ namespace PracticaLINQ.Data.Queries
         public Products GetProductsFirstOrNullByID(int productID)
         {
             var productList = _northwindContext.Products.ToList();
-            return productList
-                .FirstOrDefault(x => x.ProductID == productID) ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
+            var produc = productList
+                .FirstOrDefault(x => x.ProductID == productID);
+            return produc ?? null;
         }
 
         public List<Products> GetProductsNoStock()

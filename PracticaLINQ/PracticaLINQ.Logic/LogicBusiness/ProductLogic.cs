@@ -22,7 +22,7 @@ namespace PracticaLINQ.Logic.LogicBusiness
 
         public Products GetProduct(int productId)
         {
-            return _productQueries.GetProductsFirstOrNullByID(productId);
+            return _productQueries.GetProductsFirstOrNullByID(productId) ?? null;
         }
 
         public Products GetOneProduct()

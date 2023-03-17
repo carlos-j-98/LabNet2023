@@ -87,7 +87,7 @@ namespace PracticaLINQ.UI.Menu
                 catch (IsNullOrEmptyException ex)
                 {
                     ex = new IsNullOrEmptyException(ex.Message);
-                    WriteExceptionInfo(ex);
+                    Console.WriteLine(ex.Message);
                     WriteBackMenu();
                 }
                 catch (Exception ex)
