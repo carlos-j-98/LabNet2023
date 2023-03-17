@@ -1,7 +1,8 @@
 ﻿using PracticaLINQ.Entities.DbEntities;
 using PracticaLINQ.Entities.DTO;
-using PracticaLINQ.Services.Service;
-using PracticaLINQ.Services.Service.ServicesInterfaces;
+using PracticaLINQ.Logic.LogicBusiness;
+using PracticaLINQ.Logic.LogicBusiness.LogicInterfaces;
+using PracticaLINQ.Services.Validatos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,10 +11,12 @@ namespace PracticaLINQ.UI.Menu
 {
     public class ProductPresentation
     {
-        private readonly IProductService _productService;
+        private readonly IProductLogic _productService;
+        private readonly ProductValidator _productValidator;
         public ProductPresentation()
         {
-            _productService = new ProductService();
+            _productService = new ProductLogic();
+            _productValidator = new ProductValidator();
         }
         public void WriteListProducts(string select)
         {
@@ -48,7 +51,7 @@ namespace PracticaLINQ.UI.Menu
                 MenuPrincipal.WriteIncorrectOption();
                 return;
             }
-            if (saveList != null)
+            if (_productValidator.IsNullProductsListValidator(saveList))
             {
                 foreach (var product in saveList)
                 {
@@ -87,14 +90,14 @@ namespace PracticaLINQ.UI.Menu
             else if (select == "puntoDoce")
             {
                 Console.WriteLine($"Buscando el primer producto de una lista \n");
-                product = _productService.GetProduct();
+                product = _productService.GetOneProduct();
             }
             else
             {
                 MenuPrincipal.WriteIncorrectOption();
                 return;
             }
-            if (product != null)
+            if (_productValidator.IsNullProductValidator(product))
             {
                 Console.WriteLine("");
                 Console.WriteLine("--------------------------------- \n");
@@ -116,10 +119,6 @@ namespace PracticaLINQ.UI.Menu
                     Console.Write("En continuidad");
                 }
             }
-            else
-            {
-                Console.WriteLine($"No se encontro el producto \n");
-            }
         }
         public void WriteProductCategoriesList()
         {
@@ -127,7 +126,7 @@ namespace PracticaLINQ.UI.Menu
             Console.Title = "Mostrar categorias con productos asociados";
             Console.WriteLine($"Productos agrupados por categorias");
             List<ProductCategoriesDTO> product = _productService.GetProductCategoriesGrupBy();
-            if (product != null)
+            if (_productValidator.IsNullProductCategories(product))
             {
                 foreach (var item in product)
                 {
@@ -136,10 +135,6 @@ namespace PracticaLINQ.UI.Menu
                     Console.WriteLine($"Nombre de la categoria: {item.categoryName}");
                     Console.WriteLine($"Productos asociados: {item.productName}");
                 }
-            }
-            else
-            {
-                Console.WriteLine("");
             }
         }
     }

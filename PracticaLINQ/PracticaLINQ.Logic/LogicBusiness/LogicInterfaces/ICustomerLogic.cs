@@ -2,9 +2,9 @@
 using PracticaLINQ.Entities.DTO;
 using System.Collections.Generic;
 
-namespace PracticaLINQ.Services.Service.ServicesInterfaces
+namespace PracticaLINQ.Logic.LogicBusiness.LogicInterfaces
 {
-    public interface ICustomerService
+    public interface ICustomerLogic
     {
         Customers GetOneCustomer();
         List<Customers> GetCustomersRegion(string custRegion);

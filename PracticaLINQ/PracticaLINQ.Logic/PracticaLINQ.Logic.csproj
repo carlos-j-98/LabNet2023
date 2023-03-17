@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C6497985-8D27-40AC-A0DD-B91D3B902044}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>PracticaLINQ.UI</RootNamespace>
-    <AssemblyName>PracticaLINQ.UI</AssemblyName>
+    <ProjectGuid>{483F9DDF-C5A6-4E0B-98CB-CB617B394977}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PracticaLINQ.Logic</RootNamespace>
+    <AssemblyName>PracticaLINQ.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,7 +39,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,29 +48,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu\CustomersPresentation.cs" />
-    <Compile Include="Menu\MenuPrincipal.cs" />
-    <Compile Include="Menu\ProductPresentation.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LogicBusiness\CustomerLogic.cs" />
+    <Compile Include="LogicBusiness\ProductLogic.cs" />
+    <Compile Include="LogicBusiness\LogicInterfaces\ICustomerLogic.cs" />
+    <Compile Include="LogicBusiness\LogicInterfaces\IProductLogic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\PracticaLINQ.Data\PracticaLINQ.Data.csproj">
+      <Project>{D7746408-0AE7-442F-9DDE-C178F8685D7E}</Project>
+      <Name>PracticaLINQ.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PracticaLINQ.Entities\PracticaLINQ.Entities.csproj">
       <Project>{834CB6E6-DA95-4416-84A3-2EDD4F977517}</Project>
       <Name>PracticaLINQ.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PracticaLINQ.Logic\PracticaLINQ.Logic.csproj">
-      <Project>{483f9ddf-c5a6-4e0b-98cb-cb617b394977}</Project>
-      <Name>PracticaLINQ.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PracticaLINQ.Services\PracticaLINQ.Services.csproj">
-      <Project>{88827f43-a24d-4b3b-899b-22849b253334}</Project>
-      <Name>PracticaLINQ.Services</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

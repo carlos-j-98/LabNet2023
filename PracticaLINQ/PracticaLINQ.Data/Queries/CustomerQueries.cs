@@ -2,8 +2,10 @@
 using PracticaLINQ.Data.Queries.QueriesInterfaces;
 using PracticaLINQ.Entities.DbEntities;
 using PracticaLINQ.Entities.DTO;
+using PracticaLINQ.Services.CustomExceptions;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 namespace PracticaLINQ.Data.Queries
@@ -26,13 +28,15 @@ namespace PracticaLINQ.Data.Queries
                                  custNames = g.Key,
                                  lOrders = g.Select(p => p.OrderID).ToList()
                              }).ToList();
-            var result = custOrder.ToList().Select(x => new CustCantOrderDTO
-            {
-                custName = x.custNames,
-                asociedOrders = string.Join(",", x.lOrders),
-                cantOrders = x.lOrders.Count
-            }).ToList();
-            return result;
+            var result = custOrder
+                .ToList()
+                .Select(x => new CustCantOrderDTO
+                {
+                    custName = x.custNames,
+                    asociedOrders = string.Join(",", x.lOrders),
+                    cantOrders = x.lOrders.Count
+                }).ToList();
+            return result ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationCustText"]);
         }
 
         public List<Customers> GetCustomerCantByRegion(string custRegion, int cant)
@@ -40,7 +44,7 @@ namespace PracticaLINQ.Data.Queries
             var customers = (from c in _northwindContext.Customers
                              where c.Region == custRegion
                              select c).Take(cant).ToList();
-            return customers;
+            return customers ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
         }
 
         public List<CustomersOrdersDTO> GetCustomersOrders(string custRegion, DateTime date)
@@ -63,12 +67,15 @@ namespace PracticaLINQ.Data.Queries
                                  phone = c.Phone,
                                  orderID = o.OrderID
                              };
-            return custOrders.ToList();
+            return custOrders
+                .ToList() ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
         }
 
         public List<Customers> GetCustomersRegion(string custRegion)
         {
-            return _northwindContext.Customers.Where(x => x.Region == custRegion).ToList();
+            return _northwindContext.Customers
+                .Where(x => x.Region == custRegion)
+                .ToList() ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
         }
 
         public List<CustomersUpperLowerDTO> GetCustomersUpperLowers()
@@ -79,12 +86,14 @@ namespace PracticaLINQ.Data.Queries
                                     lowerName = c.ContactName.ToLower(),
                                     upperName = c.ContactName.ToUpper()
                                 };
-            return customersName.ToList();
+            return customersName
+                .ToList() ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
         }
 
         public Customers GetOneCustomers()
         {
-            return _northwindContext.Customers.FirstOrDefault();
+            return _northwindContext.Customers
+                .FirstOrDefault() ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
         }
     }
 }

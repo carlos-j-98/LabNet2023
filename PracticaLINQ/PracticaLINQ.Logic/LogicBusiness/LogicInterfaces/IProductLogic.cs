@@ -2,9 +2,9 @@
 using PracticaLINQ.Entities.DTO;
 using System.Collections.Generic;
 
-namespace PracticaLINQ.Services.Service.ServicesInterfaces
+namespace PracticaLINQ.Logic.LogicBusiness.LogicInterfaces
 {
-    public interface IProductService
+    public interface IProductLogic
     {
         List<Products> GetNoStockProducts();
         List<Products> GetStockProductsStockThreePerUnits();
@@ -12,6 +12,6 @@ namespace PracticaLINQ.Services.Service.ServicesInterfaces
         List<Products> GetProductsOrderedByName(bool isAcending);
         List<Products> GetProductsOrderedByUnitsInStock(bool isAcending);
         List<ProductCategoriesDTO> GetProductCategoriesGrupBy();
-        Products GetProduct();
+        Products GetOneProduct();
     }
 }

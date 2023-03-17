@@ -2,16 +2,16 @@
 using PracticaLINQ.Data.Queries.QueriesInterfaces;
 using PracticaLINQ.Entities.DbEntities;
 using PracticaLINQ.Entities.DTO;
-using PracticaLINQ.Services.Service.ServicesInterfaces;
+using PracticaLINQ.Logic.LogicBusiness.LogicInterfaces;
 using System;
 using System.Collections.Generic;
 
-namespace PracticaLINQ.Services.Service
+namespace PracticaLINQ.Logic.LogicBusiness
 {
-    public class CustomerService : ICustomerService
+    public class CustomerLogic : ICustomerLogic
     {
         private readonly ICustomerQueries _customerQueries;
-        public CustomerService()
+        public CustomerLogic()
         {
             this._customerQueries = new CustomerQueries();
         }
@@ -31,7 +31,6 @@ namespace PracticaLINQ.Services.Service
             DateTime date = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
             return _customerQueries.GetCustomersOrders(custRegion, date);
         }
-
         public List<Customers> GetCustomersRegion(string custRegion)
         {
             return _customerQueries.GetCustomersRegion(custRegion);

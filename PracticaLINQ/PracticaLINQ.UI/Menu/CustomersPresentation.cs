@@ -1,6 +1,7 @@
 ﻿using PracticaLINQ.Entities.DbEntities;
-using PracticaLINQ.Services.Service;
-using PracticaLINQ.Services.Service.ServicesInterfaces;
+using PracticaLINQ.Logic.LogicBusiness;
+using PracticaLINQ.Logic.LogicBusiness.LogicInterfaces;
+using PracticaLINQ.Services.Validatos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,17 +10,19 @@ namespace PracticaLINQ.UI.Menu
 {
     public class CustomersPresentation
     {
-        private readonly ICustomerService _customerService;
+        private readonly ICustomerLogic _customerService;
+        private readonly CustomerValidator _customerValidator;
         public CustomersPresentation()
         {
-            this._customerService = new CustomerService();
+            this._customerService = new CustomerLogic();
+            this._customerValidator = new CustomerValidator();
         }
         public void WriteObjectCustomer()
         {
             Console.Clear();
             Console.Title = "Mostrar un customer";
             var save = _customerService.GetOneCustomer();
-            if (save != null)
+            if (_customerValidator.IsNullCustomerValidator(save))
             {
                 Console.WriteLine("Se esta mostrando el primer customer que hay en la DB \n");
                 Console.WriteLine($"Nombre de contacto: {save.ContactName} \n");
@@ -55,7 +58,7 @@ namespace PracticaLINQ.UI.Menu
                 MenuPrincipal.WriteIncorrectOption();
                 return;
             }
-            if (saveList != null)
+            if (_customerValidator.IsNullListCustomerValidator(saveList))
             {
                 foreach (var save in saveList)
                 {
@@ -80,7 +83,7 @@ namespace PracticaLINQ.UI.Menu
             Console.Title = "Mostrar lista de Customers en mayuscula y minuscula";
             Console.WriteLine("Lista de customers en mayuscula y en minuscula");
             var saveList = _customerService.GetCustomersUpperLowerCase();
-            if (saveList != null)
+            if (_customerValidator.IsNullListCustomerUL(saveList))
             {
                 foreach (var save in saveList)
                 {
@@ -102,7 +105,7 @@ namespace PracticaLINQ.UI.Menu
             Console.Title = "Mostrando Customers y Orders";
             Console.WriteLine($"Lista de customers y orders de la region {custRegion} de la fecha {dateConcat} hasta hoy");
             var saveList = _customerService.GetCustomersOrdersRegionDate(custRegion, year, month, day);
-            if (saveList != null || saveList.Count != 0)
+            if (_customerValidator.IsNullListCusOrdersValidator(saveList))
             {
                 foreach (var save in saveList)
                 {
@@ -124,7 +127,7 @@ namespace PracticaLINQ.UI.Menu
             Console.Title = "Cantidad de ordenes por cada customer";
             Console.WriteLine("Cantidad de ordenes por customer \n");
             var saveList = _customerService.GetCustCantOrder();
-            if (saveList != null && saveList.Count > 0)
+            if (_customerValidator.IsNullListCusCantOrderValidator(saveList))
             {
                 foreach (var item in saveList)
                 {

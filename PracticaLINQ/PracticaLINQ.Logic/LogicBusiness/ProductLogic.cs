@@ -2,15 +2,15 @@
 using PracticaLINQ.Data.Queries.QueriesInterfaces;
 using PracticaLINQ.Entities.DbEntities;
 using PracticaLINQ.Entities.DTO;
-using PracticaLINQ.Services.Service.ServicesInterfaces;
+using PracticaLINQ.Logic.LogicBusiness.LogicInterfaces;
 using System.Collections.Generic;
 
-namespace PracticaLINQ.Services.Service
+namespace PracticaLINQ.Logic.LogicBusiness
 {
-    public class ProductService : IProductService
+    public class ProductLogic : IProductLogic
     {
         private readonly IProductQueries _productQueries;
-        public ProductService()
+        public ProductLogic()
         {
             _productQueries = new ProductQueries();
         }
@@ -25,7 +25,7 @@ namespace PracticaLINQ.Services.Service
             return _productQueries.GetProductsFirstOrNullByID(productId);
         }
 
-        public Products GetProduct()
+        public Products GetOneProduct()
         {
             return _productQueries.GetProduct();
         }

@@ -1,4 +1,5 @@
-﻿using PracticaLINQ.Services.ExtensionMethods;
+﻿using PracticaLINQ.Services.CustomExceptions;
+using PracticaLINQ.Services.ExtensionMethods;
 using System;
 using System.Configuration;
 using System.Threading;
@@ -83,6 +84,12 @@ namespace PracticaLINQ.UI.Menu
                     WriteExceptionInfo(ex);
                     WriteBackMenu();
                 }
+                catch (IsNullOrEmptyException ex)
+                {
+                    ex = new IsNullOrEmptyException(ex.Message);
+                    WriteExceptionInfo(ex);
+                    WriteBackMenu();
+                }
                 catch (Exception ex)
                 {
                     ex = new Exception(ConfigurationManager.AppSettings["exceptionGenericText"]);
@@ -95,17 +102,20 @@ namespace PracticaLINQ.UI.Menu
         {
             Console.Clear();
             Console.Title = "Menu principal ";
+            int idSelect = int.Parse(ConfigurationManager.AppSettings["productIDPuntoCinco"]);
+            int cantSelect = int.Parse(ConfigurationManager.AppSettings["cantSelect"]);
+            string custRegion = ConfigurationManager.AppSettings["customerRegion"];
             Console.WriteLine("Menu principal de conexion a la base de datos \n");
             Console.WriteLine("¿Que desea hacer? \n");
             Console.WriteLine("--------------------------------- \n");
             Console.WriteLine("1-  Obtener un customer");
             Console.WriteLine("2-  Obtener productos sin stock");
             Console.WriteLine("3-  Obtener productos con stock y que valgan + de $3");
-            Console.WriteLine("4-  Obtener customers de la region de WA");
-            Console.WriteLine("5-  Obtener elemento o nulo de lista de productos donde el ID sea 789");
+            Console.WriteLine($"4-  Obtener customers de la region de {custRegion}");
+            Console.WriteLine($"5-  Obtener elemento o nulo de lista de productos donde el ID sea {idSelect}");
             Console.WriteLine("6-  Obtener nombre del customer en mayuscula y minuscula");
-            Console.WriteLine("7-  Obtener customer y orders de WA y posteriores a 1/1/1997");
-            Console.WriteLine("8-  Obtener 3 primeros customer de la region de WA");
+            Console.WriteLine($"7-  Obtener customer y orders de {custRegion} y posteriores a {WriteDateComplete()}");
+            Console.WriteLine($"8-  Obtener {cantSelect} primeros customer de la region de {custRegion}");
             Console.WriteLine("9-  Obtener lista de productos ordenados por nombre");
             Console.WriteLine("10- Obtener lista de productos ordenados por 'unit in stock' de mayor a menor");
             Console.WriteLine("11- Obtener distintas categorias asociadas a productos");
@@ -137,6 +147,18 @@ namespace PracticaLINQ.UI.Menu
         {
             int select = int.Parse(Console.ReadLine());
             return select;
+        }
+        public static void WriteNotFound()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("No se ha encontrado ningun elemento/s que cumpla/n con los parametros indicados \n");
+        }
+        public string WriteDateComplete() 
+        {
+            string year = ConfigurationManager.AppSettings["yearOrder"];
+            string month = ConfigurationManager.AppSettings["monthOrder"];
+            string day = ConfigurationManager.AppSettings["dayOrder"];
+            return $"{day}/{month}/{year}";
         }
     }
 }

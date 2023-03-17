@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\PracticaLINQ.Entities\PracticaLINQ.Entities.csproj">
       <Project>{834cb6e6-da95-4416-84a3-2edd4f977517}</Project>
       <Name>PracticaLINQ.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PracticaLINQ.Services\PracticaLINQ.Services.csproj">
+      <Project>{88827f43-a24d-4b3b-899b-22849b253334}</Project>
+      <Name>PracticaLINQ.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
