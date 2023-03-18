@@ -14,6 +14,10 @@ namespace PracticaLINQ.Logic.LogicBusiness
         {
             _productQueries = new ProductQueries();
         }
+        public ProductLogic(IProductQueries productQueries)
+        {
+            _productQueries = productQueries;
+        }
 
         public List<Products> GetNoStockProducts()
         {

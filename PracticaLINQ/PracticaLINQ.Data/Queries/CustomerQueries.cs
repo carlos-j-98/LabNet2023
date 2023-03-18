@@ -17,7 +17,6 @@ namespace PracticaLINQ.Data.Queries
         {
             _northwindContext = new NorthwindContext();
         }
-
         public List<CustCantOrderDTO> GetCustCantOrder()
         {
             var custOrder = (from o in _northwindContext.Orders

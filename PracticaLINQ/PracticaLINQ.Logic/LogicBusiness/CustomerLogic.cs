@@ -15,6 +15,10 @@ namespace PracticaLINQ.Logic.LogicBusiness
         {
             this._customerQueries = new CustomerQueries();
         }
+        public CustomerLogic(ICustomerQueries customerQueries)
+        {
+            _customerQueries = customerQueries;
+        }
 
         public List<CustCantOrderDTO> GetCustCantOrder()
         {

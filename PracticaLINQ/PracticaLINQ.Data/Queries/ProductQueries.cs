@@ -26,23 +26,12 @@ namespace PracticaLINQ.Data.Queries
 
         public List<ProductCategoriesDTO> GetProductCategoriesGroupBy()
         {
-            var prodCate = (from c in _northwindContext.Categories
-                            join p in _northwindContext.Products on c.CategoryID equals p.CategoryID
-                            group p by c.CategoryName into g
-                            select new
-                            {
-                                CategoryName = g.Key,
-                                Products = g.Select(p => p.ProductName)
-                                .ToList()
-                            }).ToList();
-            var result = prodCate
-                .ToList()
-                .Select(x => new ProductCategoriesDTO
-                {
-                    categoryName = x.CategoryName,
-                    productName = string.Join(",", x.Products)
-                }).ToList();
-            return result ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
+            var categories = _northwindContext.Categories
+                                .Where(c => c.Products.Any())
+                                .Select(c => new ProductCategoriesDTO { categoryName = c.CategoryName })
+                                .Distinct()
+                                .ToList();
+            return categories ?? throw new IsNullOrEmptyException(ConfigurationManager.AppSettings["invalidOperationProdText"]);
         }
 
         public Products GetProductsFirstOrNullByID(int productID)

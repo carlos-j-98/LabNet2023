@@ -114,7 +114,7 @@ namespace PracticaLINQ.UI.Menu
                     Console.WriteLine($"Orden numero: {save.orderID.ToString() ?? "Desconocido"}");
                     Console.WriteLine($"Nombre de contacto: {save.customerName ?? "Desconocido"}");
                     Console.WriteLine($"Region: {save.region ?? "Desconocido"}");
-                    Console.WriteLine($"Direccion: {save.address + "," +save.city + "," +save.country ?? "Desconocido"}");
+                    Console.WriteLine($"Direccion: {save.address + "," + save.city + "," + save.country ?? "Desconocido"}");
                     Console.WriteLine($"Codigo postal: {save.postalCode ?? "Desconocido"}");
                     Console.WriteLine($"Telefono: {save.phone ?? "Desconocido"}");
                     Console.WriteLine($"Fecha de orden: {save.orderDate.ToString() ?? "Desconocido"}");

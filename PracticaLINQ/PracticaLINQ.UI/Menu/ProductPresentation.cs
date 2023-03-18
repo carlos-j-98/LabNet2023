@@ -99,10 +99,10 @@ namespace PracticaLINQ.UI.Menu
             }
             WriteProductExist(product);
         }
-        public void WriteProductExist(Products product) 
+        public void WriteProductExist(Products product)
         {
 
-            if (product != null) 
+            if (product != null)
             {
                 Console.WriteLine("");
                 Console.WriteLine("--------------------------------- \n");
@@ -123,10 +123,11 @@ namespace PracticaLINQ.UI.Menu
                 {
                     Console.Write("En continuidad");
                 }
+                Console.WriteLine("");
             }
-            else 
+            else
             {
-                Console.WriteLine("El producto es nulo \n");
+                Console.WriteLine("No se encontro ningun producto es nulo \n");
             }
         }
         public void WriteProductCategoriesList()
@@ -137,12 +138,13 @@ namespace PracticaLINQ.UI.Menu
             List<ProductCategoriesDTO> product = _productService.GetProductCategoriesGrupBy();
             if (_productValidator.IsNullProductCategories(product))
             {
+                Console.WriteLine("");
+                Console.WriteLine("--------------------------------- \n");
+                Console.WriteLine("Estas son las distintas categorias que tienen productos asociados \n");
                 foreach (var item in product)
                 {
-                    Console.WriteLine("");
-                    Console.WriteLine("--------------------------------- \n");
                     Console.WriteLine($"Nombre de la categoria: {item.categoryName ?? "Desconocido"}");
-                    Console.WriteLine($"Productos asociados: {item.productName ?? "Desconocido"}");
+
                 }
             }
         }

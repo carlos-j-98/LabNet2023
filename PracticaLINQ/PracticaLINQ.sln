@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaLINQ.Entities", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaLINQ.Logic", "PracticaLINQ.Logic\PracticaLINQ.Logic.csproj", "{483F9DDF-C5A6-4E0B-98CB-CB617B394977}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaLINQ.Tests", "PracticaLINQ.Tests\PracticaLINQ.Tests.csproj", "{6A57845C-C91E-4180-85CF-CE54EA1223C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{483F9DDF-C5A6-4E0B-98CB-CB617B394977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{483F9DDF-C5A6-4E0B-98CB-CB617B394977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{483F9DDF-C5A6-4E0B-98CB-CB617B394977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A57845C-C91E-4180-85CF-CE54EA1223C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A57845C-C91E-4180-85CF-CE54EA1223C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A57845C-C91E-4180-85CF-CE54EA1223C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A57845C-C91E-4180-85CF-CE54EA1223C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

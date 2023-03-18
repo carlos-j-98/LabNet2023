@@ -148,12 +148,7 @@ namespace PracticaLINQ.UI.Menu
             int select = int.Parse(Console.ReadLine());
             return select;
         }
-        public static void WriteNotFound()
-        {
-            Console.WriteLine("");
-            Console.WriteLine("No se ha encontrado ningun elemento/s que cumpla/n con los parametros indicados \n");
-        }
-        public string WriteDateComplete() 
+        public string WriteDateComplete()
         {
             string year = ConfigurationManager.AppSettings["yearOrder"];
             string month = ConfigurationManager.AppSettings["monthOrder"];
