@@ -85,7 +85,7 @@ function pokemonGen() {
       genPoke = "Sexta";
       break;
     case pokeId <= 809:
-      genPoke = "Septima";
+      genPoke = "Séptima";
       break;
     case pokeId <= 902:
       genPoke = "Octava";
@@ -163,14 +163,14 @@ function changeWin(status) {
     document.body.style.backgroundColor = "#FF0000";
     imgAsh.src = "../assets/img/ashTriste.jpg";
     resultText.textContent =
-      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que esta pensando Ash para la proxima";
+      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima";
     statusGame = "fin";
     removeIncorrectOption();
   } else if (status === "Reiniciar") {
     imgAsh.src = "../assets/img/Ash.png";
     document.body.style.backgroundColor = "#F0F0F0";
     resultText.textContent =
-      "La PC de Ash esta llena de Pokemon y esta formando un nuevo equipo. \n Tiene estas 6 opciones ¿Cual crees que eligio?";
+      "La PC de Ash está llena de Pokemon y está formando un nuevo equipo. \n Tiene estás 6 opciones ¿Cúal crees que eligío?";
   }
 }
 
@@ -185,9 +185,9 @@ function initHint() {
   const divHint1 = document.getElementById("div-hint1");
   const divHint2 = document.getElementById("div-hint2");
   divHint1.innerHTML =
-    '<h1>El pokemon es de tipo: <br><span id="text-hint1">Se desbloqueara cuando tu puntuacion sea 4</span></h1>';
+    '<h1>El pokemon es de tipo: <br><span id="text-hint1">Se desbloqueará cuando tu puntuación sea 4 o menor</span></h1>';
   divHint2.innerHTML =
-    '<h1>La generacion del pokemon es: <br> <span id="text-hint2"> Se desbloqueara cuando tu puntuacion sea 2</span></h1>';
+    '<h1>La generación del pokemon es: <br> <span id="text-hint2"> Se desbloqueará cuando tu puntuación sea 2 o menor</span></h1>';
 }
 
 function setHintImg(type, pokeUrl) {
@@ -222,7 +222,7 @@ function updateHints() {
 }
 function incorrectOption() {
   const msgDiv = document.createElement("div");
-  msgDiv.textContent = "Pokemon incorrecto, intente nuevamente";
+  msgDiv.textContent = "Pokémon incorrecto, inténtalo de nuevo.";
   msgDiv.classList.add("message");
   msgDiv.classList.add("incorrecto");
   msgDiv.id = "msgIncorrectOption";
