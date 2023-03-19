@@ -35,7 +35,7 @@ header {
 /* Articulo principal */
 .principal-article {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 10px;
 }
@@ -48,18 +48,23 @@ header {
   width: 35%;
 }
 .left-section img {
-  width: 80%;
+  width: 65%;
+}
+.img-Ash{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Seccion central */
 .center-section {
   display: flex;
-  width: 53%;
+  width: 65%;
+  justify-content: center;
 }
 
 .container {
-  width: 80%;
-  margin: 0 auto;
+  width: 75%;
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -82,7 +87,7 @@ header {
   display: grid;
   grid-template-columns: repeat(3, 2fr);
   grid-gap: 20px;
-  margin: 20px 0;
+  width: 100%;
 }
 
 .box {

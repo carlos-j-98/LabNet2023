@@ -57,6 +57,7 @@ function loadImgPokemons(idPokemon, posImg, images) {
         localStorage.setItem("pokeUrl",JSON.stringify(pokeUrl));
         localStorage.setItem("type",data.types[0].type.name)
         localStorage.setItem("idPokemon", data.id);
+        localStorage.setItem("namePokemon",data.name)
       }
     })
     .catch((error) => {});
@@ -151,11 +152,12 @@ function selectWinner() {
 function changeWin(status) {
   let imgAsh = document.getElementById("ashImg");
   let resultText = document.getElementById("resultTextGuess");
+  let pokeSelect = localStorage.getItem("namePokemon");
   if (status === "Ganaste") {
     imgAsh.src = "../assets/img/ashFeliz.jpg";
     document.body.style.backgroundColor = "#008000";
     resultText.textContent =
-      "¡Pokemon correcto! ¡Excelente elección, entrenador! Ese es un Pokemon increíblemente fuerte y valiente.";
+      "¡Pokemon correcto! ¡Excelente elección, entrenador! Ese es un Pokemon increíblemente fuerte y valiente. El pokemon era " + pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
     updateHighScore();
@@ -163,7 +165,7 @@ function changeWin(status) {
     document.body.style.backgroundColor = "#FF0000";
     imgAsh.src = "../assets/img/ashTriste.jpg";
     resultText.textContent =
-      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima";
+      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima. El pokemon era " + pokeSelect.toUpperCase() ;
     statusGame = "fin";
     removeIncorrectOption();
   } else if (status === "Reiniciar") {
