@@ -1,38 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Adivina la imagen</title>
-    <link rel="stylesheet" href="../assets/css/stylesPokemon.css">
+    <link rel="stylesheet" href="../assets/css/stylesPokemon.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Adivina la imagen</h1>
-      <div class="grid">
-        <div class="box">
-            <img id="0" src="https://via.placeholder.com/150" alt="">
+    <header class="header-section">
+      <div class="header-container">
+        <div class="logo">
+          <img src="../assets/img/R.png" alt="Icono" />
         </div>
-        <div class="box">
-            <img id="1" src="https://via.placeholder.com/150" alt="">
-        </div>
-        <div class="box">
-            <img id="2" src="https://via.placeholder.com/150" alt="">
-        </div>
-        <div class="box">
-            <img id="3" src="https://via.placeholder.com/150" alt="">
-        </div>
-        <div class="box">
-            <img id="4" src="https://via.placeholder.com/150" alt="">
-        </div>
-        <div class="box">
-            <img id="5" src="https://via.placeholder.com/150" alt="">
+        <h1 class="title">Adivina el equipo pokemon</h1>
+        <div class="logo">
+          <img src="../assets/img/R.png" alt="Icono" />
         </div>
       </div>
-      <p class="hint">Haz clic en la imagen correcta</p>
-      <div id="scoreGuess"></div>
-      <div id="high-score"></div>
-      <div id="message"></div>
-    </div>
+    </header>
+    <main>
+      <article class="principal-article">
+        <section class="left-section">
+          <div id="imgAshDiv">
+            <img src="../assets/img/Ash.png" id="ashImg" alt="imagen" />
+          </div>
+        </section>
+        <section class="center-section">
+          <div id="containerCenter" class="container">
+            <h1 id="resultTextGuess"></h1>
+            <div class="grid">
+              <div class="box">
+                <img id="img-1" src="https://via.placeholder.com/150" alt="" />
+              </div>
+              <div class="box">
+                <img id="img-2" src="https://via.placeholder.com/150" alt="" />
+              </div>
+              <div class="box">
+                <img id="img-3" src="https://via.placeholder.com/150" alt="" />
+              </div>
+              <div class="box">
+                <img id="img-4" src="https://via.placeholder.com/150" alt="" />
+              </div>
+              <div class="box">
+                <img id="img-5" src="https://via.placeholder.com/150" alt="" />
+              </div>
+              <div class="box">
+                <img id="img-6" src="https://via.placeholder.com/150" alt="" />
+              </div>
+            </div>
+            <div id="incorrectOption"></div>
+            <h1>Poder hacer click en la imagen del pokemon o <br> ingresar su posicion aqui</h1>
+            <div class="input-container">
+              <input type="text" id="inputGuess" placeholder="Ingresa un numero del 1 al 6">
+              <button class="buttonGuess" type="button" id="buttonGuess">Ingresar</button>
+            </div>
+            
+        </section>
+        <section class="right-section">
+          <div class="square">
+            <p>Las reglas son:
+              <br> 1- Si tu puntuacion llega a 0 perdes
+              <br> 2- Ganas si adivinas el Pokemon
+              <br> 3- Los numeros o valores incorrectos restan puntos de igual forma
+              <br> 4- Divertirse
+            </p>
+          </div>
+          <div class="square">
+            <p>Puntuacion:</p>
+            <p id="score-id"></p>
+          </div>
+          <div class="square">
+            <p>Mayor puntaje:</p>
+            <p id="highScore-id"></p>
+          </div>
+          <div>
+            <button class="squareButton" type="button" id="restartButton">Reiniciar</button>
+          </div>
+        </section>
+      </article>
+      <article class="hint-article">
+        <h1 class="titleHint">Te voy a dar algunas pistas</h1>
+        <section class="container-hint">
+          <div id="div-hint1"class="hint-1">
+            
+          </div>
+          <div id="div-hint2" class="hint-2">
+            
+          </div>
+        </section>
+      </article>
+    </main>
+
     <script type="module" src="../js/pokemonGame.js"></script>
   </body>
 </html>
