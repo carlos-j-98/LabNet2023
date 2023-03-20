@@ -55,11 +55,12 @@ function loadImgPokemons(idPokemon, posImg, images) {
       let imageSources = data.sprites.front_default;
       images[posImg].src = imageSources;
       images[posImg].alt = data.name;
-      if ("img-"+ (posImg+1) == localStorage.getItem("guessWinner")) {
-        localStorage.setItem("pokeUrl",JSON.stringify(pokeUrl));
-        localStorage.setItem("type",data.types[0].type.name)
+      if ("img-" + (posImg + 1) == localStorage.getItem("guessWinner")) {
+        localStorage.setItem("pokeUrl", JSON.stringify(pokeUrl));
+        localStorage.setItem("type", data.types[0].type.name);
         localStorage.setItem("idPokemon", data.id);
-        localStorage.setItem("namePokemon",data.name)
+        localStorage.setItem("namePokemon", data.name);
+        localStorage.setItem("posPokemon", posImg + 1);
       }
     })
     .catch((error) => {});
@@ -118,8 +119,10 @@ function defaultValues() {
   highScore = document.querySelector("#highScore-id");
   scoreText = document.querySelector("#score-id");
   statusGame = "";
-  if(lastGuess != undefined){
-    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "#FFFFFF"
+  if (lastGuess != undefined) {
+    document.getElementById(
+      localStorage.getItem("guessWinner")
+    ).style.backgroundColor = "#FFFFFF";
   }
   initGame();
 }
@@ -158,23 +161,30 @@ function changeWin(status) {
   let imgAsh = document.getElementById("ashImg");
   let resultText = document.getElementById("resultTextGuess");
   let pokeSelect = localStorage.getItem("namePokemon");
+  let posPokemon = localStorage.getItem("posPokemon");
   if (status === "Ganaste") {
     imgAsh.src = "../assets/img/ashFeliz.jpg";
     document.body.style.backgroundColor = "#008000";
-    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "green"
+    document.getElementById(
+      localStorage.getItem("guessWinner")
+    ).style.backgroundColor = "green";
     lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
-      "¡Pokemon correcto! ¡Excelente elección, entrenador! Ese es un Pokemon increíblemente fuerte y valiente. El pokemon era " + pokeSelect.toUpperCase();
+      "¡Pokemon correcto! ¡Excelente elección, entrenador! Ese es un Pokemon increíblemente fuerte y valiente. El pokemon estaba en la posición nº " +
+      posPokemon + " y era " + pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
     updateHighScore();
   } else if (status === "Perdiste") {
     document.body.style.backgroundColor = "#FF0000";
-    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "red"
+    document.getElementById(
+      localStorage.getItem("guessWinner")
+    ).style.backgroundColor = "red";
     imgAsh.src = "../assets/img/ashTriste.jpg";
     lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
-      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima. El pokemon era " + pokeSelect.toUpperCase() ;
+      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima. El pokemon estaba en la posición nº "+ posPokemon + " y era " +
+      pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
   } else if (status === "Reiniciar") {
@@ -237,18 +247,18 @@ function incorrectOption() {
   msgDiv.classList.add("message");
   msgDiv.classList.add("incorrecto");
   msgDiv.id = "msgIncorrectOption";
-  localStorage.setItem("incorrectOption",msgDiv.id);
+  localStorage.setItem("incorrectOption", msgDiv.id);
   containerMsg.appendChild(msgDiv);
   setTimeout(() => {
     removeIncorrectOption();
   }, 3000);
 }
 
-function removeIncorrectOption(){
+function removeIncorrectOption() {
   var remove = document.getElementById(localStorage.getItem("incorrectOption"));
-    if(remove != null){
-      remove.remove();
-    }
+  if (remove != null) {
+    remove.remove();
+  }
 }
 
 function initScores() {
