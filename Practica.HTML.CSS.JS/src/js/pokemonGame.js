@@ -1,121 +1,44 @@
-const img1 = document.querySelector("#img-1");
-const img2 = document.querySelector("#img-2");
-const img3 = document.querySelector("#img-3");
-const img4 = document.querySelector("#img-4");
-const img5 = document.querySelector("#img-5");
-const img6 = document.querySelector("#img-6");
-
-let scoreText = document.querySelector("#score-id");
-let button = document.querySelector("#buttonGuess");
-let buttonRestart = document.querySelector("#restartButton");
-let inputGuess = document.querySelector("#inputGuess");
+const scoreText = document.querySelector("#score-id");
+const button = document.querySelector("#buttonGuess");
+const buttonRestart = document.querySelector("#restartButton");
+const inputGuess = document.querySelector("#inputGuess");
 const containerMsg = document.getElementById("incorrectOption");
+
 let lastGuess;
 let score;
 let highScore;
-let statusGame = "";
+let images = [];
 
-let pokeUrl = {
-  water:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/d/d3/Icon_Agua.png",
-  steel:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/b/bc/Icon_Acero.png",
-  bug: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/7/7e/Icon_Bicho.png",
-  dragon:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/9/96/Icon_Drag%C3%B3n.png",
-  electric:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/3/33/Icon_El%C3%A9ctrico.png",
-  ghost:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/9/9a/Icon_Fantasma.png",
-  fire: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/4/44/Icon_Fuego.png",
-  hada: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/6/60/Icon_Hada.png",
-  ice: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/2/22/Icon_Hielo.png",
-  fighting:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/4/4c/Icon_Lucha.png",
-  normal:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/4/43/Icon_Normal.png",
-  grass:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/7/7f/Icon_Planta.png",
-  psychic:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/c/c0/Icon_Ps%C3%ADquico.png",
-  rock: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/1/12/Icon_Roca.png",
-  dark: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/a/a4/Icon_Siniestro.png",
-  ground:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/8/8d/Icon_Tierra.png",
-  poison:
-    "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/3/3e/Icon_Veneno.png",
-  fly: "https://static.wikia.nocookie.net/pokemongo_es_gamepedia/images/d/d3/Icon_Volador.png",
-};
+let statusGame = "";
+let maxScore = 5;
+let cantBox = 6;
+let firstHint = 3;
+let secondHint = 1;
 let urlBase = "https://pokeapi.co/api/v2/pokemon/";
 
-function loadImgPokemons(idPokemon, posImg, images) {
-  fetch(urlBase + idPokemon)
-    .then((response) => response.json())
-    .then((data) => {
-      let imageSources = data.sprites.front_default;
-      images[posImg].src = imageSources;
-      images[posImg].alt = data.name;
-      if ("img-" + (posImg + 1) == localStorage.getItem("guessWinner")) {
-        localStorage.setItem("pokeUrl", JSON.stringify(pokeUrl));
-        localStorage.setItem("type", data.types[0].type.name);
-        localStorage.setItem("idPokemon", data.id);
-        localStorage.setItem("namePokemon", data.name);
-        localStorage.setItem("posPokemon", posImg + 1);
-      }
-    })
-    .catch((error) => {});
-}
-
-function pokemonGen() {
-  let pokeId = parseInt(localStorage.getItem("idPokemon"));
-  let genPoke;
-  switch (true) {
-    case pokeId <= 151:
-      genPoke = "Primera";
-      break;
-    case pokeId <= 251:
-      genPoke = "Segunda";
-      break;
-    case pokeId <= 386:
-      genPoke = "Tercera";
-      break;
-    case pokeId <= 493:
-      genPoke = "Cuarta";
-      break;
-    case pokeId <= 649:
-      genPoke = "Quinta";
-      break;
-    case pokeId <= 721:
-      genPoke = "Sexta";
-      break;
-    case pokeId <= 809:
-      genPoke = "Séptima";
-      break;
-    case pokeId <= 902:
-      genPoke = "Octava";
-      break;
-    case pokeId <= 1008:
-      genPoke = "Novena";
-      break;
-  }
-  return genPoke;
-}
-
-const images = [img1, img2, img3, img4, img5, img6];
-images.forEach((image) => {
-  image.addEventListener("click", () => {
-    const clickedNumber = image.getAttribute("id");
-    principalRun(clickedNumber);
-  });
-});
 button.addEventListener("click", () => {
   principalRun("img-" + inputGuess.value);
 });
 buttonRestart.addEventListener("click", () => {
   defaultValues();
 });
+
+function chargeImgId() {
+  for (let index = 0; index < cantBox; index++) {
+    id = "#img-" + (index + 1);
+    imgId = document.querySelector(id);
+    images[index] = imgId;
+  }
+  images.forEach((image) => {
+    image.addEventListener("click", () => {
+      const clickedNumber = image.getAttribute("id");
+      principalRun(clickedNumber);
+    });
+  });
+}
+
 function defaultValues() {
-  score = 5;
+  score = maxScore;
   highScore = document.querySelector("#highScore-id");
   scoreText = document.querySelector("#score-id");
   statusGame = "";
@@ -124,6 +47,7 @@ function defaultValues() {
       localStorage.getItem("guessWinner")
     ).style.backgroundColor = "#FFFFFF";
   }
+  chargeImgId();
   initGame();
 }
 
@@ -150,9 +74,9 @@ function principalRun(id) {
 }
 
 function selectWinner() {
-  let randomNumber = Math.floor(Math.random() * 6 + 1);
+  let randomNumber = Math.floor(Math.random() * cantBox + 1);
   while (randomNumber === 0) {
-    let randomNumber = Math.floor(Math.random() * 6 + 1);
+    let randomNumber = Math.floor(Math.random() * cantBox + 1);
   }
   localStorage.setItem("guessWinner", "img-" + randomNumber);
 }
@@ -170,8 +94,10 @@ function changeWin(status) {
     ).style.backgroundColor = "green";
     lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
-      "¡Pokemon correcto! ¡Excelente elección, entrenador! Ese es un Pokemon increíblemente fuerte y valiente. El pokemon estaba en la posición nº " +
-      posPokemon + " y era " + pokeSelect.toUpperCase();
+      "¡Numero correcto!. El numero era " +
+      posPokemon +
+      " y pokemon era " +
+      pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
     updateHighScore();
@@ -183,7 +109,9 @@ function changeWin(status) {
     imgAsh.src = "../assets/img/ashTriste.jpg";
     lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
-      "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima. El pokemon estaba en la posición nº "+ posPokemon + " y era " +
+      "¡Numero incorrecto! Oh no, ese no es el numero correcto. Pero no te preocupes, seguro encontrarás el numero que está pensando Ash para la próxima. El numero era " +
+      posPokemon +
+      " y el pokemon es " +
       pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
@@ -191,32 +119,49 @@ function changeWin(status) {
     imgAsh.src = "../assets/img/Ash.png";
     document.body.style.backgroundColor = "#F0F0F0";
     resultText.textContent =
-      "Ash eligio uno de estos pokemon del 1 al 6.\n ¿Podés adivinar cual es de estos es?";
+      "Ash eligio un numero del 1 al 6 y coincide con el lugar de uno de estos pokemon.\n ¿Podés adivinar cual es de estos es?";
   }
 }
 
 function initImg() {
-  for (let index = 0; index < 6; index++) {
+  for (let index = 0; index < cantBox; index++) {
     const randomPoke = Math.floor(Math.random() * 1008) + 1;
     loadImgPokemons(randomPoke, index, images);
   }
 }
 
+function loadImgPokemons(idPokemon, posImg, images) {
+  fetch(urlBase + idPokemon)
+    .then((response) => response.json())
+    .then((data) => {
+      let imageSources = data.sprites.front_default;
+      let pokeName = data.name;
+      images[posImg].src = imageSources;
+      images[posImg].alt = pokeName;
+      if ("img-" + (posImg + 1) == localStorage.getItem("guessWinner")) {
+        localStorage.setItem("type", data.types[0].type.name);
+        localStorage.setItem("namePokemon", pokeName);
+        localStorage.setItem("idPokemon", data.id);
+        localStorage.setItem("posPokemon", posImg + 1);
+      }
+    });
+}
+
 function initHint() {
   const divHint1 = document.getElementById("div-hint1");
   const divHint2 = document.getElementById("div-hint2");
-  divHint1.innerHTML =
-    '<h1>El pokemon es de tipo: <br><span id="text-hint1">Se desbloqueará cuando tu puntuación sea 3 o menor</span></h1>';
-  divHint2.innerHTML =
-    '<h1>La generación del pokemon es: <br> <span id="text-hint2"> Se desbloqueará cuando tu puntuación sea 1</span></h1>';
+  divHint1.innerHTML = `<h1>El numero esta en un lugar donde el pokemon es de tipo: <br><span id="text-hint1">Se desbloqueará cuando tu puntuación sea ${firstHint} o menor</span></h1>`;
+  divHint2.innerHTML = `<h1>La mitad es ${
+    cantBox / 2
+  } ¿El numero esta por encima o por debajo?: <br> <span id="text-hint2"> Se desbloqueará cuando tu puntuación sea ${secondHint}</span></h1>`;
 }
 
 function setHintImg(type, pokeUrl) {
-  if (score === 3) {
+  if (score === firstHint) {
     for (let key in pokeUrl) {
       if (key == type) {
         var img = document.createElement("img");
-        img.src = pokeUrl[key];
+        img.src = "../assets/img/iconosTiposElementales/" + key + ".png";
         img.alt = "imagen de pista";
         img.id = "img-hin1";
         var div = document.getElementById("div-hint1");
@@ -229,9 +174,16 @@ function setHintImg(type, pokeUrl) {
 }
 
 function setHintText() {
-  if (score === 1) {
+  if (score === secondHint) {
     var hintText = document.querySelector("#text-hint2");
-    hintText.textContent = pokemonGen();
+    let posHint = parseInt(localStorage.getItem("posPokemon"));
+    let hint;
+    if (maxScore / 2 > posHint) {
+      hint = "El numero es mayor a " + cantBox / 2;
+    } else {
+      hint = "El numero es menor a " + cantBox / 2;
+    }
+    hintText.textContent = hint;
   }
 }
 
