@@ -10,6 +10,7 @@ let button = document.querySelector("#buttonGuess");
 let buttonRestart = document.querySelector("#restartButton");
 let inputGuess = document.querySelector("#inputGuess");
 const containerMsg = document.getElementById("incorrectOption");
+let lastGuess;
 let score;
 let highScore;
 let statusGame = "";
@@ -53,6 +54,7 @@ function loadImgPokemons(idPokemon, posImg, images) {
     .then((data) => {
       let imageSources = data.sprites.front_default;
       images[posImg].src = imageSources;
+      images[posImg].alt = data.name;
       if ("img-"+ (posImg+1) == localStorage.getItem("guessWinner")) {
         localStorage.setItem("pokeUrl",JSON.stringify(pokeUrl));
         localStorage.setItem("type",data.types[0].type.name)
@@ -112,10 +114,13 @@ buttonRestart.addEventListener("click", () => {
   defaultValues();
 });
 function defaultValues() {
-  score = 6;
+  score = 5;
   highScore = document.querySelector("#highScore-id");
   scoreText = document.querySelector("#score-id");
   statusGame = "";
+  if(lastGuess != undefined){
+    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "#FFFFFF"
+  }
   initGame();
 }
 
@@ -156,6 +161,8 @@ function changeWin(status) {
   if (status === "Ganaste") {
     imgAsh.src = "../assets/img/ashFeliz.jpg";
     document.body.style.backgroundColor = "#008000";
+    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "green"
+    lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
       "¡Pokemon correcto! ¡Excelente elección, entrenador! Ese es un Pokemon increíblemente fuerte y valiente. El pokemon era " + pokeSelect.toUpperCase();
     statusGame = "fin";
@@ -163,7 +170,9 @@ function changeWin(status) {
     updateHighScore();
   } else if (status === "Perdiste") {
     document.body.style.backgroundColor = "#FF0000";
+    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "red"
     imgAsh.src = "../assets/img/ashTriste.jpg";
+    lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
       "¡Pokemon incorrecto! Oh no, ese no es el Pokemon correcto. Pero no te preocupes, seguro encontrarás el pokemon que está pensando Ash para la próxima. El pokemon era " + pokeSelect.toUpperCase() ;
     statusGame = "fin";
@@ -172,7 +181,7 @@ function changeWin(status) {
     imgAsh.src = "../assets/img/Ash.png";
     document.body.style.backgroundColor = "#F0F0F0";
     resultText.textContent =
-      "La PC de Ash está llena de Pokemon y está formando un nuevo equipo. \n Tiene estás 6 opciones ¿Cúal crees que eligío?";
+      "Ash eligio uno de estos pokemon del 1 al 6.\n ¿Podés adivinar cual es de estos es?";
   }
 }
 
@@ -187,13 +196,13 @@ function initHint() {
   const divHint1 = document.getElementById("div-hint1");
   const divHint2 = document.getElementById("div-hint2");
   divHint1.innerHTML =
-    '<h1>El pokemon es de tipo: <br><span id="text-hint1">Se desbloqueará cuando tu puntuación sea 4 o menor</span></h1>';
+    '<h1>El pokemon es de tipo: <br><span id="text-hint1">Se desbloqueará cuando tu puntuación sea 3 o menor</span></h1>';
   divHint2.innerHTML =
-    '<h1>La generación del pokemon es: <br> <span id="text-hint2"> Se desbloqueará cuando tu puntuación sea 2 o menor</span></h1>';
+    '<h1>La generación del pokemon es: <br> <span id="text-hint2"> Se desbloqueará cuando tu puntuación sea 1</span></h1>';
 }
 
 function setHintImg(type, pokeUrl) {
-  if (score === 4) {
+  if (score === 3) {
     for (let key in pokeUrl) {
       if (key == type) {
         var img = document.createElement("img");
@@ -210,7 +219,7 @@ function setHintImg(type, pokeUrl) {
 }
 
 function setHintText() {
-  if (score === 2) {
+  if (score === 1) {
     var hintText = document.querySelector("#text-hint2");
     hintText.textContent = pokemonGen();
   }
