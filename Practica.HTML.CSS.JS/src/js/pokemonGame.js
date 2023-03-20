@@ -31,9 +31,7 @@ function defaultValues() {
   scoreText = document.querySelector("#score-id");
   statusGame = "";
   if (lastGuess != undefined) {
-    document.getElementById(
-      localStorage.getItem("guessWinner")
-    ).style.backgroundColor = "#FFFFFF";
+    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "#FFFFFF";
   }
   removeBox();
   addBox();
@@ -108,29 +106,28 @@ function changeWin(status) {
   let resultText = document.getElementById("resultTextGuess");
   let pokeSelect = localStorage.getItem("namePokemon");
   let posPokemon = localStorage.getItem("posPokemon");
+  lastGuess = localStorage.getItem("guessWinner");
+  let backColorImg = document.getElementById(localStorage.getItem("guessWinner"));
   if (status === "Ganaste") {
     imgAsh.src = "../assets/img/ashFeliz.jpg";
     document.body.style.backgroundColor = "#008000";
-    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "green";
-    lastGuess = localStorage.getItem("guessWinner");
-    resultText.textContent = "¡Numero correcto!. El numero era " + posPokemon + " y pokemon era " + pokeSelect.toUpperCase();
+    backColorImg.style.backgroundColor = "green";
     statusGame = "fin";
-    removeIncorrectOption();
+    resultText.textContent = "¡Numero correcto!. El numero era " + posPokemon + " y pokemon era " + pokeSelect.toUpperCase();
     updateHighScore();
   } else if (status === "Perdiste") {
     document.body.style.backgroundColor = "#FF0000";
-    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "red";
+    backColorImg.style.backgroundColor = "red";
     imgAsh.src = "../assets/img/ashTriste.jpg";
-    lastGuess = localStorage.getItem("guessWinner");
+    statusGame = "fin";
     resultText.textContent =
       "¡Numero incorrecto! Oh no, ese no es el numero correcto. Pero no te preocupes, seguro encontrarás el numero que está pensando Ash para la próxima. El numero era " + posPokemon + " y el pokemon es " + pokeSelect.toUpperCase();
-    statusGame = "fin";
-    removeIncorrectOption();
   } else if (status === "Reiniciar") {
     imgAsh.src = "../assets/img/Ash.png";
     document.body.style.backgroundColor = "#F0F0F0";
     resultText.textContent = "Ash eligio un numero del 1 al 6 y coincide con el lugar de uno de estos pokemon.\n ¿Podés adivinar cual es de estos es?";
   }
+  removeIncorrectOption();
 }
 
 function initImg() {
@@ -166,25 +163,21 @@ function initHint() {
   } ¿El numero esta por encima o por debajo?: <br> <span id="text-hint2"> Se desbloqueará cuando tu puntuación sea ${secondHint}</span></h1>`;
 }
 
-function setHintImg(type, pokeUrl) {
-  if (score === firstHint) {
-    for (let key in pokeUrl) {
-      if (key == type) {
-        var img = document.createElement("img");
-        img.src = "../assets/img/iconosTiposElementales/" + key + ".png";
-        img.alt = "imagen de pista";
-        img.id = "img-hin1";
-        var div = document.getElementById("div-hint1");
-        div.appendChild(img);
-        var text = document.getElementById("text-hint1");
-        text.remove();
-      }
-    }
+function setHintImg(type) {
+  if (score <= firstHint && !document.getElementById("img-hin1")) {
+      var img = document.createElement("img");
+      img.src = "../assets/img/iconosTiposElementales/" + type + ".png";
+      img.alt = "imagen de pista";
+      img.id = "img-hin1";
+      var div = document.getElementById("div-hint1");
+      div.appendChild(img);
+      var text = document.getElementById("text-hint1");
+      text.remove();
   }
 }
 
 function setHintText() {
-  if (score === secondHint) {
+  if (score <= secondHint && document.getElementById("text-hint2")) {
     var hintText = document.querySelector("#text-hint2");
     let posHint = parseInt(localStorage.getItem("posPokemon"));
     let hint;
@@ -199,8 +192,7 @@ function setHintText() {
 
 function updateHints() {
   let type = localStorage.getItem("type");
-  let url = JSON.parse(localStorage.getItem("pokeUrl"));
-  setHintImg(type, url);
+  setHintImg(type);
   setHintText();
 }
 function incorrectOption() {
