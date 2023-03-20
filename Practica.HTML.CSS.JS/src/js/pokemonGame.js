@@ -1,4 +1,4 @@
-const scoreText = document.querySelector("#score-id");
+let scoreText = document.querySelector("#score-id");
 const button = document.querySelector("#buttonGuess");
 const buttonRestart = document.querySelector("#restartButton");
 const inputGuess = document.querySelector("#inputGuess");
@@ -23,19 +23,7 @@ buttonRestart.addEventListener("click", () => {
   defaultValues();
 });
 
-function chargeImgId() {
-  for (let index = 0; index < cantBox; index++) {
-    id = "#img-" + (index + 1);
-    imgId = document.querySelector(id);
-    images[index] = imgId;
-  }
-  images.forEach((image) => {
-    image.addEventListener("click", () => {
-      const clickedNumber = image.getAttribute("id");
-      principalRun(clickedNumber);
-    });
-  });
-}
+defaultValues();
 
 function defaultValues() {
   score = maxScore;
@@ -47,11 +35,39 @@ function defaultValues() {
       localStorage.getItem("guessWinner")
     ).style.backgroundColor = "#FFFFFF";
   }
+  removeBox();
+  addBox();
   chargeImgId();
   initGame();
 }
 
-defaultValues();
+function addBox() {
+  let gridBox = document.getElementById("gridBox");
+  for (let index = 0; index < cantBox; index++) {
+    const newBox = document.createElement("div");
+    newBox.classList.add("box");
+    newBox.id = "box-"+index;
+
+    const newImage = document.createElement("img");
+    newImage.setAttribute("id", "img-"+(index+1));
+    newBox.appendChild(newImage);
+
+    const newText = document.createElement("div");
+    newText.classList.add("textImg");
+    newText.innerHTML = (index+1);
+    newBox.appendChild(newText);
+
+    gridBox.appendChild(newBox);
+  }
+}
+
+function chargeImgId() {
+  for (let index = 0; index < cantBox; index++) {
+    id = "#img-" + (index + 1);
+    imgId = document.querySelector(id);
+    images[index] = imgId;
+  }
+}
 
 function initGame() {
   initImg();
@@ -89,37 +105,25 @@ function changeWin(status) {
   if (status === "Ganaste") {
     imgAsh.src = "../assets/img/ashFeliz.jpg";
     document.body.style.backgroundColor = "#008000";
-    document.getElementById(
-      localStorage.getItem("guessWinner")
-    ).style.backgroundColor = "green";
+    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "green";
     lastGuess = localStorage.getItem("guessWinner");
-    resultText.textContent =
-      "¡Numero correcto!. El numero era " +
-      posPokemon +
-      " y pokemon era " +
-      pokeSelect.toUpperCase();
+    resultText.textContent = "¡Numero correcto!. El numero era " + posPokemon + " y pokemon era " + pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
     updateHighScore();
   } else if (status === "Perdiste") {
     document.body.style.backgroundColor = "#FF0000";
-    document.getElementById(
-      localStorage.getItem("guessWinner")
-    ).style.backgroundColor = "red";
+    document.getElementById(localStorage.getItem("guessWinner")).style.backgroundColor = "red";
     imgAsh.src = "../assets/img/ashTriste.jpg";
     lastGuess = localStorage.getItem("guessWinner");
     resultText.textContent =
-      "¡Numero incorrecto! Oh no, ese no es el numero correcto. Pero no te preocupes, seguro encontrarás el numero que está pensando Ash para la próxima. El numero era " +
-      posPokemon +
-      " y el pokemon es " +
-      pokeSelect.toUpperCase();
+      "¡Numero incorrecto! Oh no, ese no es el numero correcto. Pero no te preocupes, seguro encontrarás el numero que está pensando Ash para la próxima. El numero era " + posPokemon + " y el pokemon es " + pokeSelect.toUpperCase();
     statusGame = "fin";
     removeIncorrectOption();
   } else if (status === "Reiniciar") {
     imgAsh.src = "../assets/img/Ash.png";
     document.body.style.backgroundColor = "#F0F0F0";
-    resultText.textContent =
-      "Ash eligio un numero del 1 al 6 y coincide con el lugar de uno de estos pokemon.\n ¿Podés adivinar cual es de estos es?";
+    resultText.textContent = "Ash eligio un numero del 1 al 6 y coincide con el lugar de uno de estos pokemon.\n ¿Podés adivinar cual es de estos es?";
   }
 }
 
@@ -195,7 +199,7 @@ function updateHints() {
 }
 function incorrectOption() {
   const msgDiv = document.createElement("div");
-  msgDiv.textContent = "Pokémon incorrecto, inténtalo de nuevo.";
+  msgDiv.textContent = "Numero incorrecto, inténtalo de nuevo.";
   msgDiv.classList.add("message");
   msgDiv.classList.add("incorrecto");
   msgDiv.id = "msgIncorrectOption";
@@ -238,4 +242,14 @@ function updateHighScore() {
     highScore.textContent = score;
     localStorage.setItem("highScore", score);
   }
+}
+
+function removeBox() {
+  for (let index = 0; index < cantBox; index++) {
+    boxId = "box-"+index;
+    const boxToRemove = document.getElementById(boxId);
+    if (boxToRemove) {
+      boxToRemove.parentNode.removeChild(boxToRemove);
+    }
+  } 
 }
