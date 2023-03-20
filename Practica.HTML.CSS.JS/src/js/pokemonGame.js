@@ -67,6 +67,12 @@ function chargeImgId() {
     imgId = document.querySelector(id);
     images[index] = imgId;
   }
+  images.forEach((image) => {
+    image.addEventListener("click", () => {
+      const clickedNumber = image.getAttribute("id");
+      principalRun(clickedNumber);
+    });
+  });
 }
 
 function initGame() {
