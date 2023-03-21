@@ -1,7 +1,7 @@
 ﻿using Practica4.EF.Entities.EntitiesDatabase;
+using Practica4.EF.Logic.LogicBussines;
 using Practica4.EF.Services;
 using Practica4.EF.Services.CustomExceptions;
-using Practica4.EF.Services.InterfaceService;
 using System;
 using System.Collections.Generic;
 
@@ -9,12 +9,12 @@ namespace Practica4.EF.UI.Menu
 {
     public class MenuConsultas
     {
-        private readonly IShipperService _shipperService;
-        private readonly ITerritorieService _territorieService;
+        private readonly IShipperLogic _shipperService;
+        private readonly ITerritorieLogic _territorieService;
         public MenuConsultas()
         {
-            _shipperService = new ShipperService();
-            _territorieService = new TerritorieService();
+            _shipperService = new ShipperLogic();
+            _territorieService = new TerritorieLogic();
         }
         public void RunMenuConsultas()
         {

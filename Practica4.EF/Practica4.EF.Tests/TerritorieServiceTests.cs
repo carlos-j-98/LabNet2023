@@ -4,6 +4,7 @@ using Practica4.EF.Data.Queries;
 using Practica4.EF.Data.Queries.InterfaceQueries;
 using Practica4.EF.Data.Repositorys;
 using Practica4.EF.Entities.EntitiesDatabase;
+using Practica4.EF.Logic.LogicBussines;
 using System.Collections.Generic;
 
 namespace Practica4.EF.Services.Tests
@@ -17,7 +18,7 @@ namespace Practica4.EF.Services.Tests
             //Arrage
             var mockQuerie = new Mock<ITerritoriesQueries>();
             var mockRepo = new Mock<IRepository>();
-            var terriService = new TerritorieService(mockQuerie.Object, mockRepo.Object);
+            var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             //Act
             terriService.Add(new Territories
             {
@@ -35,7 +36,7 @@ namespace Practica4.EF.Services.Tests
             //Arrange
             var mockQuerie = new Mock<ITerritoriesQueries>();
             var mockRepo = new Mock<IRepository>();
-            var terriService = new TerritorieService(mockQuerie.Object, mockRepo.Object);
+            var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             int select = 4;
             //Act
             terriService.Delete(select);
@@ -49,7 +50,7 @@ namespace Practica4.EF.Services.Tests
             //Arrange
             var mockQuerie = new Mock<ITerritoriesQueries>();
             var mockRepo = new Mock<IRepository>();
-            var terriService = new TerritorieService(mockQuerie.Object, mockRepo.Object);
+            var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             //Act
             terriService.Update(new Territories
             {
@@ -67,7 +68,7 @@ namespace Practica4.EF.Services.Tests
             //Arrange
             var mockQuerie = new Mock<TerritorieQueries>();
             var mockRepo = new Mock<Repository>();
-            var terriService = new TerritorieService(mockQuerie.Object, mockRepo.Object);
+            var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             var dataExpected = new List<Territories>
             {
                 new Territories { TerritoryDescription = "Westboro                                          " },
@@ -88,7 +89,7 @@ namespace Practica4.EF.Services.Tests
             //Arrange
             var mockQuerie = new Mock<TerritorieQueries>();
             var mockRepo = new Mock<Repository>();
-            var terriService = new TerritorieService(mockQuerie.Object, mockRepo.Object);
+            var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             string select = "01581";
             var dataExpected = new Territories
             {

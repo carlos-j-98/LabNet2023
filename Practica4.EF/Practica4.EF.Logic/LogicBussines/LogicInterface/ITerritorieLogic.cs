@@ -1,9 +1,9 @@
 ﻿using Practica4.EF.Entities.EntitiesDatabase;
 using System.Collections.Generic;
 
-namespace Practica4.EF.Services.InterfaceService
+namespace Practica4.EF.Logic.LogicBussines
 {
-    public interface ITerritorieService
+    public interface ITerritorieLogic
     {
         List<Territories> GetAll();
         Territories GetById(string id);

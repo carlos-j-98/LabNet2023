@@ -101,13 +101,13 @@
       <Project>{05DA40D5-7EFF-4641-88D1-C7BAD2CEC4CC}</Project>
       <Name>Practica4.EF.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Practica4.EF.Logic\Practica4.EF.Logic.csproj">
+      <Project>{9f06f898-4464-4265-9768-c41c9895edeb}</Project>
+      <Name>Practica4.EF.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Practica4.EF.Services\Practica4.EF.Services.csproj">
       <Project>{82B6A7C1-8A60-4091-834D-A8B7BA9B4A48}</Project>
       <Name>Practica4.EF.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Practica4.EF.UI\Practica4.EF.UI.csproj">
-      <Project>{63e24e4c-237b-4504-bc74-52c47c9360c6}</Project>
-      <Name>Practica4.EF.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

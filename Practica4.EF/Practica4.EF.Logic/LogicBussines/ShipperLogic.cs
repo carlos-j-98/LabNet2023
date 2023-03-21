@@ -2,16 +2,15 @@
 using Practica4.EF.Data.Queries.InterfaceQueries;
 using Practica4.EF.Data.Repositorys;
 using Practica4.EF.Entities.EntitiesDatabase;
-using Practica4.EF.Services.InterfaceService;
 using System.Collections.Generic;
 
-namespace Practica4.EF.Services
+namespace Practica4.EF.Logic.LogicBussines
 {
-    public class ShipperService : IShipperService
+    public class ShipperLogic : IShipperLogic
     {
         private readonly IRepository _repository;
         private readonly IShipperQueries _shipperQuerie;
-        public ShipperService()
+        public ShipperLogic()
         {
             this._shipperQuerie = new ShipperQueries();
             this._repository = new Repository();

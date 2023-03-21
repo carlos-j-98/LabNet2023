@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{63E24E4C-237B-4504-BC74-52C47C9360C6}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Practica4.EF.UI</RootNamespace>
-    <AssemblyName>Practica4.EF.UI</AssemblyName>
+    <ProjectGuid>{9F06F898-4464-4265-9768-C41C9895EDEB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Practica4.EF.Logic</RootNamespace>
+    <AssemblyName>Practica4.EF.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,7 +39,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,29 +48,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu\MenuConsultas.cs" />
-    <Compile Include="Menu\MenuPrincipal.cs" />
-    <Compile Include="Menu\MenuRepositorio.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="LogicBussines\LogicInterface\IShipperLogic.cs" />
+    <Compile Include="LogicBussines\LogicInterface\ITerritorieLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LogicBussines\ShipperLogic.cs" />
+    <Compile Include="LogicBussines\TerritorieLogic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Practica4.EF.Data\Practica4.EF.Data.csproj">
+      <Project>{c7d0a6b1-1c3e-4f10-86b2-ba1951592428}</Project>
+      <Name>Practica4.EF.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Practica4.EF.Entities\Practica4.EF.Entities.csproj">
       <Project>{05da40d5-7eff-4641-88d1-c7bad2cec4cc}</Project>
       <Name>Practica4.EF.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Practica4.EF.Logic\Practica4.EF.Logic.csproj">
-      <Project>{9F06F898-4464-4265-9768-C41C9895EDEB}</Project>
-      <Name>Practica4.EF.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Practica4.EF.Services\Practica4.EF.Services.csproj">
-      <Project>{82B6A7C1-8A60-4091-834D-A8B7BA9B4A48}</Project>
-      <Name>Practica4.EF.Services</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

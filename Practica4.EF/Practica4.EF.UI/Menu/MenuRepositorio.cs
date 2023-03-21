@@ -1,6 +1,5 @@
 ﻿using Practica4.EF.Entities.EntitiesDatabase;
-using Practica4.EF.Services;
-using Practica4.EF.Services.InterfaceService;
+using Practica4.EF.Logic.LogicBussines;
 using Practica4.EF.Services.Validators;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,11 @@ namespace Practica4.EF.UI.Menu
     public class MenuRepositorio
     {
         private readonly ShippersValidator _shippersValidator;
-        private readonly IShipperService _shipperService;
+        private readonly IShipperLogic _shipperService;
         public MenuRepositorio()
         {
             _shippersValidator = new ShippersValidator();
-            _shipperService = new ShipperService();
+            _shipperService = new ShipperLogic();
         }
         public void RunMenuRepositorio()
         {
@@ -29,6 +28,8 @@ namespace Practica4.EF.UI.Menu
                     break;
                 case 3:
                     WriteDelete();
+                    break;
+                case 4:
                     break;
                 default:
                     MenuPrincipal.WriteIncorrectOption();

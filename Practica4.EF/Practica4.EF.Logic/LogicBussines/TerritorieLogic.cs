@@ -2,21 +2,20 @@
 using Practica4.EF.Data.Queries.InterfaceQueries;
 using Practica4.EF.Data.Repositorys;
 using Practica4.EF.Entities.EntitiesDatabase;
-using Practica4.EF.Services.InterfaceService;
 using System.Collections.Generic;
 
-namespace Practica4.EF.Services
+namespace Practica4.EF.Logic.LogicBussines
 {
-    public class TerritorieService : ITerritorieService
+    public class TerritorieLogic : ITerritorieLogic
     {
         private readonly ITerritoriesQueries _territoriesQuerie;
         private readonly IRepository _repository;
-        public TerritorieService()
+        public TerritorieLogic()
         {
             _territoriesQuerie = new TerritorieQueries();
             _repository = new Repository();
         }
-        public TerritorieService(ITerritoriesQueries territoriesQueries, IRepository repository)
+        public TerritorieLogic(ITerritoriesQueries territoriesQueries, IRepository repository)
         {
             _territoriesQuerie = territoriesQueries;
             _repository = repository;
