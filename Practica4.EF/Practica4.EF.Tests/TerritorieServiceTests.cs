@@ -16,7 +16,7 @@ namespace Practica4.EF.Services.Tests
         public void AddTest()
         {
             //Arrage
-            var mockQuerie = new Mock<ITerritoriesQueries>();
+            var mockQuerie = new Mock<IGenericQuerie>();
             var mockRepo = new Mock<IRepository>();
             var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             //Act
@@ -34,7 +34,7 @@ namespace Practica4.EF.Services.Tests
         public void DeleteTest()
         {
             //Arrange
-            var mockQuerie = new Mock<ITerritoriesQueries>();
+            var mockQuerie = new Mock<IGenericQuerie>();
             var mockRepo = new Mock<IRepository>();
             var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             int select = 4;
@@ -48,7 +48,7 @@ namespace Practica4.EF.Services.Tests
         public void UpdateTest()
         {
             //Arrange
-            var mockQuerie = new Mock<ITerritoriesQueries>();
+            var mockQuerie = new Mock<IGenericQuerie>();
             var mockRepo = new Mock<IRepository>();
             var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             //Act
@@ -66,7 +66,7 @@ namespace Practica4.EF.Services.Tests
         public void GetAllTest()
         {
             //Arrange
-            var mockQuerie = new Mock<TerritorieQueries>();
+            var mockQuerie = new Mock<GenericQuery>();
             var mockRepo = new Mock<Repository>();
             var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             var dataExpected = new List<Territories>
@@ -87,7 +87,7 @@ namespace Practica4.EF.Services.Tests
         public void GetByIdTest()
         {
             //Arrange
-            var mockQuerie = new Mock<TerritorieQueries>();
+            var mockQuerie = new Mock<GenericQuery>();
             var mockRepo = new Mock<Repository>();
             var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
             string select = "01581";

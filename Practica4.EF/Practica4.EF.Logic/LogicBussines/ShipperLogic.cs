@@ -9,10 +9,10 @@ namespace Practica4.EF.Logic.LogicBussines
     public class ShipperLogic : IShipperLogic
     {
         private readonly IRepository _repository;
-        private readonly IShipperQueries _shipperQuerie;
+        private readonly IGenericQuerie _shipperQuerie;
         public ShipperLogic()
         {
-            this._shipperQuerie = new ShipperQueries();
+            this._shipperQuerie = new GenericQuery();
             this._repository = new Repository();
         }
         public void Add(Shippers ship)
@@ -30,11 +30,11 @@ namespace Practica4.EF.Logic.LogicBussines
 
         public List<Shippers> GetAll()
         {
-            return _shipperQuerie.GetAll();
+            return _shipperQuerie.GetAll<Shippers>();
         }
         public Shippers GetById(int id)
         {
-            return _shipperQuerie.GetById(id);
+            return _shipperQuerie.GetById<Shippers>(id);
         }
 
 

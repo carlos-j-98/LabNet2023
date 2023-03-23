@@ -5,5 +5,6 @@
         void Add<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
         void Delete<T>(int id) where T : class;
+        void Delete<T>(string id) where T : class;
     }
 }

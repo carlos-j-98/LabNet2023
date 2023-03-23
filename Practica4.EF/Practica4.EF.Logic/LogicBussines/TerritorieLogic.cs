@@ -8,14 +8,14 @@ namespace Practica4.EF.Logic.LogicBussines
 {
     public class TerritorieLogic : ITerritorieLogic
     {
-        private readonly ITerritoriesQueries _territoriesQuerie;
+        private readonly IGenericQuerie _territoriesQuerie;
         private readonly IRepository _repository;
         public TerritorieLogic()
         {
-            _territoriesQuerie = new TerritorieQueries();
+            _territoriesQuerie = new GenericQuery();
             _repository = new Repository();
         }
-        public TerritorieLogic(ITerritoriesQueries territoriesQueries, IRepository repository)
+        public TerritorieLogic(IGenericQuerie territoriesQueries, IRepository repository)
         {
             _territoriesQuerie = territoriesQueries;
             _repository = repository;
@@ -24,7 +24,7 @@ namespace Practica4.EF.Logic.LogicBussines
         {
             _repository.Add<Territories>(ship);
         }
-        public void Delete(int id)
+        public void Delete(string id)
         {
             _repository.Delete<Territories>(id);
         }
@@ -35,11 +35,11 @@ namespace Practica4.EF.Logic.LogicBussines
 
         public List<Territories> GetAll()
         {
-            return _territoriesQuerie.GetAll();
+            return _territoriesQuerie.GetAll<Territories>();
         }
         public Territories GetById(string id)
         {
-            return _territoriesQuerie.GetById(id);
+            return _territoriesQuerie.GetById<Territories>(id);
         }
     }
 }

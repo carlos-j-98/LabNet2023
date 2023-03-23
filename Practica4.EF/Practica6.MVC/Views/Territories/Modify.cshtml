@@ -1,0 +1,27 @@
+﻿@model Practica6.MVC.Models.TerritoriesView
+@{
+    ViewBag.Title = "Territories Page";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/genericStyles.css" />
+</head>
+
+<h1>Creacion y modificacion de Territories</h1>
+<h4>Nota: ten en cuenta que algunos Territories no podras borrar por que estan siendo utilizados</h4>
+<div class="form-group">
+    <label class="form-label">Selecciona el que quieras modificar o "Nuevo"" para crear</label>
+    @Html.DropDownList("SelectedTerritorieID", ViewBag.ShipOptions as SelectList, new { @id = "territoriesList", @class = "form-select" })
+
+    @using (Html.BeginForm("Modify", "Territories", FormMethod.Post))
+    {
+        <label class="form-label">ID</label> @Html.TextBoxFor(t => t.ID, new { id = "idTerritories", @readonly = "readonly", @class = "form-control" })
+        <label class="form-label">Descripcion</label> @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control", data_val_required = "Este campo es requerido." })
+        @Html.ValidationMessageFor(t => t.Description, "", new { @class = "text-danger" })
+        <label class="form-label">Region</label> @Html.TextBoxFor(t => t.RegionID, new { id = "region", @class = "form-control", @type = "number" })
+
+        <input type="submit" name="action" class="btn btn-success" value="Agregar" />
+        <input type="submit" name="action" class="btn btn-danger" value="Borrar" />
+    }
+</div>
+<script src="~/Scripts/territoriesUtils.js"></script>

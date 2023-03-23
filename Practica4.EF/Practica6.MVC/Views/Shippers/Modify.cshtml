@@ -1,0 +1,28 @@
+﻿@model Practica6.MVC.Models.ShippersView
+@{
+    ViewBag.Title = "Shippers Page";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/genericStyles.css" />
+</head>
+
+<h1>Creacion y modificacion de Shippers</h1>
+<h4>Nota: ten en cuenta que algunos shippers no podras borrar por que estan siendo utilizados</h4>
+<div class="form-group">
+    <label class="form-label">Selecciona el que quieras modificar o "Nuevo"" para crear</label>
+    @Html.DropDownList("SelectedShipperID", ViewBag.ShipOptions as SelectList, new { @id = "shipperList", @class = "form-select" })
+
+    @using (Html.BeginForm("Modify", "Shippers", FormMethod.Post))
+    {
+        <label class="form-label">ID</label> @Html.TextBoxFor(s => s.ID, new { id = "idShipper", @readonly = "readonly",@class="form-control"})
+        <label class="form-label">Descripcion</label> @Html.TextBoxFor(s => s.CompanyName, new { id = "companyName", @class = "form-control" })
+        <label class="form-label">Telefono</label> @Html.TextBoxFor(s => s.Phone, new { id = "phone", @class = "form-control" })
+
+        <input type="submit" name="action" class="btn btn-success" value="Agregar" />
+        <input type="submit" name="action" class="btn btn-danger" value="Borrar" />
+
+
+    }
+</div>
+<script src="~/Scripts/shipperUtils.js"></script>

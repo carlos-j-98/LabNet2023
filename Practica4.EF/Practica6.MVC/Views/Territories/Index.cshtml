@@ -1,0 +1,29 @@
+﻿@model List<Practica6.MVC.Models.TerritoriesView>
+@{
+    ViewBag.Title = "Territories Page";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/buttonStyles.css" />
+</head>
+
+<h1>
+    Pagina Territories
+</h1>
+<table class="table">
+    <tr>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Region</th>
+        <th scope="col">Editar</th>
+    </tr>
+    <tbody>
+        @foreach (var territories in Model)
+        {
+            <tr>
+                <th scope="row">@territories.Description</th>
+                <th scope="row">@territories.RegionID</th>
+                <th scope="row">@Html.ActionLink("Editar/Eliminar", "Modify", new { parameter = territories.ID })</th>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -8,7 +8,7 @@ namespace Practica4.EF.Logic.LogicBussines
         List<Territories> GetAll();
         Territories GetById(string id);
         void Add(Territories ship);
-        void Delete(int id);
+        void Delete(string id);
         void Update(Territories ship);
     }
 }

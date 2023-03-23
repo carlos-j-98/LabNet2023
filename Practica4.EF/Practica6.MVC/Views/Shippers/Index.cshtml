@@ -1,0 +1,33 @@
+﻿@model List<Practica6.MVC.Models.ShippersView> 
+
+
+@{ 
+    ViewBag.Title = "Bienvenido a la vista de Shippers";
+
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/buttonStyles.css" />
+</head>
+<h1>
+    Pagina Shippers
+</h1>
+<table class="table">
+    <tr>
+        <th scope="col">Company Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Editar</th>
+    </tr>
+    <tbody>
+        @foreach (var shippers in Model)
+        {
+            <tr>
+                <th scope="row">@shippers.CompanyName</th>
+                <th scope="row">@shippers.Phone</th>
+                <th scope="row">@Html.ActionLink("Editar/Eliminar", "Modify", new {parameter = shippers.ID })</th>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <button class="btn btn-secondary botones">@Html.ActionLink("Insertar nuevo shipper", "Modify")</button>
+</div>

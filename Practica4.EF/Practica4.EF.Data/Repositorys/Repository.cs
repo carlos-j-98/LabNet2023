@@ -31,5 +31,11 @@ namespace Practica4.EF.Data.Repositorys
             _dbSet.Remove(_dbSet.Find(id));
             dbContext.SaveChanges();
         }
+        public void Delete<T>(string id) where T : class
+        {
+            var _dbSet = dbContext.Set<T>();
+            _dbSet.Remove(_dbSet.Find(id));
+            dbContext.SaveChanges();
+        }
     }
 }

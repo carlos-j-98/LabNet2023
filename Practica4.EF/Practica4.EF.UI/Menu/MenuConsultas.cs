@@ -1,6 +1,5 @@
 ﻿using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.LogicBussines;
-using Practica4.EF.Services;
 using Practica4.EF.Services.CustomExceptions;
 using System;
 using System.Collections.Generic;
@@ -56,11 +55,11 @@ namespace Practica4.EF.UI.Menu
         public static void WriteInfoShippersList(List<Shippers> ship)
         {
             Console.Clear();
-            if (ship.Count == 0) 
+            if (ship.Count == 0)
             {
                 throw new IsNullException();
             }
-            else 
+            else
             {
                 foreach (var shippers in ship)
                 {
@@ -75,11 +74,11 @@ namespace Practica4.EF.UI.Menu
         public static void WriteInfoTerritoriesList(List<Territories> terri)
         {
             Console.Clear();
-            if (terri.Count == 0) 
+            if (terri.Count == 0)
             {
                 throw new IsNullException();
             }
-            else 
+            else
             {
                 foreach (var territories in terri)
                 {
