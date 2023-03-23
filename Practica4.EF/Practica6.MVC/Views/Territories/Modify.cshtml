@@ -9,18 +9,22 @@
 
 <h1>Creacion y modificacion de Territories</h1>
 <h4>Nota: ten en cuenta que algunos Territories no podras borrar por que estan siendo utilizados</h4>
+<h7>Los elementos con "*" son obligatorios</h7>
+<hr />
 <div class="form-group">
-    <label class="form-label">Selecciona el que quieras modificar o "Nuevo"" para crear</label>
-    @Html.DropDownList("SelectedTerritorieID", ViewBag.ShipOptions as SelectList, new { @id = "territoriesList", @class = "form-select" })
-
     @using (Html.BeginForm("Modify", "Territories", FormMethod.Post))
     {
-        <label class="form-label">ID</label> @Html.TextBoxFor(t => t.ID, new { id = "idTerritories", @readonly = "readonly", @class = "form-control" })
-        <label class="form-label">Descripcion</label> @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control"})
+        <label class="form-label">Selecciona el que quieras modificar o "Nuevo"" para crear</label>
+        @Html.DropDownList("SelectedTerritorieID", ViewBag.ShipOptions as SelectList, new { @id = "territoriesList", @class = "form-select" })
+        <br />
+        <label class="form-label">Identificador*</label> @Html.TextBoxFor(t => t.ID, new { id = "idTerritories", @readonly = "readonly", @class = "form-control" })
+        <span id="idTerritoriesError" class="text-danger"></span><br />
+        <label class="form-label">Descripcion*</label> @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control" })
+        <span id="descriptionTerritoriesError" class="text-danger"></span><br />
         <label class="form-label">Region</label> @Html.TextBoxFor(t => t.RegionID, new { id = "region", @class = "form-control", @type = "number" })
-
-        <input type="submit" name="action" class="btn btn-success" value="Agregar" />
-        <input type="submit" name="action" class="btn btn-danger" value="Borrar" />
+        <br />
+        <input type="button" name="action" id="btnAdd" class="btn btn-success" value="Agregar" />
+        <input type="button" name="action" id="btnDel" class="btn btn-danger" value="Borrar" />
     }
 </div>
-<script src="~/Scripts/territoriesUtils.js"></script>
+<script src="~/Scripts/terriUtils.js"></script>

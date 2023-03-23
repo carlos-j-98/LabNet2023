@@ -50,3 +50,27 @@ function SetDefaultValues() {
     $("#description").val("");
     $("#region").val("");
 }
+
+$("#description").keyup(function () {
+    console.log("hola");
+    console.log($('#description').val());
+    if ($('#description').val() === '') {
+        $('#descriptionTerritoriesError').text('El campo no puede estar vacío');
+    } else {
+        $('#descriptionTerritoriesError').text('');
+    }
+})
+
+$('#btnAdd, #btnDel').on('click', function () {
+    if ($('#idTerritories').val() === '') {
+        $('#idTerritoriesError').text('El campo no puede estar vacío');
+        return false;
+    }
+    if ($('#description').val() === '') {
+        $('#descriptionTerritoriesError').text('El campo no puede estar vacío');
+        return false;
+    }
+    var btnValue = $(this).val();
+    $("form").attr("action", "/Territories/Modify?request=" + btnValue);
+    $("form").submit();
+});

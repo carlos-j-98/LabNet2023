@@ -1,9 +1,12 @@
-﻿using Practica4.EF.Entities.EntitiesDatabase;
+﻿using Newtonsoft.Json;
+using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.LogicBussines;
+using Practica4.EF.Services.Validators;
 using Practica6.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace Practica6.MVC.Controllers
@@ -11,6 +14,7 @@ namespace Practica6.MVC.Controllers
     public class TerritoriesController : Controller
     {
         TerritorieLogic logic = new TerritorieLogic();
+        private readonly TerritoriesViewDTOValidator _validator = new TerritoriesViewDTOValidator();
         // GET: Territories
         public ActionResult Index()
         {
@@ -35,7 +39,7 @@ namespace Practica6.MVC.Controllers
             var territoriesOptions = territoriesViews.Select(s => new SelectListItem
             {
                 Value = s.ID.ToString(),
-                Text = s.Description
+                Text = s.Description + " - " + s.ID.ToString()
             });
             territoriesOptions = new List<SelectListItem>
             {
@@ -44,32 +48,53 @@ namespace Practica6.MVC.Controllers
             ViewBag.shipOptions = new SelectList(territoriesOptions, "Value", "Text");
             return View();
         }
+        [Route("/Territories/Modify/{request}")]
         [HttpPost]
-        public ActionResult Modify(TerritoriesView territoriesView, string action)
+        public ActionResult Modify(TerritoriesView territoriesView,string request)
         {
-            try
+            var terriDto = new Practica4.EF.Entities.DTO.TerritoriesViewDTO()
             {
-                if (action == "Agregar")
+                ID = territoriesView.ID,
+                Description = territoriesView.Description,
+                RegionID = territoriesView.RegionID
+            };
+            var validationResult = _validator.Validate(terriDto);
+            if (!validationResult.IsValid)
+            {
+                List<object> errores = new List<object>();
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
                 {
-                    Territories territoriesEntity = new Territories()
-                    {
-                        TerritoryID = territoriesView.ID.ToString(),
-                        TerritoryDescription = territoriesView.Description,
-                        RegionID = territoriesView.RegionID
-                    };
-                    logic.Update(territoriesEntity);
-                    return RedirectToAction("Index");
+                    errores.Add(error.ErrorMessage);
                 }
-                else if (action == "Borrar")
-                {
-                    logic.Delete(territoriesView.ID);
-                    return RedirectToAction("Index");
-                }
-                return RedirectToAction("Error");
+                string erroresJson = JsonConvert.SerializeObject(errores);
+                return RedirectToAction("Index", "Error", new { error = erroresJson });
             }
-            catch (Exception ex)
+            else
             {
-                return RedirectToAction("Index", "Error");
+                try
+                {
+                    if (request == "Agregar")
+                    {
+                        Territories territoriesEntity = new Territories()
+                        {
+                            TerritoryID = territoriesView.ID.ToString(),
+                            TerritoryDescription = territoriesView.Description,
+                            RegionID = territoriesView.RegionID
+                        };
+                        logic.Update(territoriesEntity);
+                        return RedirectToAction("Index");
+                    }
+                    else if (request == "Borrar")
+                    {
+                        logic.Delete(territoriesView.ID);
+                        return RedirectToAction("Index");
+                    }
+                    return RedirectToAction("Index","Error");
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Index", "Error");
+                }
             }
         }
         [HttpPost]

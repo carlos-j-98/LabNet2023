@@ -4,6 +4,7 @@ namespace Practica6.MVC.Models
 {
     public class ShippersView
     {
+        [Key]
         public int ID { get; set; }
         [Required]
         [StringLength(40)]

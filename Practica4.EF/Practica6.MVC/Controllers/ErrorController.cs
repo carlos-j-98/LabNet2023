@@ -16,5 +16,9 @@ namespace Practica6.MVC.Controllers
             }
             return View();
         }
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }
