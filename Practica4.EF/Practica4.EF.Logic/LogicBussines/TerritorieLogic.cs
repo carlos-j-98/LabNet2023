@@ -41,5 +41,9 @@ namespace Practica4.EF.Logic.LogicBussines
         {
             return _territoriesQuerie.GetById<Territories>(id);
         }
+        public string GetNextId()
+        {
+            return _territoriesQuerie.GetNextIdTerritories();
+        }
     }
 }

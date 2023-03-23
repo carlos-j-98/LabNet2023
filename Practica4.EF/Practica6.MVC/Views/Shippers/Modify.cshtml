@@ -16,8 +16,8 @@
     @using (Html.BeginForm("Modify", "Shippers", FormMethod.Post))
     {
         <label class="form-label">ID</label> @Html.TextBoxFor(s => s.ID, new { id = "idShipper", @readonly = "readonly",@class="form-control"})
-        <label class="form-label">Descripcion</label> @Html.TextBoxFor(s => s.CompanyName, new { id = "companyName", @class = "form-control" })
-        <label class="form-label">Telefono</label> @Html.TextBoxFor(s => s.Phone, new { id = "phone", @class = "form-control" })
+        <label class="form-label">Company name</label> @Html.TextBoxFor(s => s.CompanyName, new { id = "companyName", @class = "form-control" })
+        <label class="form-label">Phone</label> @Html.TextBoxFor(s => s.Phone, new { id = "phone", @class = "form-control" })
 
         <input type="submit" name="action" class="btn btn-success" value="Agregar" />
         <input type="submit" name="action" class="btn btn-danger" value="Borrar" />

@@ -37,11 +37,11 @@ namespace Practica4.EF.Services.Tests
             var mockQuerie = new Mock<IGenericQuerie>();
             var mockRepo = new Mock<IRepository>();
             var terriService = new TerritorieLogic(mockQuerie.Object, mockRepo.Object);
-            int select = 4;
+            string select = "4";
             //Act
             terriService.Delete(select);
             //Assert
-            mockRepo.Verify(m => m.Delete<Territories>(It.IsAny<int>()), Times.Once());
+            mockRepo.Verify(m => m.Delete<Territories>(It.IsAny<string>()), Times.Once());
         }
 
         [TestMethod()]

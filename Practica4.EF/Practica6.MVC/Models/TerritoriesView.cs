@@ -4,6 +4,7 @@ namespace Practica6.MVC.Models
 {
     public class TerritoriesView
     {
+        [Key]
         [StringLength(20)]
         public string ID { get; set; }
         [Required]

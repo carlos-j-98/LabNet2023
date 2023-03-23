@@ -1,15 +1,19 @@
-﻿using Practica4.EF.Entities.EntitiesDatabase;
+﻿using Microsoft.Ajax.Utilities;
+using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.LogicBussines;
 using Practica6.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Practica4.EF.Services.Validators;
+using Newtonsoft.Json;
 
 namespace Practica6.MVC.Controllers
 {
     public class ShippersController : Controller
     {
+        private readonly ShipperViewDTOValidator shippersViewDTOValidator = new ShipperViewDTOValidator();
         ShipperLogic logic = new ShipperLogic();
         // GET: Shippers
         public ActionResult Index()
@@ -47,29 +51,49 @@ namespace Practica6.MVC.Controllers
         [HttpPost]
         public ActionResult Modify(ShippersView shippersView, string action)
         {
-            try
+            var shipDto = new Practica4.EF.Entities.DTO.ShipperViewDTO()
             {
-                if (action == "Agregar")
+                ID = shippersView.ID,
+                CompanyName = shippersView.CompanyName,
+                Phone = shippersView.Phone
+            };
+            var validatioResult = shippersViewDTOValidator.Validate(shipDto);
+            if (!validatioResult.IsValid)
+            {
+                List<object> errores = new List<object>();
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
                 {
-                    Shippers shipperEntity = new Shippers()
-                    {
-                        ShipperID = shippersView.ID,
-                        CompanyName = shippersView.CompanyName,
-                        Phone = shippersView.Phone
-                    };
-                    logic.Update(shipperEntity);
-                    return RedirectToAction("Index");
+                    errores.Add(error.ErrorMessage);
                 }
-                else if (action == "Borrar")
-                {
-                    logic.Delete(shippersView.ID);
-                    return RedirectToAction("Index");
-                }
-                return RedirectToAction("Error");
+                string erroresJson = JsonConvert.SerializeObject(errores);
+                return RedirectToAction("Index","Error",new {error = erroresJson});
             }
-            catch (Exception ex)
+            else
             {
-                return RedirectToAction("Index", "Error");
+                try
+                {
+                    if (action == "Agregar")
+                    {
+                        Shippers shipperEntity = new Shippers()
+                        {
+                            ShipperID = shippersView.ID,
+                            CompanyName = shippersView.CompanyName,
+                            Phone = shippersView.Phone
+                        };
+                        logic.Update(shipperEntity);
+                        return RedirectToAction("Index");
+                    }
+                    else if (action == "Borrar")
+                    {
+                        logic.Delete(shippersView.ID);
+                        return RedirectToAction("Index");
+                    }
+                    return RedirectToAction("Error");
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Index", "Error");
+                }
             }
         }
         [HttpPost]
@@ -89,6 +113,11 @@ namespace Practica6.MVC.Controllers
                 Phone = shippers.Phone
             };
             return new JsonResult() { Data = shippersView, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        public ActionResult GetLastId() 
+        {
+            return new JsonResult() { Data = logic.GetNextId(),JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
     }
 }

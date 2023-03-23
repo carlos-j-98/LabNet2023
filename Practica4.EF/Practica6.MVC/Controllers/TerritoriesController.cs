@@ -90,5 +90,10 @@ namespace Practica6.MVC.Controllers
             };
             return new JsonResult() { Data = territoriesView, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [HttpGet]
+        public ActionResult GetLastId()
+        {
+            return new JsonResult() { Data = logic.GetNextId(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
     }
 }

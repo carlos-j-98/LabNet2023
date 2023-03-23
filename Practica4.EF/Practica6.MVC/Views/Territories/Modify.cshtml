@@ -16,8 +16,7 @@
     @using (Html.BeginForm("Modify", "Territories", FormMethod.Post))
     {
         <label class="form-label">ID</label> @Html.TextBoxFor(t => t.ID, new { id = "idTerritories", @readonly = "readonly", @class = "form-control" })
-        <label class="form-label">Descripcion</label> @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control", data_val_required = "Este campo es requerido." })
-        @Html.ValidationMessageFor(t => t.Description, "", new { @class = "text-danger" })
+        <label class="form-label">Descripcion</label> @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control"})
         <label class="form-label">Region</label> @Html.TextBoxFor(t => t.RegionID, new { id = "region", @class = "form-control", @type = "number" })
 
         <input type="submit" name="action" class="btn btn-success" value="Agregar" />

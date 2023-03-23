@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\ShipperViewDTO.cs" />
+    <Compile Include="DTO\TerritoriesViewDTO.cs" />
     <Compile Include="EntititesDatabase\Categories.cs" />
     <Compile Include="EntititesDatabase\CustomerDemographics.cs" />
     <Compile Include="EntititesDatabase\Customers.cs" />

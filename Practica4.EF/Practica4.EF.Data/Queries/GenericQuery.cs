@@ -1,6 +1,12 @@
 ﻿using Practica4.EF.Data.Queries.InterfaceQueries;
+using Practica4.EF.Entities.EntitiesDatabase;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Contexts;
 
 namespace Practica4.EF.Data.Queries
 {
@@ -26,6 +32,18 @@ namespace Practica4.EF.Data.Queries
         {
             var _dbSet = _context.Set<T>();
             return _dbSet.Find(id);
+        }
+        public int GetNextIdShippers()
+        {
+            var _dbSet = _context.Set<Shippers>();
+            return _dbSet.Max(s => s.ShipperID)+1;
+        }
+        public string GetNextIdTerritories()
+        {
+            var _dbSet = _context.Set<Territories>();
+            string maxId = _dbSet.Max(t => t.TerritoryID);
+            int maxNum = int.Parse(maxId) + 1;
+            return (maxNum + 1).ToString();
         }
     }
 }

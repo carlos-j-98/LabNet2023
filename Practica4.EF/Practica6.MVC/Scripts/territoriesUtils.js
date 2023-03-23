@@ -1,23 +1,22 @@
 ﻿$(document).ready(function () {
     const searchParams = new URLSearchParams(window.location.search);
-    var id = searchParams.get("parameter");
+    let id = searchParams.get("parameter");
     if (id) {
         $("#territoriesList").val(id);
-        GetShippers(id);
+        GetTerritories(id);
+    } else {
+        SetDefaultValues();
     }
     $("#territoriesList").change(function () {
-
         const selectedValue = $(this).val();
         if (selectedValue != -1) {
-            GetShippers(selectedValue);
+            GetTerritories(selectedValue);
         } else {
-            $("#idTerritories").val("");
-            $("#description").val("");
-            $("#region").val("");
+            SetDefaultValues();
         }
     });
 });
-function GetShippers(id) {
+function GetTerritories(id) {
     $.ajax({
         url: '/Territories/GetByID?id=' + id,
         type: 'GET',
@@ -27,4 +26,27 @@ function GetShippers(id) {
             $("#region").val(result.RegionID);
         }
     });
+}
+
+function GetNextId() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: '/Territories/GetLastId',
+            type: 'GET',
+            success: function (result) {
+                resolve(result);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+}
+function SetDefaultValues() {
+    GetNextId().then(function (result) {
+
+        $("#idTerritories").val(result);
+    })
+    $("#description").val("");
+    $("#region").val("");
 }

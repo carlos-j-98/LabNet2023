@@ -36,7 +36,10 @@ namespace Practica4.EF.Logic.LogicBussines
         {
             return _shipperQuerie.GetById<Shippers>(id);
         }
-
+        public int GetNextId()
+        {
+            return _shipperQuerie.GetNextIdShippers();
+        }
 
     }
 }

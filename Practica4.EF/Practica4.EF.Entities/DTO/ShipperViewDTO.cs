@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Practica4.EF.Entities.DTO
+{
+    public class ShipperViewDTO
+    {
+        public int ID { get; set; }
+        [Required]
+        [StringLength(40)]
+        public string CompanyName { get; set; }
+        [StringLength(24)]
+        public string Phone { get; set; }
+    }
+}
