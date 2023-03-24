@@ -34,6 +34,9 @@
     <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.11.5.1\lib\netstandard2.0\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -52,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CustomExceptions\IsNullException.cs" />
     <Compile Include="ExtensionMethods\ExceptionExtension.cs" />
+    <Compile Include="ExtensionMethods\StringExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\ShippersValidator.cs" />
     <Compile Include="Validators\ShipperViewDTOValidator.cs" />

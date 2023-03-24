@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
-using Practica4.EF.Entities.EntitiesDatabase;
+﻿using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.LogicBussines;
+using Practica4.EF.Services.ExtensionMethods;
 using Practica4.EF.Services.Validators;
 using Practica6.MVC.Models;
+using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,34 +14,20 @@ namespace Practica6.MVC.Controllers
 {
     public class TerritoriesController : Controller
     {
-        private readonly TerritorieLogic logic = new TerritorieLogic();
+        private readonly TerritorieLogic _logic = new TerritorieLogic();
         private readonly TerritoriesViewDTOValidator _validator = new TerritoriesViewDTOValidator();
         // GET: Territories
         public ActionResult Index()
         {
-            var territories = logic.GetAll();
-            List<TerritoriesView> terriList = territories.Select(t => new TerritoriesView
-            {
-                ID = t.TerritoryID,
-                Description = t.TerritoryDescription,
-                RegionID = t.RegionID
-            }).ToList();
+            var territories = _logic.GetAll();
+            List<TerritoriesView> terriList = territories.TerritoriesListExtension();
             return View(terriList);
         }
         public ActionResult Modify()
         {
-            var items = logic.GetAll();
-            List<TerritoriesView> territoriesViews = items.Select(t => new TerritoriesView
-            {
-                ID = t.TerritoryID,
-                Description = t.TerritoryDescription,
-                RegionID = t.RegionID
-            }).ToList();
-            var territoriesOptions = territoriesViews.Select(s => new SelectListItem
-            {
-                Value = s.ID.ToString(),
-                Text = s.Description + " - " + s.ID.ToString()
-            });
+            var items = _logic.GetAll();
+            List<TerritoriesView> territoriesViews = items.TerritoriesListExtension();
+            var territoriesOptions = territoriesViews.ToSelectList();
             territoriesOptions = new List<SelectListItem>
             {
                 new SelectListItem {Value ="-1",Text="Nuevo"}
@@ -47,85 +35,99 @@ namespace Practica6.MVC.Controllers
             ViewBag.shipOptions = new SelectList(territoriesOptions, "Value", "Text");
             return View();
         }
-        [Route("/Territories/Modify/{request}")]
         [HttpPost]
         public ActionResult Modify(TerritoriesView territoriesView, string request)
         {
-            var terriDto = new Practica4.EF.Entities.DTO.TerritoriesViewDTO()
+            try
             {
-                ID = territoriesView.ID,
-                Description = territoriesView.Description,
-                RegionID = territoriesView.RegionID
-            };
-            var validationResult = _validator.Validate(terriDto);
-            if (!validationResult.IsValid)
-            {
-                List<object> errores = new List<object>();
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                var terriDto = territoriesView.TerritoriesViewDTOExtension();
+                var validationResult = _validator.Validate(terriDto);
+                if (!validationResult.IsValid)
                 {
-                    errores.Add(error.ErrorMessage);
+                    List<object> errores = new List<object>();
+                    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        errores.Add(error.ErrorMessage);
+                    }
+                    return RedirectToAction("Index", "Error", errores.ToJSONList());
                 }
-                string erroresJson = JsonConvert.SerializeObject(errores);
-                return RedirectToAction("Index", "Error", new { error = erroresJson });
-            }
-            else
-            {
-                try
+                else
                 {
                     if (request == "Agregar")
                     {
-                        Territories territoriesEntity = new Territories()
-                        {
-                            TerritoryID = territoriesView.ID.ToString(),
-                            TerritoryDescription = territoriesView.Description,
-                            RegionID = territoriesView.RegionID
-                        };
-                        logic.Update(territoriesEntity);
+                        Territories territoriesEntity = territoriesView.ToTerritories();
+                        _logic.Update(territoriesEntity);
                         return RedirectToAction("Index");
                     }
                     else if (request == "Borrar")
                     {
-                        logic.Delete(territoriesView.ID);
+                        _logic.Delete(territoriesView.ID);
                         return RedirectToAction("Index");
                     }
-                    throw new Exception();
-                }
-                catch (ArgumentNullException)
-                {
-                    string exceptionError = "El elemento no se puede borrar debido a que esta siendo utilizado";
-                    string json = JsonConvert.SerializeObject(new { error = exceptionError });
-                    return RedirectToAction("Index", "Error", new { error = json });
-                }
-                catch (Exception ex)
-                {
-                    string exceptionError = "Ocurrio un error desconocido intente nuevamente";
-                    string json = JsonConvert.SerializeObject(new { error = exceptionError, mensaje = ex.Message });
-                    return RedirectToAction("Index", "Error", new { error = json });
+                    return RedirectToAction("Index", "Error", ConfigurationManager.AppSettings["invalidActionText"].ToJSON());
                 }
             }
+            catch (ArgumentNullException)
+            {
+                return RedirectToAction("Index", "Error", ConfigurationManager.AppSettings["argumentNullText"].ToJSON());
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Error", ConfigurationManager.AppSettings["exceptionGenericText"].ToJSON());
+            }
+
         }
         [HttpPost]
         public ActionResult Delete(string id)
         {
-            logic.Delete(id);
-            return View();
+            try
+            {
+                _logic.Delete(id);
+                return View();
+            }
+            catch (ArgumentNullException)
+            {
+                return HttpNotFound($"No se pudo eliminar el elemento de ID {id}");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message);
+            }
         }
         [HttpGet]
         public ActionResult GetByID(string id)
         {
-            var territories = logic.GetById(id);
-            var territoriesView = new TerritoriesView()
+            try
             {
-                ID = territories.TerritoryID,
-                Description = territories.TerritoryDescription,
-                RegionID = territories.RegionID
-            };
-            return new JsonResult() { Data = territoriesView, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                var territories = _logic.GetById(id);
+                var territoriesView = territories.ToTerritoriesView();
+                return new JsonResult() { Data = territoriesView, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            catch (ArgumentNullException)
+            {
+                return HttpNotFound($"No se encontro el elemento de ID {id}");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message);
+            }
         }
         [HttpGet]
         public ActionResult GetLastId()
         {
-            return new JsonResult() { Data = logic.GetNextId(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            try
+            {
+                return new JsonResult() { Data = _logic.GetNextId(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            catch (ArgumentNullException)
+            {
+
+                return HttpNotFound("No se encontraron elementos que cumplan con lo requerido");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message);
+            }
         }
     }
 }
