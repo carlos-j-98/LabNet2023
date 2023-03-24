@@ -7,6 +7,8 @@ using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -49,7 +51,7 @@ namespace Practica6.MVC.Controllers
                     {
                         errores.Add(error.ErrorMessage);
                     }
-                    return RedirectToAction("Index", "Error", errores.ToJSONList());
+                    return RedirectToAction("Index", "Error", new {error = errores.ToJSONList() });
                 }
                 else
                 {
@@ -64,16 +66,16 @@ namespace Practica6.MVC.Controllers
                         _logic.Delete(shippersView.ID);
                         return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index", "Error", ConfigurationManager.AppSettings["invalidActionText"].ToJSON());
+                    return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["invalidActionText"].ToJSON() });
                 }
             }
-            catch (ArgumentNullException)
+            catch (DbUpdateException)
             {
-                return RedirectToAction("Index", "Error", ConfigurationManager.AppSettings["argumentNullText"].ToJSON());
+                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["argumentNullText"].ToJSON()});
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return RedirectToAction("Index", "Error", ConfigurationManager.AppSettings["exceptionGenericText"].ToJSON());
+                return RedirectToAction("Index", "Error", new {error = ConfigurationManager.AppSettings["exceptionGenericText"].ToJSON() });
             }
         }
         [HttpPost]
@@ -84,7 +86,7 @@ namespace Practica6.MVC.Controllers
                 _logic.Delete(id);
                 return View();
             }
-            catch (ArgumentNullException)
+            catch (DbUpdateException)
             {
                 return HttpNotFound($"No se pudo eliminar el elemento de ID {id}");
             }
@@ -103,7 +105,7 @@ namespace Practica6.MVC.Controllers
                 var shippersView = shippers.ToShippersView();
                 return new JsonResult() { Data = shippersView, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
-            catch (ArgumentNullException)
+            catch (NullReferenceException)
             {
                 return HttpNotFound($"No se encontro el elemento de ID {id}");
             }
@@ -119,7 +121,7 @@ namespace Practica6.MVC.Controllers
             {
                 return new JsonResult() { Data = _logic.GetNextId(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
-            catch (ArgumentNullException)
+            catch (NullReferenceException)
             {
 
                 return HttpNotFound("No se encontraron elementos que cumplan con lo requerido");
