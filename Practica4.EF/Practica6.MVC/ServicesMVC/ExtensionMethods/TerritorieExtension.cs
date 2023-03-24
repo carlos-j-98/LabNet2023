@@ -1,11 +1,8 @@
 ﻿using Practica4.EF.Entities.DTO;
 using Practica4.EF.Entities.EntitiesDatabase;
 using Practica6.MVC.Models;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Web;
 
 namespace Practica6.MVC.ServicesMVC.ExtensionMethods
 {
@@ -20,7 +17,7 @@ namespace Practica6.MVC.ServicesMVC.ExtensionMethods
                 RegionID = t.RegionID
             }).ToList();
         }
-        public static TerritoriesViewDTO TerritoriesViewDTOExtension(this TerritoriesView territoriesView) 
+        public static TerritoriesViewDTO TerritoriesViewDTOExtension(this TerritoriesView territoriesView)
         {
             return new TerritoriesViewDTO()
             {
@@ -29,7 +26,7 @@ namespace Practica6.MVC.ServicesMVC.ExtensionMethods
                 RegionID = territoriesView.RegionID
             };
         }
-        public static Territories ToTerritories(this TerritoriesView territoriesView) 
+        public static Territories ToTerritories(this TerritoriesView territoriesView)
         {
             return new Territories()
             {

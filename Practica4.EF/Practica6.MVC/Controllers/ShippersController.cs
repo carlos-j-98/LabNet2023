@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace Practica6.MVC.Controllers
 {

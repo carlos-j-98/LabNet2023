@@ -1,10 +1,8 @@
 ﻿using Practica4.EF.Entities.DTO;
 using Practica4.EF.Entities.EntitiesDatabase;
 using Practica6.MVC.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Practica6.MVC.ServicesMVC.ExtensionMethods
 {

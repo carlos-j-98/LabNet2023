@@ -1,8 +1,6 @@
 ﻿using Practica6.MVC.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Practica6.MVC.ServicesMVC.ExtensionMethods
