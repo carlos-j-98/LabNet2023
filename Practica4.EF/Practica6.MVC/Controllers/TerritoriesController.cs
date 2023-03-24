@@ -50,7 +50,7 @@ namespace Practica6.MVC.Controllers
                     {
                         errores.Add(error.ErrorMessage);
                     }
-                    return RedirectToAction("Index", "Error", new {error = errores.ToJSONList() });
+                    return RedirectToAction("Index", "Error", new { error = errores.ToJSONList() });
                 }
                 else
                 {
@@ -65,12 +65,12 @@ namespace Practica6.MVC.Controllers
                         _logic.Delete(territoriesView.ID);
                         return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index", "Error", new {error = ConfigurationManager.AppSettings["invalidActionText"].ToJSON() });
+                    return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["invalidActionText"].ToJSON() });
                 }
             }
             catch (DbUpdateException)
             {
-                return RedirectToAction("Index", "Error", new {error = ConfigurationManager.AppSettings["argumentNullText"].ToJSON() });
+                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["argumentNullText"].ToJSON() });
             }
             catch (Exception)
             {

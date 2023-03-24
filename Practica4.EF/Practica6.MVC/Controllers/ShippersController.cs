@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -51,7 +50,7 @@ namespace Practica6.MVC.Controllers
                     {
                         errores.Add(error.ErrorMessage);
                     }
-                    return RedirectToAction("Index", "Error", new {error = errores.ToJSONList() });
+                    return RedirectToAction("Index", "Error", new { error = errores.ToJSONList() });
                 }
                 else
                 {
@@ -71,11 +70,11 @@ namespace Practica6.MVC.Controllers
             }
             catch (DbUpdateException)
             {
-                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["argumentNullText"].ToJSON()});
+                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["argumentNullText"].ToJSON() });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Error", new {error = ConfigurationManager.AppSettings["exceptionGenericText"].ToJSON() });
+                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["exceptionGenericText"].ToJSON() });
             }
         }
         [HttpPost]
