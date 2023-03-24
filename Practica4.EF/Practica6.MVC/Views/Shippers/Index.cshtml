@@ -7,27 +7,33 @@
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/buttonStyles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/tableStyle.css" />
 </head>
 <h1>
     Pagina Shippers
 </h1>
-<table class="table">
-    <tr>
-        <th scope="col">Company Name</th>
-        <th scope="col">Phone</th>
-        <th scope="col">Editar</th>
-    </tr>
-    <tbody>
-        @foreach (var shippers in Model)
-        {
-            <tr>
-                <th scope="row">@shippers.CompanyName</th>
-                <th scope="row">@shippers.Phone</th>
-                <th scope="row">@Html.ActionLink("Editar/Eliminar", "Modify", new {parameter = shippers.ID })</th>
-            </tr>
-        }
-    </tbody>
-</table>
 <div>
-    <button class="btn btn-secondary botones">@Html.ActionLink("Insertar nuevo shipper", "Modify")</button>
+    <button class="btn btn-dark botones">@Html.ActionLink("Insertar nuevo shipper", "Modify")</button>
+</div>
+<hr />
+<div class="table-responsive">
+    <div class="my-custom-scrollbar table-wrapper-scroll-y">
+        <table class="table table-dark table-hover table-striped">
+            <tr>
+                <th scope="col">Company Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Accion</th>
+            </tr>
+            <tbody>
+                @foreach (var shippers in Model)
+                {
+                    <tr>
+                        <th scope="row">@shippers.CompanyName</th>
+                        <th scope="row">@shippers.Phone</th>
+                        <th scope="row">@Html.ActionLink("Editar/Eliminar", "Modify", new { parameter = shippers.ID })</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

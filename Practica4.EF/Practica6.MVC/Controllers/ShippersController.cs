@@ -1,24 +1,23 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿using Newtonsoft.Json;
 using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.LogicBussines;
+using Practica4.EF.Services.Validators;
 using Practica6.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Practica4.EF.Services.Validators;
-using Newtonsoft.Json;
 
 namespace Practica6.MVC.Controllers
 {
     public class ShippersController : Controller
     {
         private readonly ShipperViewDTOValidator shippersViewDTOValidator = new ShipperViewDTOValidator();
-        ShipperLogic logic = new ShipperLogic();
+        private readonly ShipperLogic _logic = new ShipperLogic();
         // GET: Shippers
         public ActionResult Index()
         {
-            var shippers = logic.GetAll();
+            var shippers = _logic.GetAll();
             List<ShippersView> shippersView = shippers.Select(s => new ShippersView
             {
                 ID = s.ShipperID,
@@ -29,7 +28,7 @@ namespace Practica6.MVC.Controllers
         }
         public ActionResult Modify()
         {
-            var items = logic.GetAll();
+            var items = _logic.GetAll();
             List<ShippersView> shippersViewList = items.Select(s => new ShippersView
             {
                 ID = s.ShipperID,
@@ -39,7 +38,7 @@ namespace Practica6.MVC.Controllers
             var shipOptions = shippersViewList.Select(s => new SelectListItem
             {
                 Value = s.ID.ToString(),
-                Text = s.CompanyName
+                Text = s.CompanyName + " - " + s.ID.ToString()
             });
             shipOptions = new List<SelectListItem>
             {
@@ -48,8 +47,9 @@ namespace Practica6.MVC.Controllers
             ViewBag.shipOptions = new SelectList(shipOptions, "Value", "Text");
             return View();
         }
+        [Route("/Shippers/Modify/{request}")]
         [HttpPost]
-        public ActionResult Modify(ShippersView shippersView, string action)
+        public ActionResult Modify(ShippersView shippersView, string request)
         {
             var shipDto = new Practica4.EF.Entities.DTO.ShipperViewDTO()
             {
@@ -66,13 +66,13 @@ namespace Practica6.MVC.Controllers
                     errores.Add(error.ErrorMessage);
                 }
                 string erroresJson = JsonConvert.SerializeObject(errores);
-                return RedirectToAction("Index","Error",new {error = erroresJson});
+                return RedirectToAction("Index", "Error", new { error = erroresJson });
             }
             else
             {
                 try
                 {
-                    if (action == "Agregar")
+                    if (request == "Agregar")
                     {
                         Shippers shipperEntity = new Shippers()
                         {
@@ -80,32 +80,41 @@ namespace Practica6.MVC.Controllers
                             CompanyName = shippersView.CompanyName,
                             Phone = shippersView.Phone
                         };
-                        logic.Update(shipperEntity);
+                        _logic.Update(shipperEntity);
                         return RedirectToAction("Index");
                     }
-                    else if (action == "Borrar")
+                    else if (request == "Borrar")
                     {
-                        logic.Delete(shippersView.ID);
+                        _logic.Delete(shippersView.ID);
                         return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Error");
+                    throw new Exception();
+                }
+                catch (ArgumentNullException)
+                {
+                    string exceptionError = "El elemento no se puede borrar debido a que esta siendo utilizado";
+                    string json = JsonConvert.SerializeObject(new { error = exceptionError });
+                    return RedirectToAction("Index", "Error", new { error = json });
                 }
                 catch (Exception ex)
                 {
-                    return RedirectToAction("Index", "Error");
+                    string exceptionError = "Ocurrio un error desconocido intente nuevamente";
+                    string json = JsonConvert.SerializeObject(new { error = exceptionError, mensaje = ex.Message });
+                    return RedirectToAction("Index", "Error", new { error = json });
                 }
             }
+
         }
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            logic.Delete(id);
+            _logic.Delete(id);
             return View();
         }
         [HttpGet]
         public ActionResult GetByID(int id)
         {
-            var shippers = logic.GetById(id);
+            var shippers = _logic.GetById(id);
             var shippersView = new ShippersView()
             {
                 ID = shippers.ShipperID,
@@ -115,9 +124,9 @@ namespace Practica6.MVC.Controllers
             return new JsonResult() { Data = shippersView, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpGet]
-        public ActionResult GetLastId() 
+        public ActionResult GetLastId()
         {
-            return new JsonResult() { Data = logic.GetNextId(),JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            return new JsonResult() { Data = _logic.GetNextId(), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

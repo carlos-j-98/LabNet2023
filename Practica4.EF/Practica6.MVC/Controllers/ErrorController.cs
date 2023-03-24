@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Practica6.MVC.Controllers
@@ -14,10 +13,6 @@ namespace Practica6.MVC.Controllers
                 var erroresJson = JsonConvert.DeserializeObject(error);
                 ViewBag.Errores = erroresJson;
             }
-            return View();
-        }
-        public ActionResult Index()
-        {
             return View();
         }
     }

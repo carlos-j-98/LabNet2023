@@ -6,14 +6,13 @@ using Practica6.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace Practica6.MVC.Controllers
 {
     public class TerritoriesController : Controller
     {
-        TerritorieLogic logic = new TerritorieLogic();
+        private readonly TerritorieLogic logic = new TerritorieLogic();
         private readonly TerritoriesViewDTOValidator _validator = new TerritoriesViewDTOValidator();
         // GET: Territories
         public ActionResult Index()
@@ -50,7 +49,7 @@ namespace Practica6.MVC.Controllers
         }
         [Route("/Territories/Modify/{request}")]
         [HttpPost]
-        public ActionResult Modify(TerritoriesView territoriesView,string request)
+        public ActionResult Modify(TerritoriesView territoriesView, string request)
         {
             var terriDto = new Practica4.EF.Entities.DTO.TerritoriesViewDTO()
             {
@@ -89,11 +88,19 @@ namespace Practica6.MVC.Controllers
                         logic.Delete(territoriesView.ID);
                         return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index","Error");
+                    throw new Exception();
+                }
+                catch (ArgumentNullException)
+                {
+                    string exceptionError = "El elemento no se puede borrar debido a que esta siendo utilizado";
+                    string json = JsonConvert.SerializeObject(new { error = exceptionError });
+                    return RedirectToAction("Index", "Error", new { error = json });
                 }
                 catch (Exception ex)
                 {
-                    return RedirectToAction("Index", "Error");
+                    string exceptionError = "Ocurrio un error desconocido intente nuevamente";
+                    string json = JsonConvert.SerializeObject(new { error = exceptionError, mensaje = ex.Message });
+                    return RedirectToAction("Index", "Error", new { error = json });
                 }
             }
         }

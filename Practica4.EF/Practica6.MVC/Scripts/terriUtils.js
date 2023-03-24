@@ -1,49 +1,36 @@
-﻿$(document).ready(function () {
+﻿import { GetAll,GetNextId } from './getData.js'
+
+$(document).ready(function () {
     const searchParams = new URLSearchParams(window.location.search);
     let id = searchParams.get("parameter");
     if (id) {
         $("#territoriesList").val(id);
-        GetTerritories(id);
+        GetAll(id, "Territories").then(function (result) {
+            SetIdValues(result);
+        })
     } else {
         SetDefaultValues();
     }
     $("#territoriesList").change(function () {
         const selectedValue = $(this).val();
         if (selectedValue != -1) {
-            GetTerritories(selectedValue);
+            GetAll(selectedValue, "Territories").then(function (result) {
+                SetIdValues(result);
+            });
         } else {
             SetDefaultValues();
         }
     });
 });
-function GetTerritories(id) {
-    $.ajax({
-        url: '/Territories/GetByID?id=' + id,
-        type: 'GET',
-        success: function (result) {
-            $("#idTerritories").val(result.ID);
-            $("#description").val(result.Description);
-            $("#region").val(result.RegionID);
-        }
-    });
+
+function SetIdValues(result) {
+    $("#idTerritories").val(result.ID);
+    $("#description").val(result.Description);
+    $("#region").val(result.RegionID);
 }
 
-function GetNextId() {
-    return new Promise(function (resolve, reject) {
-        $.ajax({
-            url: '/Territories/GetLastId',
-            type: 'GET',
-            success: function (result) {
-                resolve(result);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
-    });
-}
 function SetDefaultValues() {
-    GetNextId().then(function (result) {
+    GetNextId("Territories").then(function (result) {
 
         $("#idTerritories").val(result);
     })
@@ -52,7 +39,6 @@ function SetDefaultValues() {
 }
 
 $("#description").keyup(function () {
-    console.log("hola");
     console.log($('#description').val());
     if ($('#description').val() === '') {
         $('#descriptionTerritoriesError').text('El campo no puede estar vacío');
@@ -70,7 +56,7 @@ $('#btnAdd, #btnDel').on('click', function () {
         $('#descriptionTerritoriesError').text('El campo no puede estar vacío');
         return false;
     }
-    var btnValue = $(this).val();
+    let btnValue = $(this).val();
     $("form").attr("action", "/Territories/Modify?request=" + btnValue);
     $("form").submit();
 });

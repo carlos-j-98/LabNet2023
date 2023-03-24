@@ -5,26 +5,32 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/buttonStyles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/tableStyle.css" />
 </head>
 
 <h1>
     Pagina Territories
 </h1>
-<table class="table">
-    <tr>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Region</th>
-        <th scope="col">Editar</th>
-    </tr>
-    <tbody>
-        @foreach (var territories in Model)
-        {
+<button class="btn btn-dark botones">@Html.ActionLink("Insertar nuevo territorio", "Modify")</button>
+<hr />
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table class="table table-dark table-hover table-striped">
+        <thead>
             <tr>
-                <th scope="row">@territories.Description</th>
-                <th scope="row">@territories.RegionID</th>
-                <th scope="row">@Html.ActionLink("Editar/Eliminar", "Modify", new { parameter = territories.ID })</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Region</th>
+                <th scope="col">Accion</th>
             </tr>
-        }
-    </tbody>
-    <button class="btn btn-secondary botones">@Html.ActionLink("Insertar nuevo territorio", "Modify")</button>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var territories in Model)
+            {
+                <tr>
+                    <th scope="row">@territories.Description</th>
+                    <th scope="row">@territories.RegionID</th>
+                    <th scope="row">@Html.ActionLink("Editar/Eliminar", "Modify", new { parameter = territories.ID })</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

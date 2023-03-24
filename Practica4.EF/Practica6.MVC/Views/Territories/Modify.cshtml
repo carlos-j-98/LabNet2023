@@ -11,20 +11,25 @@
 <h4>Nota: ten en cuenta que algunos Territories no podras borrar por que estan siendo utilizados</h4>
 <h7>Los elementos con "*" son obligatorios</h7>
 <hr />
-<div class="form-group">
-    @using (Html.BeginForm("Modify", "Territories", FormMethod.Post))
-    {
-        <label class="form-label">Selecciona el que quieras modificar o "Nuevo"" para crear</label>
-        @Html.DropDownList("SelectedTerritorieID", ViewBag.ShipOptions as SelectList, new { @id = "territoriesList", @class = "form-select" })
-        <br />
-        <label class="form-label">Identificador*</label> @Html.TextBoxFor(t => t.ID, new { id = "idTerritories", @readonly = "readonly", @class = "form-control" })
-        <span id="idTerritoriesError" class="text-danger"></span><br />
-        <label class="form-label">Descripcion*</label> @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control" })
-        <span id="descriptionTerritoriesError" class="text-danger"></span><br />
-        <label class="form-label">Region</label> @Html.TextBoxFor(t => t.RegionID, new { id = "region", @class = "form-control", @type = "number" })
-        <br />
-        <input type="button" name="action" id="btnAdd" class="btn btn-success" value="Agregar" />
-        <input type="button" name="action" id="btnDel" class="btn btn-danger" value="Borrar" />
-    }
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Modify", "Territories", FormMethod.Post))
+        {
+            <label class="form-label">Selecciona el que quieras modificar o "Nuevo"" para crear</label>
+            @Html.DropDownList("SelectedTerritorieID", ViewBag.ShipOptions as SelectList, new { @id = "territoriesList", @class = "form-select" })<br />
+            <label class="form-label">Identificador*</label> 
+            @Html.TextBoxFor(t => t.ID, new { id = "idTerritories", @readonly = "readonly", @class = "form-control"})
+            <span id="idTerritoriesError" class="text-danger"></span><br/>
+            <label class="form-label">Descripcion*</label> 
+            @Html.TextBoxFor(t => t.Description, new { id = "description", @class = "form-control" })
+            <span id="descriptionTerritoriesError" class="text-danger"></span><br/>
+            <label class="form-label">Region</label> 
+            @Html.TextBoxFor(t => t.RegionID, new { id = "region", @class = "form-control", @type = "number" })<br />
+
+            <input type="button" name="action" id="btnAdd" class="btn btn-success" value="Agregar" />
+            <input type="button" name="action" id="btnDel" class="btn btn-danger" value="Borrar" />
+        }
+    </div>
 </div>
-<script src="~/Scripts/terriUtils.js"></script>
+<script type="module" src="~/Scripts/terriUtils.js"></script>
