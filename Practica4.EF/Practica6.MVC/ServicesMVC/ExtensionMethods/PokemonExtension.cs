@@ -1,5 +1,5 @@
 ﻿using Practica4.EF.Entities.PokemonEntities;
-using Practica6.MVC.Models.PokemonModels;
+using Practica4.EF.Entities.PokemonEntitiesView.PokemonModels;
 using System.Collections.Generic;
 using System.Linq;
 

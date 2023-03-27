@@ -3,12 +3,9 @@ using Practica4.EF.Services.ExtensionMethods;
 using Practica4.EF.Services.Validators;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using Practica7.WebApi.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
 using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
 

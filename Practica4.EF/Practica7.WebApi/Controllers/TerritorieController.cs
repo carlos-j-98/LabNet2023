@@ -4,7 +4,6 @@ using Practica4.EF.Services.Validators;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using Practica7.WebApi.Models;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Http;
 
@@ -20,7 +19,7 @@ namespace Practica7.WebApi.Controllers
             try
             {
                 var terriList = _territorieLogic.GetAll();
-                if (terriList == null) 
+                if (terriList == null)
                 {
                     return BadRequest("No se encontraron territorios");
                 }
@@ -53,7 +52,7 @@ namespace Practica7.WebApi.Controllers
         {
             try
             {
-                if(territoriesView.ID == null)
+                if (territoriesView.ID == null)
                 {
                     territoriesView.ID = _territorieLogic.GetNextId();
                 }
@@ -78,7 +77,7 @@ namespace Practica7.WebApi.Controllers
         }
         //Put api/Territorie/{id}
         [HttpPut]
-        public IHttpActionResult UpdateTerritorie([FromBody]TerritoriesView territoriesView)
+        public IHttpActionResult UpdateTerritorie([FromBody] TerritoriesView territoriesView)
         {
             try
             {

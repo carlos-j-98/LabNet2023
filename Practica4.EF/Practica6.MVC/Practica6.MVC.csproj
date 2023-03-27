@@ -143,8 +143,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\PokemonModels\PokemonView.cs" />
-    <Compile Include="Models\PokemonModels\PokeView.cs" />
     <Compile Include="Models\ShippersView.cs" />
     <Compile Include="Models\TerritoriesView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

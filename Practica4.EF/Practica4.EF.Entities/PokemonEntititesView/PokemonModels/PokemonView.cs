@@ -1,4 +1,4 @@
-﻿namespace Practica6.MVC.Models.PokemonModels
+﻿namespace Practica4.EF.Entities.PokemonEntitiesView.PokemonModels
 {
     public class PokemonView
     {

@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogicBussines\LogicInterface\IPokemonLogic.cs" />
     <Compile Include="LogicBussines\LogicInterface\IShipperLogic.cs" />
     <Compile Include="LogicBussines\LogicInterface\ITerritorieLogic.cs" />
+    <Compile Include="LogicBussines\PokemonLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LogicBussines\ShipperLogic.cs" />
     <Compile Include="LogicBussines\TerritorieLogic.cs" />

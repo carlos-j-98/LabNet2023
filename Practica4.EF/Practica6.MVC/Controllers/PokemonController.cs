@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using Practica4.EF.Entities.PokemonEntities;
+﻿using Practica4.EF.Entities.PokemonEntities;
+using Practica4.EF.Logic.LogicBussines;
+using Practica4.EF.Logic.LogicBussines.LogicInterface;
 using Practica4.EF.Services.ExtensionMethods;
-using Practica6.MVC.Models.PokemonModels;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -13,10 +12,10 @@ namespace Practica6.MVC.Controllers
 {
     public class PokemonController : Controller
     {
-        private readonly HttpClient _httpClient;
+        private readonly IPokemonLogic _pokemonLogic;
         public PokemonController()
         {
-            _httpClient = new HttpClient();
+            _pokemonLogic = new PokemonLogic();
         }
         // GET: Pokemon
         public async Task<ActionResult> Index(int? limit, int? offset)
@@ -29,22 +28,12 @@ namespace Practica6.MVC.Controllers
             {
                 offset = int.Parse(ConfigurationManager.AppSettings["defaultOffset"]);
             }
-
             List<Pokemon> pokemons = new List<Pokemon>();
-            var response = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon?limit={limit}&offset={offset}");
-            var content = await response.Content.ReadAsStringAsync();
-            var pokemonResult = JsonConvert.DeserializeObject<PokeView>(content);
-            foreach (var pokemon in pokemonResult.pokeList)
+            var pokemonResult = _pokemonLogic.GetPagesPokemon(limit, offset);
+            foreach (var pokemon in pokemonResult.Result.pokeList)
             {
-                // Realiza una solicitud GET para obtener más detalles sobre el Pokemon
-                var pokemonResponse = await _httpClient.GetAsync(pokemon.Url);
-
-                if (pokemonResponse.IsSuccessStatusCode)
-                {
-                    var pokemonContent = await pokemonResponse.Content.ReadAsStringAsync();
-                    var detailedPokemon = JsonConvert.DeserializeObject<Pokemon>(pokemonContent);
-                    pokemons.Add(detailedPokemon);
-                }
+                var pokeInfo = _pokemonLogic.GetPokemon(pokemon.Url);
+                pokemons.Add(pokeInfo.Result);
             }
             return View(pokemons.ToPokemonView());
         }
@@ -55,17 +44,9 @@ namespace Practica6.MVC.Controllers
             {
                 return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["notFoundPokemon"].ToJSON() });
             }
-            var response = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon/{name}/");
+            var response = _pokemonLogic.GetPokemonId(name);
 
-            if (!response.IsSuccessStatusCode)
-            {
-                return HttpNotFound();
-            }
-
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var pokemon = JsonConvert.DeserializeObject<Pokemon>(jsonContent);
-
-            return View(pokemon.ToPokemonView());
+            return View(response.Result.ToPokemonView());
         }
 
 
