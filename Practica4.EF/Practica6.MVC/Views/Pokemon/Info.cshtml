@@ -1,0 +1,67 @@
+﻿@model Practica6.MVC.Models.PokemonModels.PokemonView
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/pokemonInfoStyle.css" />
+</head>
+<h1>@Model.Name.ToUpper()</h1>
+
+<div class="cards-container">
+    <div class="card card-front">
+        <div class="card-header">
+            <h2 class="card-title"> @Model.Name.ToUpper()</h2>
+            <p class="card-pokedex"> Numero de pokedex: @Model.Id</p>
+        </div>
+        <div class="card-image">
+            @if (Model.SpriteFront != null)
+            {
+                <img class="card-img-top img-front" src="@Model.SpriteFront" alt="@Model.Name">
+
+            }
+            else
+            {
+                <img class="card-img-top img-front" src="@Url.Content($"~/Images/placeholder 150-150.png")" alt="@Model.Name">
+
+            }
+        </div>
+        <div class="card-text">Peso: @Model.Weight Kg</div>
+        <div class="card-types d-flex justify-content-center">
+            <img src="@Url.Content($"~/Images/Types/{Model.TypeOne}.png")" />
+            @if (Model.TypeTwo != null)
+            {
+                <img src="@Url.Content($"~/Images/Types/{Model.TypeTwo}.png")" />
+            }
+        </div>
+    </div>
+    <div class="card card-front">
+        <div class="card-header">
+            <h2 class="card-title"> @Model.Name.ToUpper()</h2>
+            <p class="card-pokedex"> Numero de pokedex: @Model.Id</p>
+        </div>
+        <div class="card-image">
+            @if (Model.SpriteBack != null)
+            {
+                <img class="card-img-top img-back" src="@Model.SpriteBack" alt="@Model.Name">
+            }
+            else
+            {
+                <img class="card-img-top img-back" src="@Url.Content($"~/Images/placeholder 150-150.png")" alt="@Model.Name">
+            }
+        </div>
+        <div class="card-text">Altura: @Model.Height M</div>
+        <div class="card-types d-flex justify-content-center">
+            <img src="@Url.Content($"~/Images/Types/{Model.TypeOne}.png")" />
+            @if (Model.TypeTwo != null)
+            {
+                <img src="@Url.Content($"~/Images/Types/{Model.TypeTwo}.png")" />
+            }
+        </div>
+    </div>
+</div>
+
+<h1>Estadisticas del pokemon</h1>
+<h2>Experiencia base: @Model.BaseExperience</h2>
+<h3>Puntos de vida : @Model.HP</h3>
+<h3>Ataque : @Model.Attack</h3>
+<h3>Ataque especial : @Model.SpecialAttack</h3>
+<h3>Defensa : @Model.Defense</h3>
+<h3>Defensa especial : @Model.SpecialDefense</h3>

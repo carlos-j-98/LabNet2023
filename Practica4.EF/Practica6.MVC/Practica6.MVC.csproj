@@ -137,14 +137,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PokemonController.cs" />
     <Compile Include="Controllers\ShippersController.cs" />
     <Compile Include="Controllers\TerritoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PokemonModels\PokemonView.cs" />
+    <Compile Include="Models\PokemonModels\PokeView.cs" />
     <Compile Include="Models\ShippersView.cs" />
     <Compile Include="Models\TerritoriesView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesMVC\ExtensionMethods\PokemonExtension.cs" />
     <Compile Include="ServicesMVC\ExtensionMethods\ShipperExtension.cs" />
     <Compile Include="ServicesMVC\ExtensionMethods\TerritorieExtension.cs" />
     <Compile Include="ServicesMVC\ExtensionMethods\SelectListExtension.cs" />
@@ -168,10 +172,31 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\buttonStyles.css" />
     <Content Include="Content\genericStyles.css" />
+    <Content Include="Content\pokemonInfoStyle.css" />
+    <Content Include="Content\pokemonStyles.css" />
     <Content Include="Content\tableStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\placeholder 150-150.png" />
+    <Content Include="Images\Types\bug.png" />
+    <Content Include="Images\Types\dark.png" />
+    <Content Include="Images\Types\dragon.png" />
+    <Content Include="Images\Types\electric.png" />
+    <Content Include="Images\Types\fairy.png" />
+    <Content Include="Images\Types\fighting.png" />
+    <Content Include="Images\Types\fire.png" />
+    <Content Include="Images\Types\flying.png" />
+    <Content Include="Images\Types\ghost.png" />
+    <Content Include="Images\Types\grass.png" />
+    <Content Include="Images\Types\ground.png" />
+    <Content Include="Images\Types\ice.png" />
+    <Content Include="Images\Types\normal.png" />
+    <Content Include="Images\Types\poison.png" />
+    <Content Include="Images\Types\psychic.png" />
+    <Content Include="Images\Types\rock.png" />
+    <Content Include="Images\Types\steel.png" />
+    <Content Include="Images\Types\water.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -191,6 +216,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pokemonUtils.js" />
     <Content Include="Scripts\shipperUtils.js" />
     <Content Include="Scripts\terriUtils.js" />
     <Content Include="Web.config" />
@@ -210,6 +236,8 @@
     <Content Include="Views\Shippers\Modify.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Territories\Modify.cshtml" />
+    <Content Include="Views\Pokemon\Index.cshtml" />
+    <Content Include="Views\Pokemon\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

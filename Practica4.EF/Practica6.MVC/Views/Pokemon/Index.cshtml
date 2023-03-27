@@ -1,0 +1,54 @@
+﻿@model List<Practica6.MVC.Models.PokemonModels.PokemonView>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/pokemonStyles.css" />
+</head>
+<h2>Bienvenido a la pokedex</h2>
+
+<div class="row d-flex justify-content-center">
+    @foreach (var pokemon in Model)
+    {
+        <div class="col-md-2 mb-5 w-auto">
+            <div class="card" onclick="window.location.href='@Url.Action("Info", "Pokemon", new { name = pokemon.Name })'">
+                <div class="card-header text-center">
+                    <h5 class="card-title">@pokemon.Name.ToUpper()</h5>
+                </div>
+                @if (pokemon.SpriteFront != null)
+                {
+                    <img class="card-img-top img-front d-block" src="@pokemon.SpriteFront" alt="@pokemon.Name">
+
+                }else
+                {
+                    <img class="card-img-top img-front d-block" src="@Url.Content($"~/Images/placeholder 150-150.png")" alt="@pokemon.Name">
+
+                }
+
+                @if (pokemon.SpriteBack != null)
+                {
+                    <img class="card-img-top img-back d-none" src="@pokemon.SpriteBack" alt="@pokemon.Name">
+                }else
+                {
+                    <img class="card-img-top img-back d-none" src="@Url.Content($"~/Images/placeholder 150-150.png")" alt="@pokemon.Name">
+                }
+
+                <div class="card-body text-center">
+                    <h6 class="card-subtitle mb-2">Numero de pokedex: @pokemon.Id</h6>
+                    <ul class="list-unstyled d-flex justify-content-center">
+                        <img src="@Url.Content($"~/Images/Types/{pokemon.TypeOne}.png")" />
+                        @if (pokemon.TypeTwo != null)
+                        {
+                            <img src="@Url.Content($"~/Images/Types/{pokemon.TypeTwo}.png")" />
+                        }
+                    </ul>
+                </div>
+                <button class="btn btn-outline-info"> Ver +</button>
+            </div>
+        </div>
+    }
+</div>
+<div class="d-flex justify-content-center buttons" id="buttons">
+    <button class="btn btn-outline-dark" id="btn-back">Anterior</button>
+    <button class="btn btn-outline-dark" id="btn-next">Siguiente</button>
+</div>
+<script src="~/Scripts/pokemonUtils.js"></script>

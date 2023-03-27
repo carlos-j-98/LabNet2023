@@ -1,0 +1,73 @@
+﻿.cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid black;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    width: calc(50% - 5px);
+    position: relative;
+}
+
+.card-front {
+    background-color: white;
+}
+
+.card-back {
+    background-image: url("https://cdn.bulbagarden.net/upload/4/48/Pok%C3%A9_Ball_Sprite.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: rotateY(180deg);
+    z-index: -1;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-title {
+    margin: 0;
+}
+
+.card-image {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-types {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.card-type {
+    display: inline-block;
+    margin-right: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.card-pokedex {
+    margin: 0;
+    font-size: 0.8rem;
+}
