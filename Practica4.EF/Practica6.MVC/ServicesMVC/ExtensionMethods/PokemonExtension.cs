@@ -1,11 +1,7 @@
-﻿using Microsoft.Ajax.Utilities;
-using Practica4.EF.Entities.PokemonEntities;
-using Practica6.MVC.Models;
+﻿using Practica4.EF.Entities.PokemonEntities;
 using Practica6.MVC.Models.PokemonModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Practica6.MVC.ServicesMVC.ExtensionMethods
 {
@@ -13,7 +9,8 @@ namespace Practica6.MVC.ServicesMVC.ExtensionMethods
     {
         public static List<PokemonView> ToPokemonView(this List<Pokemon> pokeList)
         {
-            List<PokemonView> pokemonViewList = pokeList.Select(pokemon => {
+            List<PokemonView> pokemonViewList = pokeList.Select(pokemon =>
+            {
                 var typeOne = pokemon.Types.Select(x => x.TypeName.Name).First();
                 var typeTwo = pokemon.Types.Where(x => x.TypeName.Name != typeOne).Select(x => x.TypeName.Name).FirstOrDefault();
 
@@ -36,7 +33,8 @@ namespace Practica6.MVC.ServicesMVC.ExtensionMethods
                 };
             }).ToList();
             return pokemonViewList;
-        }public static PokemonView ToPokemonView (this Pokemon pokemon)
+        }
+        public static PokemonView ToPokemonView(this Pokemon pokemon)
         {
             var typeOne = pokemon.Types.Select(x => x.TypeName.Name).First();
             var typeTwo = pokemon.Types.Where(x => x.TypeName.Name != typeOne).Select(x => x.TypeName.Name).FirstOrDefault();

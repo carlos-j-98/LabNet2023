@@ -1,17 +1,12 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Practica4.EF.Entities.PokemonEntities;
 using Practica4.EF.Services.ExtensionMethods;
-using Practica6.MVC.Models;
 using Practica6.MVC.Models.PokemonModels;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Practica6.MVC.Controllers
@@ -24,13 +19,13 @@ namespace Practica6.MVC.Controllers
             _httpClient = new HttpClient();
         }
         // GET: Pokemon
-        public async Task<ActionResult> Index(int? limit,int? offset)
+        public async Task<ActionResult> Index(int? limit, int? offset)
         {
-            if(limit == null) 
+            if (limit == null)
             {
                 limit = int.Parse(ConfigurationManager.AppSettings["defaultLimit"]);
             }
-            if(offset == null) 
+            if (offset == null)
             {
                 offset = int.Parse(ConfigurationManager.AppSettings["defaultOffset"]);
             }
@@ -56,9 +51,9 @@ namespace Practica6.MVC.Controllers
 
         public async Task<ActionResult> Info(string name)
         {
-            if(name == null) 
+            if (name == null)
             {
-                return RedirectToAction("Index","Error", new { error = ConfigurationManager.AppSettings["notFoundPokemon"].ToJSON() });
+                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["notFoundPokemon"].ToJSON() });
             }
             var response = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon/{name}/");
 
