@@ -28,6 +28,14 @@ namespace Practica4.EF.Data.Queries
             var _dbSet = _context.Set<T>();
             return _dbSet.Find(id);
         }
+
+        public T GetLastElement<T>() where T : class
+        {
+            var _dbSet = _context.Set<T>();
+            var listEle = _dbSet.ToList();
+            return listEle.LastOrDefault();
+        }
+
         public int GetNextIdShippers()
         {
             var _dbSet = _context.Set<Shippers>();

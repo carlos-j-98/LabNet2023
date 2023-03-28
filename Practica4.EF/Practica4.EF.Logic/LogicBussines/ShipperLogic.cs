@@ -40,5 +40,9 @@ namespace Practica4.EF.Logic.LogicBussines
             return _shipperQuerie.GetNextIdShippers();
         }
 
+        public Shippers GetLastElement()
+        {
+            return _shipperQuerie.GetLastElement<Shippers>();
+        }
     }
 }

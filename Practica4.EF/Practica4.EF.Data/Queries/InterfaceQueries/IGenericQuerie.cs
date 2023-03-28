@@ -9,5 +9,6 @@ namespace Practica4.EF.Data.Queries.InterfaceQueries
         T GetById<T>(int id) where T : class;
         int GetNextIdShippers();
         string GetNextIdTerritories();
+        T GetLastElement<T>() where T: class;
     }
 }

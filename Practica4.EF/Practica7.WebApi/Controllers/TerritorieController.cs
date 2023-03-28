@@ -3,8 +3,10 @@ using Practica4.EF.Services.ExtensionMethods;
 using Practica4.EF.Services.Validators;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using Practica7.WebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
 using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
@@ -28,13 +30,13 @@ namespace Practica7.WebApi.Controllers
                 var terriList = _territorieLogic.GetAll();
                 if (terriList == null)
                 {
-                    return BadRequest("No se encontraron territorios");
+                    throw new Exception();
                 }
                 return Ok(terriList.TerritoriesListExtension());
             }
-            catch
+            catch (Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, new { mensaje = "No se encontraron Territories." });
             }
         }
         //Get api/Territorie/{id}
@@ -42,16 +44,20 @@ namespace Practica7.WebApi.Controllers
         {
             try
             {
-                var terri = _territorieLogic.GetById(id);
-                if (terri == null)
+                if (id == null)
                 {
-                    return BadRequest("El id es requerido");
+                    return Content(HttpStatusCode.BadRequest, new { mensaje = "El id es requerido." });
+                }
+                var terri = _territorieLogic.GetById(id);
+                if(terri == null)
+                {
+                    throw new Exception();
                 }
                 return Ok(terri.ToTerritoriesView());
             }
-            catch
+            catch (Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, new { mensaje = "No se encontraron Territories con ese ID." });
             }
         }
         //Post api/Territorie/
@@ -75,11 +81,11 @@ namespace Practica7.WebApi.Controllers
                     return BadRequest(errores.ToJSONList());
                 }
                 _territorieLogic.Add(territoriesView.ToTerritories());
-                return Content(System.Net.HttpStatusCode.Created, territoriesView);
+                return Content(System.Net.HttpStatusCode.Created, _territorieLogic.GetLastElement().ToTerritoriesView());
             }
-            catch
+            catch (NullReferenceException)
             {
-                return BadRequest("No se pudo crear");
+                return Content(HttpStatusCode.BadRequest, new { mensaje = "Los datos enviados son inválidos." });
             }
         }
         //Put api/Territorie/{id}
@@ -88,7 +94,7 @@ namespace Practica7.WebApi.Controllers
         {
             try
             {
-                if (territoriesView.ID == null)
+                if (territoriesView.ID == null || territoriesView.ID == "0")
                 {
                     territoriesView.ID = _territorieLogic.GetNextId();
                 }
@@ -106,28 +112,31 @@ namespace Practica7.WebApi.Controllers
                 _territorieLogic.Update(territoriesView.ToTerritories());
                 return Ok(territoriesView);
             }
-            catch
+            catch (Exception)
             {
-                return BadRequest("No se pudo actualizar");
+                return Content(HttpStatusCode.BadRequest, new { mensaje = "Los datos enviados son inválidos." });
             }
         }
         //Delete api/Territorie/{id}
         [HttpDelete]
-        public IHttpActionResult UpdateTerritorie(string id)
+        public IHttpActionResult DeleteTerritorie(string id)
         {
             try
             {
                 if (id == null)
                 {
-                    return BadRequest("El id es requerido");
+                    return Content(HttpStatusCode.BadRequest, new { mensaje = "El id es requerido." });
                 }
-                _territorieLogic.Delete(id);
-                return Ok(new JsonResult()
-                { Data = "El elemento fue eliminado", JsonRequestBehavior = JsonRequestBehavior.AllowGet });
+                if(_territorieLogic.GetById(id) != null)
+                {
+                    _territorieLogic.Delete(id);
+                    return Content(HttpStatusCode.OK, new {mensaje = "El elemento fue eliminado" });
+                }
+                throw new Exception();
             }
-            catch
+            catch(Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, new { mensaje = "El id no fue encontrado." });
             }
         }
     }

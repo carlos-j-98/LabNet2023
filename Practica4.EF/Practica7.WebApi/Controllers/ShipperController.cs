@@ -3,8 +3,10 @@ using Practica4.EF.Services.ExtensionMethods;
 using Practica4.EF.Services.Validators;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using Practica7.WebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
 using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
@@ -28,13 +30,13 @@ namespace Practica7.WebApi.Controllers
                 var shipList = _shipperLogic.GetAll();
                 if (shipList == null)
                 {
-                    return BadRequest("No se encontraron shippers");
+                    throw new Exception();
                 }
                 return Ok(shipList.ShipperListExtension());
             }
-            catch
+            catch (Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, new { mensaje = "No se encontraron Shippers." });
             }
         }
         //Get api/Shipper/{id}
@@ -43,15 +45,19 @@ namespace Practica7.WebApi.Controllers
             try
             {
                 var ship = _shipperLogic.GetById(id);
-                if (ship == null)
+                if (id == null)
                 {
-                    return BadRequest($"No se encontro el shipper de ID {id}");
+                    return Content(HttpStatusCode.BadRequest, new { mensaje = "El id es requerido." });
+                }
+                if(ship == null)
+                {
+                    throw new Exception();
                 }
                 return Ok(ship.ToShippersView());
             }
-            catch
+            catch(Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, new { mensaje = "No se encontraron Shippers con ese ID." });
             }
         }
         //Post api/Shipper/
@@ -59,7 +65,7 @@ namespace Practica7.WebApi.Controllers
         {
             try
             {
-                if (shipperView.ID == null)
+                if (shipperView.ID == null || shipperView.ID == 0)
                 {
                     shipperView.ID = _shipperLogic.GetNextId();
                 }
@@ -75,11 +81,11 @@ namespace Practica7.WebApi.Controllers
                     return BadRequest(errores.ToJSONList());
                 }
                 _shipperLogic.Add(shipperView.ToShippers());
-                return Ok(shipperView);
+                return Content(System.Net.HttpStatusCode.Created, _shipperLogic.GetLastElement().ToShippersView());
             }
-            catch
+            catch(Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.BadRequest, new { mensaje = "Los datos enviados son inválidos." });
             }
         }
         //Put api/Shipper/{id}
@@ -108,7 +114,7 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return Content(HttpStatusCode.BadRequest, new { mensaje = "Los datos enviados son inválidos." });
             }
         }
         //Delete api/Shipper/{id}
@@ -119,14 +125,18 @@ namespace Practica7.WebApi.Controllers
             {
                 if (id == null)
                 {
-                    return BadRequest("El id es  necesario");
+                    return Content(HttpStatusCode.BadRequest, new { mensaje = "El id es requerido." });
                 }
-                _shipperLogic.Delete(id);
-                return Ok("El elemento fue eliminado");
+                if(_shipperLogic.GetById(id) != null)
+                {
+                    _shipperLogic.Delete(id);
+                    return Content(HttpStatusCode.OK, new {mensaje = "El elemento fue eliminado" });
+                }
+                throw new Exception();
             }
-            catch
+            catch(Exception ex)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, new { mensaje = "El id no fue encontrado." });
             }
         }
     }

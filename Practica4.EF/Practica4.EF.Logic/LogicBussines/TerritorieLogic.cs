@@ -39,5 +39,10 @@ namespace Practica4.EF.Logic.LogicBussines
         {
             return _territoriesQuerie.GetNextIdTerritories();
         }
+
+        public Territories GetLastElement()
+        {
+            return _territoriesQuerie.GetLastElement<Territories>();
+        }
     }
 }
