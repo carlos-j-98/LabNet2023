@@ -57,6 +57,11 @@
     <Compile Include="ExtensionMethods\ExceptionExtension.cs" />
     <Compile Include="ExtensionMethods\StringExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Validators\ShippersValidator.cs" />
     <Compile Include="Validators\ShipperViewDTOValidator.cs" />
     <Compile Include="Validators\TerritoriesViewDTOValidator.cs" />
@@ -73,6 +78,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

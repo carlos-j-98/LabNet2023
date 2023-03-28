@@ -1,5 +1,4 @@
-﻿using Practica4.EF.Data.Queries;
-using Practica4.EF.Data.Queries.InterfaceQueries;
+﻿using Practica4.EF.Data.Queries.InterfaceQueries;
 using Practica4.EF.Data.Repositorys;
 using Practica4.EF.Entities.EntitiesDatabase;
 using System.Collections.Generic;
@@ -10,10 +9,10 @@ namespace Practica4.EF.Logic.LogicBussines
     {
         private readonly IRepository _repository;
         private readonly IGenericQuerie _shipperQuerie;
-        public ShipperLogic()
+        public ShipperLogic(IRepository repository, IGenericQuerie genericQuerie)
         {
-            this._shipperQuerie = new GenericQuery();
-            this._repository = new Repository();
+            this._shipperQuerie = genericQuerie;
+            this._repository = repository;
         }
         public void Add(Shippers ship)
         {

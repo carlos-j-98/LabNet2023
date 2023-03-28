@@ -6,13 +6,20 @@ using Practica7.WebApi.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Mvc;
+using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
+using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
 
 namespace Practica7.WebApi.Controllers
 {
     public class TerritorieController : ApiController
     {
-        private TerritorieLogic _territorieLogic = new TerritorieLogic();
+        private ITerritorieLogic _territorieLogic;
         private TerritoriesViewDTOValidator _validator = new TerritoriesViewDTOValidator();
+        public TerritorieController(ITerritorieLogic territorieLogic)
+        {
+            _territorieLogic = territorieLogic;
+        }
         //Get api/Territorie/
         public IHttpActionResult GetAll()
         {
@@ -27,7 +34,7 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
         //Get api/Territorie/{id}
@@ -38,13 +45,13 @@ namespace Practica7.WebApi.Controllers
                 var terri = _territorieLogic.GetById(id);
                 if (terri == null)
                 {
-                    return BadRequest($"No se encontro el territorio de ID {id}");
+                    return BadRequest("El id es requerido");
                 }
                 return Ok(terri.ToTerritoriesView());
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
         //Post api/Territorie/
@@ -68,11 +75,11 @@ namespace Practica7.WebApi.Controllers
                     return BadRequest(errores.ToJSONList());
                 }
                 _territorieLogic.Add(territoriesView.ToTerritories());
-                return Ok(territoriesView);
+                return Content(System.Net.HttpStatusCode.Created, territoriesView);
             }
             catch
             {
-                return InternalServerError();
+                return BadRequest("No se pudo crear");
             }
         }
         //Put api/Territorie/{id}
@@ -101,7 +108,7 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return BadRequest("No se pudo actualizar");
             }
         }
         //Delete api/Territorie/{id}
@@ -112,14 +119,15 @@ namespace Practica7.WebApi.Controllers
             {
                 if (id == null)
                 {
-                    return BadRequest("El id es  necesario");
+                    return BadRequest("El id es requerido");
                 }
                 _territorieLogic.Delete(id);
-                return Ok("El elemento fue eliminado");
+                return Ok(new JsonResult()
+                { Data = "El elemento fue eliminado", JsonRequestBehavior = JsonRequestBehavior.AllowGet });
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
     }

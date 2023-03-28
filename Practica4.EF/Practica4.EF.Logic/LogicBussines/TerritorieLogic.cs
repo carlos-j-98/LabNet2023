@@ -1,5 +1,4 @@
-﻿using Practica4.EF.Data.Queries;
-using Practica4.EF.Data.Queries.InterfaceQueries;
+﻿using Practica4.EF.Data.Queries.InterfaceQueries;
 using Practica4.EF.Data.Repositorys;
 using Practica4.EF.Entities.EntitiesDatabase;
 using System.Collections.Generic;
@@ -10,11 +9,6 @@ namespace Practica4.EF.Logic.LogicBussines
     {
         private readonly IGenericQuerie _territoriesQuerie;
         private readonly IRepository _repository;
-        public TerritorieLogic()
-        {
-            _territoriesQuerie = new GenericQuery();
-            _repository = new Repository();
-        }
         public TerritorieLogic(IGenericQuerie territoriesQueries, IRepository repository)
         {
             _territoriesQuerie = territoriesQueries;

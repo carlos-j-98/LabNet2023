@@ -1,7 +1,7 @@
 ﻿using Practica4.EF.Entities.PokemonEntities;
-using Practica4.EF.Logic.LogicBussines;
 using Practica4.EF.Logic.LogicBussines.LogicInterface;
 using Practica4.EF.Services.ExtensionMethods;
+using Practica4.EF.Services.Resources;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,20 +13,20 @@ namespace Practica6.MVC.Controllers
     public class PokemonController : Controller
     {
         private readonly IPokemonLogic _pokemonLogic;
-        public PokemonController()
+        public PokemonController(IPokemonLogic pokeLogic)
         {
-            _pokemonLogic = new PokemonLogic();
+            this._pokemonLogic = pokeLogic;
         }
         // GET: Pokemon
         public async Task<ActionResult> Index(int? limit, int? offset)
         {
             if (limit == null)
             {
-                limit = int.Parse(ConfigurationManager.AppSettings["defaultLimit"]);
+                limit = int.Parse(ConfigurationManager.AppSettings["DEFAULT_LIMIT"]);
             }
             if (offset == null)
             {
-                offset = int.Parse(ConfigurationManager.AppSettings["defaultOffset"]);
+                offset = int.Parse(ConfigurationManager.AppSettings["DEFAULT_OFFSET"]);
             }
             List<Pokemon> pokemons = new List<Pokemon>();
             var pokemonResult = _pokemonLogic.GetPagesPokemon(limit, offset);
@@ -42,7 +42,7 @@ namespace Practica6.MVC.Controllers
         {
             if (name == null)
             {
-                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["notFoundPokemon"].ToJSON() });
+                return RedirectToAction("Index", "Error", new { error = Messages.notFoundPokemon.ToJSON() }); ;
             }
             var response = _pokemonLogic.GetPokemonId(name);
 

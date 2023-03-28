@@ -1,22 +1,25 @@
 ﻿using Practica4.EF.Entities.EntitiesDatabase;
 using Practica4.EF.Logic.LogicBussines;
 using Practica4.EF.Services.ExtensionMethods;
+using Practica4.EF.Services.Resources;
 using Practica4.EF.Services.Validators;
 using Practica6.MVC.Models;
 using Practica6.MVC.ServicesMVC.ExtensionMethods;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Mvc;
-
 namespace Practica6.MVC.Controllers
 {
     public class ShippersController : Controller
     {
         private readonly ShipperViewDTOValidator shippersViewDTOValidator = new ShipperViewDTOValidator();
-        private readonly ShipperLogic _logic = new ShipperLogic();
+        private readonly IShipperLogic _logic;
+        public ShippersController(IShipperLogic shipperLogic)
+        {
+            this._logic = shipperLogic;
+        }
         // GET: Shippers
         public ActionResult Index()
         {
@@ -65,16 +68,16 @@ namespace Practica6.MVC.Controllers
                         _logic.Delete(shippersView.ID);
                         return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["invalidActionText"].ToJSON() });
+                    return RedirectToAction("Index", "Error", new { error = Messages.invalidActionText.ToJSON() });
                 }
             }
             catch (DbUpdateException)
             {
-                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["argumentNullText"].ToJSON() });
+                return RedirectToAction("Index", "Error", new { error = Messages.argumentNullText.ToJSON() });
             }
             catch (Exception)
             {
-                return RedirectToAction("Index", "Error", new { error = ConfigurationManager.AppSettings["exceptionGenericText"].ToJSON() });
+                return RedirectToAction("Index", "Error", new { error = Messages.exceptionGenericText.ToJSON() });
             }
         }
         [HttpPost]

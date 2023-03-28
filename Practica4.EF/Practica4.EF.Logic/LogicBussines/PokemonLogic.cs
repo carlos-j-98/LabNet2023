@@ -1,5 +1,4 @@
-﻿using Practica4.EF.Data.Queries;
-using Practica4.EF.Data.Queries.InterfaceQueries;
+﻿using Practica4.EF.Data.Queries.InterfaceQueries;
 using Practica4.EF.Entities.PokemonEntities;
 using Practica4.EF.Entities.PokemonEntitiesView.PokemonModels;
 using Practica4.EF.Logic.LogicBussines.LogicInterface;
@@ -10,9 +9,9 @@ namespace Practica4.EF.Logic.LogicBussines
     public class PokemonLogic : IPokemonLogic
     {
         private readonly IPokemonQuerie _pokemonQuerie;
-        public PokemonLogic()
+        public PokemonLogic(IPokemonQuerie pokemonQuerie)
         {
-            _pokemonQuerie = new PokemonQuerie();
+            _pokemonQuerie = pokemonQuerie;
         }
         public Task<PokeView> GetPagesPokemon(int? limit, int? offset)
         {

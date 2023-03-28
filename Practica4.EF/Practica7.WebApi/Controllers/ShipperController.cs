@@ -13,9 +13,14 @@ namespace Practica7.WebApi.Controllers
 {
     public class ShipperController : ApiController
     {
-        private ShipperLogic _shipperLogic = new ShipperLogic();
-        private ShipperViewDTOValidator _validator = new ShipperViewDTOValidator();
-        //Get api/Territorie/
+        private readonly IShipperLogic _shipperLogic;
+        private readonly ShipperViewDTOValidator _validator = new ShipperViewDTOValidator();
+        public ShipperController(IShipperLogic shipperLogic)
+        {
+            this._shipperLogic = shipperLogic;
+        }
+        //Get api/Shipper/
+        [HttpGet]
         public IHttpActionResult GetAll()
         {
             try
@@ -29,10 +34,10 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
-        //Get api/Territorie/{id}
+        //Get api/Shipper/{id}
         public IHttpActionResult GetById(int id)
         {
             try
@@ -49,7 +54,7 @@ namespace Practica7.WebApi.Controllers
                 return InternalServerError();
             }
         }
-        //Post api/Territorie/
+        //Post api/Shipper/
         public IHttpActionResult CreateShip(ShippersView shipperView)
         {
             try
@@ -74,10 +79,10 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
-        //Put api/Territorie/{id}
+        //Put api/Shipper/{id}
         [HttpPut]
         public IHttpActionResult UpdateShipper([FromBody] ShippersView shipperView)
         {
@@ -99,14 +104,14 @@ namespace Practica7.WebApi.Controllers
                     return BadRequest(errores.ToJSONList());
                 }
                 _shipperLogic.Update(shipperView.ToShippers());
-                return Ok(shipperView);
+                return Content(System.Net.HttpStatusCode.Created, shipperView);
             }
             catch
             {
                 return InternalServerError();
             }
         }
-        //Delete api/Territorie/{id}
+        //Delete api/Shipper/{id}
         [HttpDelete]
         public IHttpActionResult DeleteShipper(int id)
         {
@@ -121,7 +126,7 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
     }

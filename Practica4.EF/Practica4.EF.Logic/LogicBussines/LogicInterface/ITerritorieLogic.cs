@@ -10,5 +10,6 @@ namespace Practica4.EF.Logic.LogicBussines
         void Add(Territories ship);
         void Delete(string id);
         void Update(Territories ship);
+        string GetNextId();
     }
 }
