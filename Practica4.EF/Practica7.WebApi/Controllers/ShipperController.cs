@@ -51,7 +51,7 @@ namespace Practica7.WebApi.Controllers
             }
             catch
             {
-                return InternalServerError();
+                return NotFound();
             }
         }
         //Post api/Shipper/
