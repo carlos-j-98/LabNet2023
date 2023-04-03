@@ -20,7 +20,7 @@ namespace Practica7.WebApi
             container.RegisterType<IRepository, Repository>();
             config.DependencyResolver = new UnityResolver(container);
             config.MapHttpAttributeRoutes();
-
+            config.EnableCors();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

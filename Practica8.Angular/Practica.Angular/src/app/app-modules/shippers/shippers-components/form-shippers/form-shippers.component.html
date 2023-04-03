@@ -1,0 +1,35 @@
+<form [formGroup]="form" class="form-shippers" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Selecciona una opcion</mat-label>
+    <mat-select
+      formControlName="shipper"
+      (selectionChange)="onShipperSelect($event.value)"
+    >
+      <mat-option value="new">Nuevo Shipper</mat-option>
+      <mat-option *ngFor="let shipper of shippers" [value]="shipper.ID"
+        >{{ shipper.ID }} - {{ shipper.CompanyName }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>CompanyName</mat-label>
+    <input matInput formControlName="name" type="text" />
+    <mat-error *ngIf="form.controls['name']?.errors?.['required']">El CompanyName es requerido</mat-error>
+    <mat-error *ngIf="form.controls['name']?.errors?.['maxlength']">Se puede un maximo de 40 caracteres</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone</mat-label>
+    <input matInput formControlName="phone" type="tel" />
+    <mat-error *ngIf="form.controls['phone']?.errors?.['maxlength']">Se puede un maximo de 24 caracteres</mat-error>
+  </mat-form-field>
+
+  <div class="buttonsForm">
+    <button mat-raised-button color="primary" type="submit" *ngIf="!isNewShipper">
+      Actualizar
+    </button>
+    <button mat-raised-button color="secundary" *ngIf="isNewShipper">
+      Registrar
+    </button>
+  </div>
+</form>

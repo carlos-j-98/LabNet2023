@@ -1,0 +1,19 @@
+.form-shippers{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mat-form-field{
+    width: 35%;
+}
+
+.buttonsForm{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.buttonsForm button{
+    margin: 50px;
+}

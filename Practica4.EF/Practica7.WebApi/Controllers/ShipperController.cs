@@ -8,11 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using HttpDeleteAttribute = System.Web.Http.HttpDeleteAttribute;
 using HttpPutAttribute = System.Web.Http.HttpPutAttribute;
 
 namespace Practica7.WebApi.Controllers
 {
+    [EnableCors("*","*","*")]
     public class ShipperController : ApiController
     {
         private readonly IShipperLogic _shipperLogic;
@@ -61,7 +63,8 @@ namespace Practica7.WebApi.Controllers
             }
         }
         //Post api/Shipper/
-        public IHttpActionResult CreateShip(ShippersView shipperView)
+        [HttpPost]
+        public IHttpActionResult CreateShip([FromBody]ShippersView shipperView)
         {
             try
             {
@@ -110,7 +113,7 @@ namespace Practica7.WebApi.Controllers
                     return BadRequest(errores.ToJSONList());
                 }
                 _shipperLogic.Update(shipperView.ToShippers());
-                return Content(System.Net.HttpStatusCode.Created, shipperView);
+                return Content(System.Net.HttpStatusCode.OK, shipperView);
             }
             catch
             {
@@ -132,11 +135,14 @@ namespace Practica7.WebApi.Controllers
                     _shipperLogic.Delete(id);
                     return Content(HttpStatusCode.OK, new {mensaje = "El elemento fue eliminado" });
                 }
-                throw new Exception();
+                else
+                {
+                    return Content(HttpStatusCode.NotFound, new { mensaje = "El Id no fue encontrado" });
+                }
             }
             catch(Exception ex)
             {
-                return Content(HttpStatusCode.NotFound, new { mensaje = "El id no fue encontrado." });
+                return Content(HttpStatusCode.BadRequest, new { mensaje = "El id no fue encontrado." });
             }
         }
     }

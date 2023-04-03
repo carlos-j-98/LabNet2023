@@ -1,0 +1,20 @@
+.tab-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.tab-shippers{
+    width: 100%;
+}
+app-table-shippers{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+app-form-shippers{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
