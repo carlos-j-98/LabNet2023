@@ -1,7 +1,9 @@
-.table-shippers table{
+.table-shippers table {
     width: 100%;
 }
-.table-shippers th,td{
+
+.table-shippers th,
+td {
     font-size: 25px;
 }
 
@@ -9,6 +11,33 @@
     font-size: 25px;
 }
 
-.mat-table{
+.mat-table {
     width: 80%;
 }
+
+.order-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.order-table table {
+    margin-bottom: 20px;
+}
+
+.order-table button {
+    background-color: #F0F0F0;
+    color: #0f0f0f;
+    border-radius: 3px;
+    box-shadow: #f0f0f0;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .order-table button:hover {
+    background-color: #000;
+    color: #fff;
+  }
