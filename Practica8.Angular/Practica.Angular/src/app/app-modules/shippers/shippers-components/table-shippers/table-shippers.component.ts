@@ -70,6 +70,6 @@ export class TableShippersComponent implements OnInit {
   }
 
   tryAgain(): void {
-    this.getShippers();
+    this.shipService.updateShippersList();
   }
 }
